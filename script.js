@@ -29,11 +29,7 @@ function switchLanguage(lang) {
     // Update page title
     document.title = languageData[lang].title;
     
-    // Update navigation title
-    const navTitle = document.querySelector('.nav-title');
-    if (navTitle) {
-        navTitle.textContent = languageData[lang].navTitle;
-    }
+    // Navigation title is now handled by data attributes
     
     // Update all elements with data attributes
     const elements = document.querySelectorAll('[data-zh][data-en]');
