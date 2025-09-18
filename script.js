@@ -6,16 +6,16 @@ const languageData = {
     zh: {
         title: '許應良 - AI 工程師履歷',
         navTitle: 'AI 工程師',
-        copied: '已複製！',
-        clickToCopy: '點擊複製',
-        copyFailed: '複製失敗'
+        copyMessage: '已複製！',
+        copyTooltip: '點擊複製',
+        copyError: '複製失敗'
     },
     en: {
         title: 'YINGLIANG HSU - AI Engineer Resume',
         navTitle: 'AI Engineer',
-        copied: 'Copied!',
-        clickToCopy: 'Click to copy',
-        copyFailed: 'Copy failed'
+        copyMessage: 'Copied!',
+        copyTooltip: 'Click to copy',
+        copyError: 'Copy failed'
     }
 };
 
@@ -55,9 +55,7 @@ function switchLanguage(lang) {
     // Update contact item tooltips
     const contactItems = document.querySelectorAll('.contact-item p');
     contactItems.forEach(item => {
-        if (item.style.cursor === 'pointer') {
-            item.title = languageData[lang].clickToCopy;
-        }
+        item.title = languageData[lang].copyTooltip;
     });
     
     // Save language preference
@@ -202,14 +200,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactItems = document.querySelectorAll('.contact-item p');
     contactItems.forEach(item => {
         item.style.cursor = 'pointer';
-        item.title = languageData[currentLanguage].clickToCopy;
+        item.title = languageData[currentLanguage].copyTooltip;
         
         item.addEventListener('click', function() {
             const text = this.textContent;
             navigator.clipboard.writeText(text).then(() => {
                 // Show temporary feedback
                 const originalText = this.textContent;
-                this.textContent = languageData[currentLanguage].copied;
+                this.textContent = languageData[currentLanguage].copyMessage;
                 this.style.color = '#27ae60';
                 
                 setTimeout(() => {
@@ -217,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     this.style.color = '#555';
                 }, 2000);
             }).catch(err => {
-                console.log(languageData[currentLanguage].copyFailed + ':', err);
+                console.log(languageData[currentLanguage].copyError + ':', err);
             });
         });
     });
