@@ -47,7 +47,9 @@ function switchLanguage(lang) {
     const langButtons = document.querySelectorAll('.lang-btn');
     langButtons.forEach(button => {
         button.classList.remove('active');
-        if (button.onclick.toString().includes(`'${lang}'`)) {
+        // Check if this button corresponds to the current language
+        const buttonLang = button.getAttribute('onclick');
+        if (buttonLang && buttonLang.includes(`'${lang}'`)) {
             button.classList.add('active');
         }
     });
@@ -60,6 +62,18 @@ function switchLanguage(lang) {
     
     // Save language preference
     localStorage.setItem('preferredLanguage', lang);
+    
+    console.log('Language switched to:', lang); // Debug log
+    
+    // Force a re-render to ensure all changes are applied
+    setTimeout(() => {
+        const elements = document.querySelectorAll('[data-zh][data-en]');
+        elements.forEach(element => {
+            if (element.textContent) {
+                element.textContent = element.getAttribute(`data-${lang}`);
+            }
+        });
+    }, 100);
 }
 
 // Auto-detect user language preference
@@ -87,6 +101,24 @@ function initializeLanguage() {
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize language
     initializeLanguage();
+    
+    // Add event listeners for language switching buttons
+    const zhButton = document.querySelector('.lang-btn[onclick*="zh"]');
+    const enButton = document.querySelector('.lang-btn[onclick*="en"]');
+    
+    if (zhButton) {
+        zhButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            switchLanguage('zh');
+        });
+    }
+    
+    if (enButton) {
+        enButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            switchLanguage('en');
+        });
+    }
     
     // Mobile navigation toggle
     const navToggle = document.getElementById('nav-toggle');

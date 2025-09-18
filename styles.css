@@ -162,6 +162,11 @@ body {
     color: white;
 }
 
+.lang-btn:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
 .lang-separator {
     color: #bdc3c7;
     font-weight: 300;
