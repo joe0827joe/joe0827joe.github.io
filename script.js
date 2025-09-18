@@ -1,5 +1,122 @@
+// Language switching functionality
+let currentLanguage = 'zh';
+
+// Language data
+const languageData = {
+    zh: {
+        title: '許應良 - AI 工程師履歷',
+        navTitle: 'AI 工程師',
+        copied: '已複製！',
+        clickToCopy: '點擊複製',
+        copyFailed: '複製失敗'
+    },
+    en: {
+        title: 'YINGLIANG HSU - AI Engineer Resume',
+        navTitle: 'AI Engineer',
+        copied: 'Copied!',
+        clickToCopy: 'Click to copy',
+        copyFailed: 'Copy failed'
+    }
+};
+
+// Switch language function
+function switchLanguage(lang) {
+    currentLanguage = lang;
+    
+    // Update HTML lang attribute
+    document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+    
+    // Update page title
+    document.title = languageData[lang].title;
+    
+    // Update navigation title
+    const navTitle = document.querySelector('.nav-title');
+    if (navTitle) {
+        navTitle.textContent = languageData[lang].navTitle;
+    }
+    
+    // Update all elements with data attributes
+    const elements = document.querySelectorAll('[data-zh][data-en]');
+    elements.forEach(element => {
+        if (element.textContent) {
+            element.textContent = element.getAttribute(`data-${lang}`);
+        }
+    });
+    
+    // Update language buttons
+    const langButtons = document.querySelectorAll('.lang-btn');
+    langButtons.forEach(button => {
+        button.classList.remove('active');
+        if (button.onclick.toString().includes(`'${lang}'`)) {
+            button.classList.add('active');
+        }
+    });
+    
+    // Update contact item tooltips
+    const contactItems = document.querySelectorAll('.contact-item p');
+    contactItems.forEach(item => {
+        if (item.style.cursor === 'pointer') {
+            item.title = languageData[lang].clickToCopy;
+        }
+    });
+    
+    // Save language preference
+    localStorage.setItem('preferredLanguage', lang);
+}
+
+// Auto-detect user language preference
+function detectUserLanguage() {
+    const savedLanguage = localStorage.getItem('preferredLanguage');
+    if (savedLanguage) {
+        return savedLanguage;
+    }
+    
+    const browserLanguage = navigator.language || navigator.userLanguage;
+    if (browserLanguage.startsWith('zh')) {
+        return 'zh';
+    } else {
+        return 'en';
+    }
+}
+
+// Initialize language on page load
+function initializeLanguage() {
+    const userLanguage = detectUserLanguage();
+    switchLanguage(userLanguage);
+}
+
 // Smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize language
+    initializeLanguage();
+    
+    // Mobile navigation toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const navLinks = navMenu.querySelectorAll('a[href^="#"]');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    }
     // Add smooth scrolling to all navigation links
     const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
     
@@ -85,14 +202,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactItems = document.querySelectorAll('.contact-item p');
     contactItems.forEach(item => {
         item.style.cursor = 'pointer';
-        item.title = '點擊複製';
+        item.title = languageData[currentLanguage].clickToCopy;
         
         item.addEventListener('click', function() {
             const text = this.textContent;
             navigator.clipboard.writeText(text).then(() => {
                 // Show temporary feedback
                 const originalText = this.textContent;
-                this.textContent = '已複製！';
+                this.textContent = languageData[currentLanguage].copied;
                 this.style.color = '#27ae60';
                 
                 setTimeout(() => {
@@ -100,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     this.style.color = '#555';
                 }, 2000);
             }).catch(err => {
-                console.log('複製失敗:', err);
+                console.log(languageData[currentLanguage].copyFailed + ':', err);
             });
         });
     });
