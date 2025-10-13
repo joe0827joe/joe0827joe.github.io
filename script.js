@@ -283,6 +283,66 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// PDF viewer function
+function openPDF(pdfUrl) {
+    // Option 1: Open in new tab
+    window.open(pdfUrl, '_blank');
+    
+    // Option 2: Open in modal (uncomment to use)
+    // showPDFModal(pdfUrl);
+}
+
+// PDF Modal function (optional)
+function showPDFModal(pdfUrl) {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        z-index: 10000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `;
+    
+    const iframe = document.createElement('iframe');
+    iframe.src = pdfUrl;
+    iframe.style.cssText = `
+        width: 90%;
+        height: 90%;
+        border: none;
+        border-radius: 8px;
+    `;
+    
+    const closeBtn = document.createElement('button');
+    closeBtn.innerHTML = '×';
+    closeBtn.style.cssText = `
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 10001;
+    `;
+    
+    closeBtn.onclick = () => document.body.removeChild(modal);
+    modal.onclick = (e) => {
+        if (e.target === modal) document.body.removeChild(modal);
+    };
+    
+    modal.appendChild(iframe);
+    modal.appendChild(closeBtn);
+    document.body.appendChild(modal);
+}
+
 // Add CSS for active navigation link
 const style = document.createElement('style');
 style.textContent = `

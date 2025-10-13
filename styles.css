@@ -502,6 +502,19 @@ section {
     font-size: 1.1rem;
 }
 
+.btn-github[onclick*="openPDF"] {
+    background: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-github[onclick*="openPDF"]:hover {
+    background: #c82333;
+    border-color: #c82333;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
 /* Experience Section */
 .timeline {
     position: relative;
