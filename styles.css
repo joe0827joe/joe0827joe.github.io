@@ -329,16 +329,13 @@ section {
 }
 
 .about-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .about-text {
     width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
 }
 
 .about-text p {
