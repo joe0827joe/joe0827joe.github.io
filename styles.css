@@ -410,32 +410,6 @@ section {
     font-size: 0.9rem;
 }
 
-.about-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-top: 3rem;
-}
-
-.stat {
-    text-align: center;
-    padding: 1.5rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-}
-
-.stat h3 {
-    font-size: 2.3rem;
-    font-weight: 700;
-    color: #3498db;
-    margin-bottom: 0.4rem;
-}
-
-.stat p {
-    color: #7f8c8d;
-    font-weight: 500;
-}
 
 /* Skills Section */
 .skills-grid {
