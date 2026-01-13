@@ -11,10 +11,11 @@
 
 ## 部署狀態
 - GitHub Pages: https://joe0827joe.github.io
-- 最後更新: 2025年10月13日
+- 最後更新: 2026年1月13日
 
 ## 聯絡方式
 - Email: joe0827joe@gmail.com
+- Phone: 0930-227-913
 - GitHub: https://github.com/joe0827joe
 
 
