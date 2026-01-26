@@ -9,75 +9,98 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        // Use a more aggressive approach to counter browser's built-in scroll memory
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        // Clear hash to prevent jump to sections
+        if (window.location.hash) {
+            history.replaceState("", document.title, window.location.pathname + window.location.search);
+        }
+
+        window.scrollTo(0, 0);
+
+        // Force stay at top for the first 200ms to override any background restoration
+        var forceTop = setInterval(function () {
+            window.scrollTo(0, 0);
+        }, 10);
+
+        setTimeout(function () {
+            clearInterval(forceTop);
+        }, 200);
+
+        // Pre-emptive strike: scroll to top just before leaving/reloading
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        };
+    </script>
 </head>
 
 <body>
     <!-- Header -->
     <header class="header">
-        <nav class="nav">
-            <div class="nav-brand">
-                <h1 data-zh="履歷" data-en="Resume">履歷</h1>
-            </div>
-            <div class="nav-toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#about" data-zh="關於我" data-en="About">關於我</a></li>
-                <li><a href="#skills" data-zh="技能" data-en="Skills">技能</a></li>
-                <li><a href="#projects" data-zh="專案" data-en="Projects">專案</a></li>
-                <li><a href="#experience" data-zh="經歷" data-en="Experience">經歷</a></li>
-                <li><a href="#education" data-zh="學歷" data-en="Education">學歷</a></li>
-                <li><a href="#contact" data-zh="聯絡" data-en="Contact">聯絡</a></li>
-                <li class="language-switcher">
-                    <button class="lang-btn" onclick="switchLanguage('zh')" data-zh="中文" data-en="中文">中文</button>
-                    <span class="lang-separator">|</span>
-                    <button class="lang-btn" onclick="switchLanguage('en')" data-zh="EN" data-en="English">EN</button>
-                </li>
-                <li><a href="https://github.com/joe0827joe" target="_blank" class="nav-github">
-                        <i class="fab fa-github"></i>
-                    </a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <nav class="nav">
+                <div class="nav-brand">
+                    <h1 data-zh="履歷" data-en="Resume">履歷</h1>
+                </div>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#about" data-zh="關於我" data-en="About">關於我</a></li>
+                    <li><a href="#skills" data-zh="技能" data-en="Skills">技能</a></li>
+                    <li><a href="#projects" data-zh="專案" data-en="Projects">專案</a></li>
+                    <li><a href="#experience" data-zh="經歷" data-en="Experience">經歷</a></li>
+                    <li><a href="#education" data-zh="學歷" data-en="Education">學歷</a></li>
+                    <li><a href="#contact" data-zh="聯絡" data-en="Contact">聯絡</a></li>
+                    <li class="language-switcher">
+                        <button class="lang-btn" onclick="switchLanguage('zh')" data-zh="中文" data-en="中文">中文</button>
+                        <span class="lang-separator">|</span>
+                        <button class="lang-btn" onclick="switchLanguage('en')" data-zh="EN"
+                            data-en="English">EN</button>
+                    </li>
+                    <li><a href="https://github.com/joe0827joe" target="_blank" class="nav-github">
+                            <i class="fab fa-github"></i>
+                        </a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title" data-zh="許應良" data-en="YINGLIANG HSU">許應良</h1>
-                <h2 class="hero-subtitle" data-zh="跨域 AI 工程師｜深度學習 / 影像辨識"
-                    data-en="Cross-domain AI Engineer｜Deep Learning / Computer Vision">跨域 AI 工程師｜深度學習 / 影像辨識</h2>
-                <p class="hero-description"
-                    data-zh="以「探索為劍、修正為盾」為職涯信念，擅長將深度學習、影像辨識與資料流程自動化整合到實際產品。具備跨產業協作經驗，能夠快速釐清需求、建立可量化的 AI 指標，並把演算法成果化為可落地的解決方案。"
-                    data-en="Guided by the motto “Explore as the blade, refine as the shield,” I integrate deep learning, computer vision, and data automation into production-ready solutions. My cross-industry experience helps me clarify requirements quickly, establish measurable AI metrics, and convert algorithms into deployable systems.">
-                    以「探索為劍、修正為盾」為職涯信念，擅長將深度學習、影像辨識與資料流程自動化整合到實際產品。具備跨產業協作經驗，能夠快速釐清需求、建立可量化的 AI 指標，並把演算法成果化為可落地的解決方案。
-                </p>
-                <div class="hero-meta">
-                    <div class="meta-chip">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span data-zh="新北市" data-en="New Taipei City">新北市</span>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-header">
+                    <div class="hero-image">
+                        <div class="avatar-container">
+                            <img src="S__46940421_218x280.png" alt="許應良" class="avatar-image">
+                        </div>
                     </div>
-                    <div class="meta-chip">
-                        <i class="fas fa-briefcase"></i>
-                        <span data-zh="5-6 年跨域工程經驗｜役畢" data-en="5-6 yrs cross-domain exp｜Military completed">5-6
-                            年跨域工程經驗｜役畢</span>
-                    </div>
-                    <div class="meta-chip">
-                        <i class="fas fa-bullseye"></i>
-                        <span data-zh="AI / 資料 / 演算法 / 軟體工程職缺" data-en="AI / Data / Algorithm / Software roles">AI / 資料
-                            / 演算法 / 軟體工程職缺</span>
+                    <div class="hero-info">
+                        <h1 class="hero-title" data-zh="許應良" data-en="YINGLIANG HSU">許應良</h1>
+                        <h2 class="hero-subtitle" data-zh="演算法工程師｜深度學習 / 影像辨識"
+                            data-en="Algorithm Engineer｜Deep Learning / Computer Vision">演算法工程師｜深度學習 / 影像辨識
+                        </h2>
                     </div>
                 </div>
-                <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary" data-zh="聯絡我" data-en="Contact Me">聯絡我</a>
-                    <a href="#projects" class="btn btn-secondary" data-zh="代表成果" data-en="Flagship Work">代表成果</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="avatar-container">
-                    <img src="S__46940421_218x280.png" alt="許應良" class="avatar-image">
+
+                <div class="hero-body">
+                    <p class="hero-description"
+                        data-zh="「以探索驅動創新，以修正淬煉卓越」為職涯信念，擅長將深度學習、影像辨識與資料流程自動化整合到實際產品。具備跨產業協作經驗，能夠快速釐清需求、建立可量化的 AI 指標，並把演算法成果化為可落地的解決方案。"
+                        data-en="Guided by the belief of 'Driving innovation through exploration, refining excellence through correction,' I integrate deep learning, computer vision, and data automation into production-ready solutions. My cross-industry experience helps me clarify requirements quickly, establish measurable AI metrics, and convert algorithms into deployable systems.">
+                        「以探索驅動創新，以修正淬煉卓越」為職涯信念，擅長將深度學習、影像辨識與資料流程自動化整合到實際產品。具備跨產業協作經驗，能夠快速釐清需求、建立可量化的 AI
+                        指標，並把演算法成果化為可落地的解決方案。
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn btn-primary" data-zh="聯絡我" data-en="Contact Me">聯絡我</a>
+                        <a href="#projects" class="btn btn-secondary" data-zh="查看專案" data-en="View Projects">查看專案</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -93,10 +116,10 @@
                         data-en="I'm Yingliang Hsu, graduated from NTUT's Institute of Automation Technology. I specialize in deep learning, computer vision, and data workflow automation, and love turning complex algorithms into practical, value-driven solutions.">
                         我是許應良，畢業於北科大自動化科技研究所，擅長深度學習、影像辨識與數據流程自動化，樂於將複雜的演算法轉化為具備實質效益的技術方案。
                     </p>
-                    <p data-zh="在研究所期間，我致力於提升 AI 模型在工業環境中的可靠性。針對 AOI 產線的低漏判要求，我參與 IC 載板瑕疵檢測專案，負責資料標註與特徵工程，制定「交叉校驗標註法」，透過標準良品影像結合工廠專家判定，建立特徵基準，讓訓練資料更一致，協助專案達到 94.44% 召回率、87.5% 精準度與 92.87% F2-score。"
-                        data-en="During graduate school I focused on making AI reliable in industrial settings. For AOI production lines I contributed to an IC substrate defect inspection project, owning labeling and feature engineering. I designed a cross-validation labeling approach using golden good images plus expert-reviewed defects to keep training data consistent, leading to 94.44% recall, 87.5% precision, and a 92.87% F2-score.">
+                    <p data-zh="在研究所期間，我致力於提升 AI 模型在工業環境中的可靠性。針對 AOI 產線的低漏判要求，我參與 IC 載板瑕疵檢測專案，負責資料標註與特徵工程，透過標準良品影像結合工廠專家判定，建立特徵基準，讓訓練資料更一致，協助專案達到 94.44% 召回率、87.5% 精準度與 92.87% F2-score。"
+                        data-en="During graduate school I focused on making AI reliable in industrial settings. For AOI production lines I contributed to an IC substrate defect inspection project, owning labeling and feature engineering. Using golden good images plus expert-reviewed defects to keep training data consistent, it led to 94.44% recall, 87.5% precision, and a 92.87% F2-score.">
                         在研究所期間，我致力於提升 AI 模型在工業環境中的可靠性。針對 AOI 產線的低漏判要求，我參與 IC
-                        載板瑕疵檢測專案，負責資料標註與特徵工程，制定「交叉校驗標註法」，透過標準良品影像結合工廠專家判定，建立特徵基準，讓訓練資料更一致，協助專案達到 94.44% 召回率、87.5% 精準度與
+                        載板瑕疵檢測專案，負責資料標註與特徵工程，透過標準良品影像結合工廠專家判定，建立特徵基準，讓訓練資料更一致，協助專案達到 94.44% 召回率、87.5% 精準度與
                         92.87% F2-score。
                     </p>
                     <p data-zh="我也與冷凍空調系合作「氣冷單元式資料中心」，處理多參數冷卻最佳化問題。負責 AI 模型建立與測試，利用 DE-MRBFNN 與 NSGA3 演算法開發節能模型，在實驗環境成功降低 7% PUE，也訓練我把技術語言轉化為跨領域共識。"
@@ -118,64 +141,86 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Skills Section: Goal-Oriented Spider Map -->
     <section id="skills" class="skills">
         <div class="container">
             <h2 class="section-title" data-zh="專業技能" data-en="Professional Skills">專業技能</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fas fa-brain"></i> <span data-zh="AI / ML 研發" data-en="AI / ML Development">AI / ML
-                            研發</span></h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">Keras</span>
-                        <span class="skill-tag">ONNX</span>
-                        <span class="skill-tag">TensorRT</span>
-                        <span class="skill-tag">Geatpy (NSGA3)</span>
-                        <span class="skill-tag">Scikit-learn</span>
+
+
+            <div class="skills-spider-map">
+                <!-- Center Core -->
+                <div class="skills-core">
+                    <div class="core-circle">
+                        <h3 data-zh="影像開發" data-en="Vision Development">影像開發</h3>
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-database"></i> <span data-zh="資料流程與自動化"
-                            data-en="Data Workflow & Automation">資料流程與自動化</span></h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">NumPy</span>
-                        <span class="skill-tag">Pandas</span>
-                        <span class="skill-tag" data-zh="特徵工程" data-en="Feature Engineering">特徵工程</span>
-                        <span class="skill-tag" data-zh="交叉校驗標註" data-en="Cross-validation labeling">交叉校驗標註</span>
-                        <span class="skill-tag">LLM API</span>
-                        <span class="skill-tag">Data Pipeline</span>
+
+                <!-- Quadrants -->
+                <div class="skills-quadrants">
+                    <!-- Axis A: Algorithm Depth -->
+                    <div class="quadrant q-depth">
+                        <div class="quadrant-header">
+                            <i class="fas fa-brain"></i>
+                            <span data-zh="AI 框架與工具" data-en="AI Frameworks & Tools">AI 框架與工具</span>
+                        </div>
+                        <div class="radiation-path stagger-reveal">
+                            <div class="skill-node" data-level="inner">PyTorch / TensorFlow <small data-zh="(模型訓練)"
+                                    data-en="(Model Training)">(模型訓練)</small></div>
+                            <div class="skill-node" data-level="middle">ONNX / TensorRT <small data-zh="(推理加速)"
+                                    data-en="(Inference Acceleration)">(推理加速)</small></div>
+                            <div class="skill-node" data-level="outer">OpenCV / Scikit-learn <small
+                                    data-zh="(影像分析與特徵工程)" data-en="(Vision Analysis & Feature Eng.)">(影像分析與特徵工程)</small>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> <span data-zh="軟體與系統開發" data-en="Software & Systems">軟體與系統開發</span>
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">C/C++</span>
-                        <span class="skill-tag">C#</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">GitHub Actions</span>
-                        <span class="skill-tag">Cursor / VS Code</span>
+
+                    <!-- Axis B: Implementation -->
+                    <div class="quadrant q-implementation">
+                        <div class="quadrant-header">
+                            <i class="fas fa-cogs"></i>
+                            <span data-zh="底層實作與部署" data-en="Implementation">底層實作與部署</span>
+                        </div>
+                        <div class="radiation-path stagger-reveal">
+                            <div class="skill-node" data-level="inner">C/C++ <small data-zh="(高效能開發)"
+                                    data-en="(High-Perf Dev)">(高效能開發)</small></div>
+                            <div class="skill-node" data-level="middle">C# <small data-zh="(系統整合)"
+                                    data-en="(System Integration)">(系統整合)</small></div>
+                            <div class="skill-node" data-level="outer">Docker <small data-zh="(環境封裝)"
+                                    data-en="(Env. Packaging)">(環境封裝)</small></div>
+                        </div>
                     </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-language"></i> <span data-zh="辦公應用與語言"
-                            data-en="Productivity & Languages">辦公應用與語言</span></h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Excel</span>
-                        <span class="skill-tag">PowerPoint</span>
-                        <span class="skill-tag">Word</span>
-                        <span class="skill-tag">Visio</span>
-                        <span class="skill-tag">Photoshop</span>
-                        <span class="skill-tag">Windows / Linux</span>
-                        <span class="skill-tag" data-zh="英文 (聽讀精通)" data-en="English (Advanced listening/reading)">英文
-                            (聽讀精通)</span>
-                        <span class="skill-tag" data-zh="台語 / 客語" data-en="Taiwanese / Hakka">台語 / 客語</span>
+
+                    <!-- Axis C: Quality -->
+                    <div class="quadrant q-quality">
+                        <div class="quadrant-header">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-zh="軟體工程實踐" data-en="Software Engineering">軟體工程實踐</span>
+                        </div>
+                        <div class="radiation-path stagger-reveal">
+                            <div class="skill-node" data-level="inner">Git <small data-zh="(版本控制)"
+                                    data-en="(Version Control)">(版本控制)</small></div>
+                            <div class="skill-node" data-level="middle">GitHub Actions <small data-zh="(CI/CD)"
+                                    data-en="(CI/CD)">(CI/CD)</small></div>
+                            <div class="skill-node" data-level="outer" data-zh="Linux 開發環境"
+                                data-en="Linux Dev Environment">Linux 開發環境</div>
+                        </div>
+                    </div>
+
+                    <!-- Axis D: Efficiency -->
+                    <div class="quadrant q-efficiency">
+                        <div class="quadrant-header">
+                            <i class="fas fa-bolt"></i>
+                            <span data-zh="輔助開發工具" data-en="Dev Tools">輔助開發工具</span>
+                        </div>
+                        <div class="radiation-path stagger-reveal">
+                            <div class="skill-node" data-level="inner">Python <small data-zh="(快速原型)"
+                                    data-en="(Rapid Prototyping)">(快速原型)</small></div>
+                            <div class="skill-node" data-level="middle">NumPy / Pandas <small data-zh="(數據分析)"
+                                    data-en="(Data Analysis)">(數據分析)</small></div>
+                            <div class="skill-node" data-level="outer">LLM API <small data-zh="(加速開發)"
+                                    data-en="(Dev Acceleration)">(加速開發)</small></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -202,7 +247,7 @@
                             data-en="Built a DE-MRBFNN real-time predictor with an NSGA3 multi-objective algorithm to optimize an air-cooled modular data center.">
                             以 DE-MRBFNN 建立即時預測模型，並搭配 NSGA3 多目標演算法，完成氣冷單元式資料中心的節能控制。
                         </p>
-                        <ul class="project-features">
+                        <ul class="project-features stagger-reveal">
                             <li data-zh="CFD 模擬耗時由數小時降至秒級"
                                 data-en="Reduced CFD simulation runtime from hours to seconds">CFD 模擬耗時由數小時降至秒級</li>
                             <li data-zh="節省 7% PUE，提供即時控制參數建議"
@@ -211,7 +256,7 @@
                                 data-en="Published in an international symposium with peer review">成果於國際研討會發表並通過同儕審查
                             </li>
                         </ul>
-                        <div class="project-actions">
+                        <div class="project-actions stagger-reveal">
                             <a href="ERAC2021-基於DE-MRBFNN與NSGA3之新式資料中心冷卻系統節能優化V2.pdf" target="_blank"
                                 class="btn btn-github">
                                 <i class="fas fa-file-pdf"></i> <span data-zh="查看論文" data-en="View Paper">查看論文</span>
@@ -221,31 +266,74 @@
                 </div>
                 <div class="project-card">
                     <div class="project-header">
-                        <h3 data-zh="LLM 智能客服與營運自動化" data-en="LLM Customer Service & Ops Automation">LLM 智能客服與營運自動化</h3>
+                        <h3 data-zh="Anime4K C# 影像強化工具" data-en="Anime4K C# Image Enhancer">Anime4K C# 影像強化工具
+                        </h3>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">.NET 9</span>
+                            <span class="tag">WinForms</span>
+                            <span class="tag">DIP</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <p data-zh="基於 C# 實作的 Anime4K 影像強化演算法，提供 WinForms 介面進行即時參數調校，專注於動漫風格影像的邊緣銳化與質感提升。"
+                            data-en="C# implementation of the Anime4K algorithm with a WinForms GUI for real-time parameter tuning, specializing in edge sharpening and texture enhancement for anime-style images.">
+                            基於 C# 實作的 Anime4K 影像強化演算法，提供 WinForms 介面進行即時參數調校，專注於動漫風格影像的邊緣銳化與質感提升。
+                        </p>
+                        <ul class="project-features stagger-reveal">
+                            <li data-zh="核心演算法：方向性三點混合（Combined Directional Push）實作"
+                                data-en="Core Algorithm: Implementation of Combined Directional Push-pull">
+                                核心演算法：方向性三點混合（Combined Directional Push）實作</li>
+                            <li data-zh="高效處理：利用 LockBits 直接操作記憶體，優化 CPU 運算效能"
+                                data-en="Efficient Processing: Utilized LockBits for direct memory access to optimize CPU performance">
+                                高效處理：利用 LockBits 直接操作記憶體，優化 CPU 運算效能</li>
+                            <li data-zh="影像優化：結合亮度/梯度遮罩與 Unsharp Mask 做細節收線"
+                                data-en="Vision Optimization: Combined luminance/gradient masks with Unsharp Mask for refinement">
+                                影像優化：結合亮度/梯度遮罩與 Unsharp Mask 做細節收線</li>
+                            <li data-zh="參數調校：支援即時調整 Scale、Strength 與可迭代次數"
+                                data-en="Live Tuning: Supports real-time adjustment of Scale, Strength, and Iterations">
+                                參數調校：支援即時調整 Scale、Strength 與可迭代次數</li>
+                        </ul>
+                        <div class="project-actions stagger-reveal">
+                            <a href="https://github.com/joe0827joe/Anime4K_C_Sharp" target="_blank"
+                                class="btn btn-github">
+                                <i class="fab fa-github"></i> <span data-zh="查看程式碼" data-en="View Code">查看程式碼</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 data-zh="LLM 智能客服與營運自動化" data-en="LLM Smart CS & Ops Automation">LLM 智能客服與營運自動化</h3>
                         <div class="project-tags">
                             <span class="tag">Python</span>
                             <span class="tag">LLM API</span>
                             <span class="tag">Automation</span>
-                            <span class="tag">Workflow</span>
+                            <span class="tag">GUI</span>
                         </div>
                     </div>
                     <div class="project-content">
-                        <p data-zh="設計語義邏輯層與自動資料擷取流程，連結 OpenAI API，將 60% 諮詢作業完成自動化。"
-                            data-en="Designed a semantic logic layer and automated data ingestion tied to the OpenAI API, automating 60% of consultation workflows.">
-                            設計語義邏輯層與自動資料擷取流程，連結 OpenAI API，將 60% 諮詢作業完成自動化。
+                        <p data-zh="自主投入數位轉型專案，開發專為蝦皮賣家設計的智能客服系統。結合 LLM（ChatGPT）API、語意邏輯梳理與自動化資料採集，成功使 60% 諮詢需求達成自動化，大幅提升回應效率與品質。"
+                            data-en="Led a digital transformation project developing a smart CS system for Shopee sellers. By integrating LLM (ChatGPT) APIs with automated data gathering, 60% of customer inquiries are now automated, substantially improving response efficiency.">
+                            自主投入數位轉型專案，開發專為蝦皮賣家設計的智能客服系統。結合 LLM（ChatGPT）API、語意邏輯梳理與自動化資料採集，成功使 60%
+                            諮詢需求達成自動化，大幅提升回應效率與品質。
                         </p>
-                        <ul class="project-features">
-                            <li data-zh="整合 RPA 與內部 API，建立可追蹤的客服派單流程"
-                                data-en="Integrated RPA and internal APIs to create a traceable support dispatch flow">
-                                整合 RPA 與內部 API，建立可追蹤的客服派單流程</li>
-                            <li data-zh="設計 Human-in-the-loop 機制維持服務品質"
-                                data-en="Implemented human-in-the-loop checkpoints to keep service quality">設計
-                                Human-in-the-loop 機制維持服務品質</li>
-                            <li data-zh="以 Dashboard 即時呈現 SLA 與省時成效"
-                                data-en="Built a dashboard for real-time SLA and time-saving visibility">以 Dashboard
-                                即時呈現 SLA 與省時成效</li>
+                        <ul class="project-features stagger-reveal">
+                            <li data-zh="60% 需求自動化：透過語意解析，成功將超過六成的常見問題引導至 AI 自動回覆"
+                                data-en="60% Automation: Successfully funneled over 60% of common inquiries to AI-driven responses">
+                                60% 需求自動化：透過語意解析，成功將超過六成的常見問題引導至 AI 自動回覆</li>
+                            <li data-zh="24/7 營運優化：實現全年無休即時服務，顯著降低高峰時段的客服人力缺口"
+                                data-en="24/7 Ops Efficiency: Achieved round-the-clock availability, bridging staffing gaps during peak hours">
+                                24/7 營運優化：實現全年無休即時服務，顯著降低高峰時段的客服人力缺口</li>
+                            <li data-zh="高準確率回覆：基於 ChatGPT 上下文理解技術，提供人性化且準確的解答"
+                                data-en="Accurate Replies: Utilized ChatGPT’s reasoning to provide precise, human-like answers">
+                                高準確率回覆：基於 ChatGPT 上下文理解技術，提供人性化且準確的解答</li>
+                            <li data-zh="帳號安全保護：內建硬體授權驗證機制，平衡自動化便利與帳號安全性"
+                                data-en="Secure Authorization: Implemented hardware-bound licensing for account security">
+                                帳號安全保護：內建硬體授權驗證機制，平衡自動化便利與帳號安全性</li>
                         </ul>
-                        <div class="project-actions">
+                        <div class="project-actions stagger-reveal">
                             <a href="https://github.com/joe0827joe/Smart-Customer-Service-Chatbot" target="_blank"
                                 class="btn btn-github">
                                 <i class="fab fa-github"></i> <span data-zh="查看程式碼" data-en="View Code">查看程式碼</span>
@@ -266,10 +354,11 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="timeline-header">
-                            <h3 data-zh="車用 LED 元件研發工程師（研替）" data-en="Automotive LED R&D Engineer (Alt. Service)">車用 LED
+                            <h3 data-zh="車用 LED 元件研發工程師（研替）"
+                                data-en="Automotive LED R&D Engineer (R&D Alternative Service)">車用 LED
                                 元件研發工程師（研替）</h3>
-                            <span class="timeline-company" data-zh="傻光電子工業股份有限公司"
-                                data-en="Sah-Light Electronics">傻光電子工業股份有限公司</span>
+                            <span class="timeline-company" data-zh="億光電子工業股份有限公司"
+                                data-en="Everlight Electronics">億光電子工業股份有限公司</span>
                             <span class="timeline-date">2022/01 – 2023/06</span>
                         </div>
                         <ul class="timeline-details">
@@ -346,40 +435,24 @@
     <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title" data-zh="聯絡方式" data-en="Contact">聯絡方式</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4 data-zh="電子信箱" data-en="Email">電子信箱</h4>
-                            <p>joe0827joe@yahoo.com.tw</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h4 data-zh="手機" data-en="Mobile">手機</h4>
-                            <p>0930-227-913</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4 data-zh="所在地" data-en="Location">所在地</h4>
-                            <p data-zh="新北市" data-en="New Taipei City">新北市</p>
-                        </div>
-                    </div>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h4 data-zh="電子信箱" data-en="Email">電子信箱</h4>
+                    <p><a href="mailto:joe0827joe@yahoo.com.tw" class="contact-link">joe0827joe@yahoo.com.tw</a></p>
                 </div>
-                <div class="contact-cta">
-                    <h3 data-zh="讓我們一起創造更好的未來" data-en="Let's Create a Better Future Together">讓我們一起創造更好的未來</h3>
-                    <p data-zh="如果您對我的專業能力感興趣，歡迎隨時與我聯繫！"
-                        data-en="If you're interested in my professional capabilities, feel free to contact me anytime!">
-                        如果您對我的專業能力感興趣，歡迎隨時與我聯繫！</p>
-                    <a href="mailto:joe0827joe@gmail.com" class="btn btn-primary" data-zh="立即聯絡"
-                        data-en="Contact Now">立即聯絡</a>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h4 data-zh="手機" data-en="Mobile">手機</h4>
+                    <p><a href="tel:0930227913" class="contact-link">0930-227-913</a></p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4 data-zh="所在地" data-en="Location">所在地</h4>
+                    <p data-zh="新北市" data-en="New Taipei City">新北市</p>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -387,11 +460,11 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p><span data-zh="&copy; 2024 許應良. 保留所有權利."
-                        data-en="&copy; 2024 YINGLIANG HSU. All rights reserved.">&copy; 2024 許應良. 保留所有權利.</span></p>
-                <p data-zh="「磨刀不誤砍柴工」- 持續學習，追求卓越"
-                    data-en="&quot;Give me six hours to chop down a tree and I will spend the first four sharpening the axe&quot; - Continuous learning, pursuing excellence">
-                    「磨刀不誤砍柴工」- 持續學習，追求卓越</p>
+                <p><span data-zh="&copy; 2026 許應良. 保留所有權利."
+                        data-en="&copy; 2026 YINGLIANG HSU. All rights reserved.">&copy; 2026 許應良. 保留所有權利.</span></p>
+                <p data-zh="「以探索驅動創新，以修正淬煉卓越」"
+                    data-en="&quot;Driving innovation through exploration, refining excellence through correction&quot;">
+                    「以探索驅動創新，以修正淬煉卓越」</p>
             </div>
         </div>
     </footer>
@@ -399,4 +472,4 @@
     <script src="script.js"></script>
 </body>
 
-</html>
+</html>                                                                             
