@@ -625,9 +625,11 @@ section {
 
 /* Timeline/Experience */
 .timeline {
+    max-width: 800px;
+    margin: 0 auto;
     border-left: 1px solid var(--border);
-    margin-left: 0.5rem;
     padding-left: 2rem;
+    position: relative;
 }
 
 .timeline-item {
@@ -670,40 +672,8 @@ section {
 }
 
 /* Education */
-.education-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    /* Increased gap to separate the items */
-    max-width: 800px;
-    margin: 0 auto;
-}
+/* Education section uses .timeline classes now for consistency */
 
-.education-card {
-    text-align: left;
-}
-
-.education-header h3 {
-    font-size: 1.1rem;
-    color: var(--text-main);
-}
-
-.education-school {
-    display: block;
-    font-weight: 600;
-    color: var(--primary);
-    font-size: 0.95rem;
-}
-
-.education-date {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
-
-.education-content {
-    margin-top: 0.75rem;
-    font-size: 0.95rem;
-}
 
 .contact-grid {
     display: grid;
