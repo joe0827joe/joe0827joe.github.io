@@ -1,20 +1,18 @@
 :root {
-    /* Professional Orange Palette - Creative & High-Energy */
-    --primary: #ea580c;
-    /* Deep Amber / Burnt Orange */
-    --primary-dim: #fff7ed;
-    /* Very light orange wash */
-    --text-main: #0f172a;
-    /* Keep deep slate for readability */
+    /* Sunrise & Deep Sea Palette - Energetic, Trustworthy & Modern */
+    --primary: #1A3263; /* Deep Royal Navy for Authority */
+    --primary-dim: #ecf3ff; /* Very soft blue tint */
+    --accent: #FFC570; /* Amber Orange for highlight energy */
+    --secondary: #547792; /* Steel Blue for sub-elements */
+    --text-main: #1A3263; /* Strong readability */
     --text-body: #334155;
     --text-muted: #64748b;
 
-    /* Paper-like aesthetic */
-    --bg-base: #fcfcfc;
-    --bg-paper: #ffffff;
-    --bg-surface: #fffaf5;
-    /* Slight warm tint for surface */
-    --border: #f1f5f9;
+    /* Cinematic Warmth aesthetic */
+    --bg-base: #FCF6F0; /* Premium light sand background */
+    --bg-paper: #ffffff; /* Clean white cards for depth */
+    --bg-surface: #FAF2EB; /* Slightly deeper sand surface */
+    --border: #EFD2B0; /* Muted beige for organic borders */
 
     /* Tactile variables */
     --shadow-soft: 0 4px 20px -5px rgba(0, 0, 0, 0.05);
@@ -186,7 +184,7 @@ body {
 
 .hero-subtitle {
     font-size: 1.25rem;
-    color: var(--primary);
+    color: var(--accent);
     font-weight: 600;
     margin-bottom: 0;
 }
@@ -221,7 +219,7 @@ body {
 }
 
 .meta-chip i {
-    color: var(--primary);
+    color: var(--accent);
     font-size: 0.8rem;
 }
 
@@ -244,14 +242,14 @@ body {
 }
 
 .btn-primary {
-    background-color: var(--primary);
-    color: white;
+    background-color: var(--accent); /* High energy orange buttons */
+    color: #1A3263; /* Dark navy text for contrast */
 }
 
 .btn-primary:hover {
-    background-color: #ea580c;
-    /* Matches primary orange */
-    filter: brightness(0.9);
+    background-color: var(--primary); /* Hover turns into deep navy */
+    color: white;
+    filter: brightness(1.1);
 }
 
 .btn-secondary {
@@ -350,9 +348,9 @@ section {
     text-align: center;
     padding: 2rem;
     box-shadow:
-        0 0 0 10px rgba(234, 88, 12, 0.1),
-        0 0 0 20px rgba(234, 88, 12, 0.05),
-        0 15px 40px rgba(234, 88, 12, 0.3);
+        0 0 0 10px rgba(26, 50, 99, 0.1),
+        0 0 0 20px rgba(26, 50, 99, 0.05),
+        0 15px 40px rgba(26, 50, 99, 0.3);
     border: 3px solid white;
 }
 
@@ -451,7 +449,7 @@ section {
 }
 
 .quadrant-header i {
-    color: var(--primary);
+    color: var(--accent);
     font-size: 1.1rem;
 }
 
@@ -493,11 +491,11 @@ section {
 }
 
 .skill-node[data-level="middle"] {
-    border-left: 5px solid #fb923c;
+    border-left: 5px solid #547792;
 }
 
 .skill-node[data-level="outer"] {
-    border-left: 5px solid #fed7aa;
+    border-left: 5px solid #799db9;
 }
 
 
@@ -573,8 +571,8 @@ section {
 
 .tag {
     font-size: 0.75rem;
-    color: var(--primary);
-    background: var(--primary-dim);
+    color: white;
+    background: var(--secondary);
     padding: 2px 8px;
     border-radius: 4px;
     margin-right: 0.5rem;
@@ -596,7 +594,7 @@ section {
     content: '→';
     position: absolute;
     left: 0;
-    color: var(--primary);
+    color: var(--accent);
 }
 
 .project-actions {
@@ -655,7 +653,7 @@ section {
 .timeline-company {
     display: block;
     font-weight: 600;
-    color: var(--primary);
+    color: var(--accent);
     font-size: 0.95rem;
 }
 
@@ -699,7 +697,7 @@ section {
 
 .contact-item i {
     font-size: 1.25rem;
-    color: var(--primary);
+    color: var(--accent);
 }
 
 .contact-item h4 {
