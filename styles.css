@@ -896,8 +896,17 @@ section {
 
 .contact-cta h3 {
     font-size: 1.25rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     color: var(--text-main);
+}
+
+.contact-cta-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .contact-cta-actions {
@@ -975,5 +984,191 @@ section {
     .js .stagger-reveal > * {
         opacity: 1 !important;
         transform: none !important;
+    }
+}
+
+/* ========== Print / Export PDF (always mirrors live site content) ========== */
+@media print {
+    @page {
+        size: A4;
+        margin: 12mm;
+    }
+
+    html,
+    body {
+        background: white !important;
+        color: #111 !important;
+        font-size: 11pt;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .header,
+    .nav-toggle,
+    .hero-actions,
+    .project-actions,
+    .project-visual,
+    .about-toggle,
+    .contact-cta,
+    .btn,
+    .language-switcher,
+    .nav-github,
+    .nav-pdf,
+    .footer {
+        display: none !important;
+    }
+
+    .js .reveal-item,
+    .js .stagger-reveal > *,
+    .js .reveal-item.is-visible,
+    .js .stagger-reveal.is-visible > * {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+        filter: none !important;
+    }
+
+    .about-extra {
+        display: block !important;
+    }
+
+    section {
+        padding: 12px 0 !important;
+        break-inside: avoid;
+    }
+
+    .hero {
+        padding: 0 0 12px !important;
+        border-bottom: 1px solid #ccc;
+        background: none !important;
+    }
+
+    .hero-content {
+        display: grid !important;
+        grid-template-columns: 1fr 120px;
+        gap: 16px;
+        align-items: start;
+        max-width: none;
+    }
+
+    .hero-title {
+        font-size: 22pt;
+        color: #1A3263 !important;
+    }
+
+    .hero-subtitle {
+        font-size: 12pt;
+        color: #1A3263 !important;
+        border-left: 3px solid #C66A18;
+        padding-left: 8px;
+    }
+
+    .hero-description {
+        font-size: 10pt;
+        max-width: none;
+        margin-bottom: 0;
+    }
+
+    .avatar-container {
+        width: 110px;
+        border: 1px solid #ddd;
+        box-shadow: none;
+    }
+
+    .highlights {
+        padding: 10px 0 !important;
+        background: none !important;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .highlights-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 8px;
+    }
+
+    .highlight-item strong {
+        font-size: 14pt;
+        color: #1A3263 !important;
+    }
+
+    .highlight-item span {
+        font-size: 8pt;
+    }
+
+    .section-title {
+        font-size: 14pt;
+        margin: 0 auto 12px;
+        color: #1A3263 !important;
+        border-bottom-color: #1A3263 !important;
+    }
+
+    .skills-lead {
+        margin: 0 auto 10px;
+        font-size: 10pt;
+    }
+
+    .projects-grid,
+    .skills-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px;
+    }
+
+    .project-card.featured {
+        grid-column: 1 / -1;
+    }
+
+    .project-card.featured .project-layout {
+        display: block !important;
+    }
+
+    .project-card,
+    .skill-card,
+    .contact-item {
+        break-inside: avoid;
+        box-shadow: none !important;
+        background: white !important;
+        border: 1px solid #ddd !important;
+        padding: 12px !important;
+    }
+
+    .project-badge {
+        background: #eee !important;
+        color: #1A3263 !important;
+    }
+
+    .tag {
+        background: #547792 !important;
+        color: white !important;
+    }
+
+    .timeline-item {
+        grid-template-columns: 100px 1fr !important;
+        gap: 10px;
+        padding-bottom: 12px !important;
+        break-inside: avoid;
+    }
+
+    .timeline-main {
+        border-left-color: #ccc;
+    }
+
+    .timeline-company,
+    .timeline-date {
+        color: #334155 !important;
+    }
+
+    .container {
+        max-width: none;
+        padding: 0;
+    }
+
+    a {
+        color: inherit !important;
+        text-decoration: none !important;
+    }
+
+    .project-features li::before,
+    .flow-arrow {
+        color: #C66A18 !important;
     }
 }
