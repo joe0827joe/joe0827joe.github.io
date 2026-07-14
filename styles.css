@@ -182,7 +182,12 @@ body {
     color: var(--primary);
 }
 
-@media (max-width: 768px) {
+/* Collapse nav earlier to avoid crowding on small laptops / tablet landscape */
+@media (max-width: 900px) {
+    .nav-brand .nav-role {
+        display: none;
+    }
+
     .nav-toggle {
         display: flex;
     }
