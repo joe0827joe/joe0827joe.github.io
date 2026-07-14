@@ -1,46 +1,38 @@
 // Language switching functionality
 let currentLanguage = 'zh';
 
-// Language data
 const languageData = {
     zh: {
         title: '許應良 - 演算法工程師履歷',
-        navTitle: '演算法工程師',
         copyMessage: '已複製！',
         copyTooltip: '點擊複製',
         copyError: '複製失敗'
     },
     en: {
         title: 'YINGLIANG HSU - Algorithm Engineer Resume',
-        navTitle: 'Algorithm Engineer',
         copyMessage: 'Copied!',
         copyTooltip: 'Click to copy',
         copyError: 'Copy failed'
     }
 };
 
-// Switch language function
 function switchLanguage(lang) {
     currentLanguage = lang;
-
-    // Update HTML lang attribute
     document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
-
-    // Update page title
     document.title = languageData[lang].title;
 
-    // Update all elements with data attributes
     const elements = document.querySelectorAll('[data-zh][data-en]');
     elements.forEach(element => {
-        // Find if any child is text or if the element itself has text
+        if (element.id === 'about-toggle') {
+            updateAboutToggleLabel();
+            return;
+        }
         if (element.children.length === 0 || Array.from(element.childNodes).some(node => node.nodeType === 3)) {
             element.textContent = element.getAttribute(`data-${lang}`);
         }
     });
 
-    // Update language buttons
-    const langButtons = document.querySelectorAll('.lang-btn');
-    langButtons.forEach(button => {
+    document.querySelectorAll('.lang-btn').forEach(button => {
         button.classList.remove('active');
         const buttonLang = button.getAttribute('onclick');
         if (buttonLang && buttonLang.includes(`'${lang}'`)) {
@@ -48,20 +40,26 @@ function switchLanguage(lang) {
         }
     });
 
-    // Update contact item tooltips
-    const contactItems = document.querySelectorAll('.contact-item p');
-    contactItems.forEach(item => {
+    document.querySelectorAll('.contact-item p').forEach(item => {
         item.title = languageData[lang].copyTooltip;
     });
 
-    // Save language preference
     localStorage.setItem('preferredLanguage', lang);
-
 }
 
+function updateAboutToggleLabel() {
+    const toggle = document.getElementById('about-toggle');
+    const aboutText = document.getElementById('about-text');
+    if (!toggle || !aboutText) return;
 
+    const expanded = aboutText.classList.contains('is-expanded');
+    if (expanded) {
+        toggle.textContent = toggle.getAttribute(`data-${currentLanguage}-expanded`);
+    } else {
+        toggle.textContent = toggle.getAttribute(`data-${currentLanguage}`);
+    }
+}
 
-// Auto-detect user language preference
 function detectUserLanguage() {
     const savedLanguage = localStorage.getItem('preferredLanguage');
     if (savedLanguage) return savedLanguage;
@@ -70,49 +68,59 @@ function detectUserLanguage() {
     return browserLanguage.startsWith('zh') ? 'zh' : 'en';
 }
 
-// Initialize on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function () {
-
+    // Only enable animation initial state after JS is confirmed running
+    document.documentElement.classList.add('js');
 
     const userLanguage = detectUserLanguage();
 
-    // Setup Mobile Nav
+    // Mobile nav
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
 
+    function closeNav() {
+        if (!navToggle || !navMenu) return;
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+    }
+
     if (navToggle && navMenu) {
         navToggle.addEventListener('click', () => {
-            navToggle.classList.toggle('active');
-            navMenu.classList.toggle('active');
+            const willOpen = !navMenu.classList.contains('active');
+            navToggle.classList.toggle('active', willOpen);
+            navMenu.classList.toggle('active', willOpen);
+            navToggle.setAttribute('aria-expanded', String(willOpen));
         });
 
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeNav);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeNav();
         });
     }
 
-    // Smooth scroll for all internal links
+    // Smooth scroll for internal links
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-            if (href === '#') return; // Skip top-of-page links if any
+            if (!href || href === '#') return;
+
+            const target = document.querySelector(href);
+            if (!target) return;
 
             e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) {
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                window.scrollTo({
-                    top: target.offsetTop - headerHeight,
-                    behavior: 'smooth'
-                });
-            }
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            window.scrollTo({
+                top: target.offsetTop - headerHeight,
+                behavior: 'smooth'
+            });
         });
     });
 
-    // Active link on scroll
+    // Active nav link on scroll
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
 
@@ -120,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let current = '';
         const headerHeight = document.querySelector('.header').offsetHeight;
         sections.forEach(section => {
-            const sectionTop = section.offsetTop - headerHeight - 100;
+            const sectionTop = section.offsetTop - headerHeight - 80;
             if (window.scrollY >= sectionTop) {
                 current = section.getAttribute('id');
             }
@@ -128,83 +136,70 @@ document.addEventListener('DOMContentLoaded', function () {
 
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
+            if (current && link.getAttribute('href') === `#${current}`) {
                 link.classList.add('active');
             }
         });
+    }, { passive: true });
 
-        // Header blur transition
-        const header = document.querySelector('.header');
-        if (window.scrollY > 50) {
-            header.style.padding = '0.5rem 0';
-            header.style.backgroundColor = 'var(--glass-bg)';
-        } else {
-            header.style.padding = '1rem 0';
-            header.style.backgroundColor = 'transparent';
-        }
-    });
+    // Progressive reveal: only when .js is present and motion is allowed
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Intersection Observer for tactile reveal animations
-    const observerOptions = {
-        threshold: 0.15,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in-up');
-
-                // Trigger staggered children if it has the class
-                if (entry.target.classList.contains('stagger-reveal')) {
-                    entry.target.classList.add('active');
-                }
-
-                observer.unobserve(entry.target); // Reveal only once
-            }
+    if (!prefersReducedMotion) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
         });
-    }, observerOptions);
 
-    // Elements to observe
-    const elementsToWatch = [
-        'section',
-        '.project-card',
-        '.quadrant',
-        '.timeline-item',
-        '.education-card',
-        '.project-features',
-        '.radiation-path',
-        '.project-actions'
-    ];
+        document.querySelectorAll('.reveal-item, .stagger-reveal').forEach(el => {
+            observer.observe(el);
+        });
+    } else {
+        document.querySelectorAll('.reveal-item, .stagger-reveal').forEach(el => {
+            el.classList.add('is-visible');
+        });
+    }
 
-    document.querySelectorAll(elementsToWatch.join(', ')).forEach(el => {
-        observer.observe(el);
-    });
+    // About expand / collapse
+    const aboutToggle = document.getElementById('about-toggle');
+    const aboutText = document.getElementById('about-text');
+    if (aboutToggle && aboutText) {
+        aboutToggle.addEventListener('click', () => {
+            aboutText.classList.toggle('is-expanded');
+            updateAboutToggleLabel();
+        });
+    }
 
-    // Click to copy
+    // Click to copy contact text (skip anchors)
     document.querySelectorAll('.contact-item p').forEach(item => {
         item.style.cursor = 'pointer';
-        item.addEventListener('click', function () {
-            const text = this.textContent;
+        item.addEventListener('click', function (e) {
+            if (e.target.closest('a')) return;
+            const text = this.textContent.trim();
             navigator.clipboard.writeText(text).then(() => {
-                const originalText = this.textContent;
+                const originalText = this.innerHTML;
                 this.textContent = languageData[currentLanguage].copyMessage;
-                const originalColor = this.style.color;
                 this.style.color = 'var(--primary)';
-
                 setTimeout(() => {
-                    this.textContent = originalText;
-                    this.style.color = originalColor;
+                    this.innerHTML = originalText;
+                    this.style.color = '';
                 }, 2000);
+            }).catch(() => {
+                // no-op
             });
         });
     });
 
-    // Initial language setup
     switchLanguage(userLanguage);
+    updateAboutToggleLabel();
 });
 
-// PDF viewer
 function openPDF(pdfUrl) {
     window.open(pdfUrl, '_blank');
 }
