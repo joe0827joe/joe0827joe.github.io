@@ -198,41 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     switchLanguage(userLanguage);
     updateAboutToggleLabel();
-
-    // Export PDF from live page content (print → Save as PDF)
-    document.querySelectorAll('.js-print-resume').forEach(el => {
-        el.addEventListener('click', (e) => {
-            e.preventDefault();
-            exportResumePdf();
-        });
-    });
 });
-
-function exportResumePdf() {
-    const aboutText = document.getElementById('about-text');
-    const wasExpanded = aboutText && aboutText.classList.contains('is-expanded');
-
-    // Ensure hidden / animated content is fully visible for print
-    if (aboutText) aboutText.classList.add('is-expanded');
-    document.querySelectorAll('.reveal-item, .stagger-reveal').forEach(el => {
-        el.classList.add('is-visible');
-    });
-    updateAboutToggleLabel();
-
-    const restore = () => {
-        if (aboutText && !wasExpanded) {
-            aboutText.classList.remove('is-expanded');
-            updateAboutToggleLabel();
-        }
-        window.removeEventListener('afterprint', restore);
-    };
-    window.addEventListener('afterprint', restore);
-
-    // Let layout settle before print dialog
-    requestAnimationFrame(() => {
-        window.print();
-    });
-}
 
 function openPDF(pdfUrl) {
     window.open(pdfUrl, '_blank');

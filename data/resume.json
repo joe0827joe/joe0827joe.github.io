@@ -1,0 +1,176 @@
+{
+  "profile": {
+    "name": { "zh": "許應良", "en": "Yingliang Hsu" },
+    "englishName": "Joe Hsu",
+    "title": {
+      "zh": "演算法工程師｜AI / Computer Vision / Automation",
+      "en": "AI / Computer Vision / Automation Engineer"
+    },
+    "location": { "zh": "新北市, 台灣", "en": "New Taipei City, Taiwan" },
+    "email": "joe0827joe@yahoo.com.tw",
+    "phone": "0930-227-913",
+    "github": "https://github.com/joe0827joe",
+    "portfolio": "https://joe0827joe.github.io/",
+    "summary": {
+      "zh": "北科大自動化科技碩士，專長深度學習、影像辨識與工業 AOI 系統落地。具備從模型訓練、推論優化到跨部門工程驗證的完整實作經驗，能把演算法轉成可量化、可部署的解決方案。",
+      "en": "Automation Technology M.S. (NTUT) specializing in deep learning, computer vision, and industrial AOI delivery. Experienced from model training and inference optimization to cross-functional validation—turning algorithms into measurable, deployable systems."
+    }
+  },
+  "skills": [
+    {
+      "label": { "zh": "Languages", "en": "Languages" },
+      "items": ["Python", "C/C++", "C#", "JavaScript", "VBA"]
+    },
+    {
+      "label": { "zh": "AI / CV", "en": "AI / CV" },
+      "items": ["PyTorch", "TensorFlow", "OpenCV", "Scikit-learn", "NumPy", "Pandas"]
+    },
+    {
+      "label": { "zh": "Deployment", "en": "Deployment" },
+      "items": ["ONNX", "TensorRT", "OpenVINO", "Docker", "Linux"]
+    },
+    {
+      "label": { "zh": "Engineering", "en": "Engineering" },
+      "items": ["Git", "GitHub Actions", "Pytest", "CI Workflows"]
+    }
+  ],
+  "experience": [
+    {
+      "title": { "zh": "軟體工程師", "en": "Software Engineer" },
+      "company": { "zh": "易豐購企業社", "en": "Yifong Enterprise Co., Ltd." },
+      "location": { "zh": "新北市", "en": "New Taipei City" },
+      "start": "2023/07",
+      "end": { "zh": "至今", "en": "Present" },
+      "bullets": [
+        {
+          "zh": "開發 Python 自動化與跨平台資料轉譯，涵蓋 API Schema Mapping、SKU 屬性整理與非結構化資料轉換",
+          "en": "Built Python automation and cross-platform data translation for API schema mapping, SKU attribute processing, and unstructured data conversion"
+        },
+        {
+          "zh": "依 ROI、流量成本與商品條件設計規則型邏輯，支援自動化篩選、排序與資源分配",
+          "en": "Designed rule-based logic using ROI, traffic cost, and product conditions to support automated filtering, ranking, and resource allocation"
+        },
+        {
+          "zh": "導入 Git、例外處理與日誌追蹤，提升無人值守腳本的穩定性與可維護性",
+          "en": "Improved unattended script reliability with Git version control, exception handling, and log tracking"
+        }
+      ]
+    },
+    {
+      "title": { "zh": "車用 LED 元件研發工程師（研替）", "en": "Automotive LED R&D Engineer (Alternative Service)" },
+      "company": { "zh": "億光電子工業股份有限公司", "en": "Everlight Electronics Co., Ltd." },
+      "location": { "zh": "新北市", "en": "New Taipei City" },
+      "start": "2022/01",
+      "end": "2023/06",
+      "bullets": [
+        {
+          "zh": "導入 Top Contact 散熱與新晶片架構，達成體積縮小 15%、亮度提升 10%，並完成車用信賴性驗證",
+          "en": "Implemented top-contact thermal path and new die design, achieving 15% volume reduction and 10% brightness gain while completing automotive reliability validation"
+        },
+        {
+          "zh": "依 APQP / AEC-Q 管控專案節點，協作品保與製程縮短驗證時程",
+          "en": "Managed APQP/AEC-Q gates and coordinated QA/process partners to shorten validation cycles"
+        }
+      ]
+    },
+    {
+      "title": { "zh": "CNC 技術人員（實習）", "en": "CNC Technician (Intern)" },
+      "company": { "zh": "群光電能科技股份有限公司", "en": "Chicony Power Technology Co., Ltd." },
+      "location": { "zh": "新北市", "en": "New Taipei City" },
+      "start": "2016/08",
+      "end": "2018/07",
+      "bullets": [
+        {
+          "zh": "開發深孔加工治具抑制震動與飄移，治具成本降低 20%",
+          "en": "Developed deep-bore fixtures to suppress vibration and drift, cutting jig cost by 20%"
+        },
+        {
+          "zh": "與研發進行 DFM 評估並優化加工路徑，誤差率下降 30%",
+          "en": "Partnered with R&D on DFM reviews and tool-path optimization, lowering error rate by 30%"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": { "zh": "PCB 混合動力瑕疵檢測系統", "en": "PCB Hybrid Defect Detection System" },
+      "featured": true,
+      "stack": ["C++", "Python", "OpenCV", "OpenVINO", "Deep Learning"],
+      "link": "https://github.com/joe0827joe/pcb-hybrid-aoi",
+      "bullets": [
+        {
+          "zh": "整合規則式 ROI 定位與深度學習分類，於工業 IPC 環境達成低延遲、高精度檢測，無需高階 GPU",
+          "en": "Combined rule-based ROI localization with DL classification for low-latency, high-accuracy inspection on industrial IPCs without high-end GPUs"
+        },
+        {
+          "zh": "CV Engine 於 10ms 內完成 ROI 定位，節省約 80% AI 推論算力；OpenVINO INT8 優化 Intel CPU 推論",
+          "en": "CV engine localized ROI in <10ms, cutting ~80% AI inference cost; OpenVINO INT8 optimized Intel CPU inference"
+        },
+        {
+          "zh": "DL Engine 支援 6 類疵點分類；導入 Pytest 與 CI 確保演算法迭代穩定",
+          "en": "DL engine classifies 6 defect types; Pytest + CI keep algorithm iterations stable"
+        }
+      ]
+    },
+    {
+      "name": { "zh": "資料中心冷卻節能優化", "en": "Data Center Cooling Optimization" },
+      "featured": false,
+      "stack": ["Python", "DE-MRBFNN", "NSGA3"],
+      "link": null,
+      "bullets": [
+        {
+          "zh": "以 DE-MRBFNN + NSGA3 建立氣冷單元式資料中心節能模型，實驗環境降低 7% PUE",
+          "en": "Built DE-MRBFNN + NSGA3 energy model for an air-cooled modular data center, cutting PUE by 7% in experiments"
+        },
+        {
+          "zh": "將 CFD 模擬耗時由數小時降至秒級，並以研討會論文發表成果",
+          "en": "Reduced CFD simulation runtime from hours to seconds; published in a peer-reviewed symposium"
+        }
+      ]
+    },
+    {
+      "name": { "zh": "Anime4K C# 影像強化工具", "en": "Anime4K C# Image Enhancer" },
+      "featured": false,
+      "stack": ["C#", ".NET 9", "WinForms"],
+      "link": "https://github.com/joe0827joe/Anime4K_C_Sharp",
+      "bullets": [
+        {
+          "zh": "實作 Anime4K 核心演算法與 WinForms 即時參數調校介面，強化動漫風格邊緣與質感",
+          "en": "Implemented Anime4K core algorithm with WinForms live tuning for anime-style edge and texture enhancement"
+        },
+        {
+          "zh": "以 LockBits 直接操作記憶體優化 CPU 效能，支援 Scale／Strength／迭代參數即時調整",
+          "en": "Used LockBits for CPU-efficient memory access; real-time Scale/Strength/iteration controls"
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": { "zh": "自動化科技研究所 碩士", "en": "M.S., Automation Technology" },
+      "school": { "zh": "國立臺北科技大學", "en": "National Taipei University of Technology" },
+      "start": "2019/08",
+      "end": "2021/09",
+      "note": {
+        "zh": "氣冷資料中心多目標節能模型（DE-MRBFNN + NSGA3），PUE 降低 7%，研討會論文發表",
+        "en": "Multi-objective data-center energy model (DE-MRBFNN + NSGA3); 7% PUE reduction; symposium paper"
+      }
+    },
+    {
+      "degree": { "zh": "機械工程系 學士", "en": "B.S., Mechanical Engineering" },
+      "school": { "zh": "國立臺北科技大學", "en": "National Taipei University of Technology" },
+      "start": "2015/09",
+      "end": "2019/06",
+      "note": {
+        "zh": "機構與製造基礎，支撐後續電／光／熱與系統整合跨域工作",
+        "en": "Mechanical/manufacturing foundation supporting later electrical, optical, thermal, and system-integration work"
+      }
+    }
+  ],
+  "highlights": [
+    { "value": "94.44%", "label": { "zh": "AOI 召回率", "en": "AOI Recall" } },
+    { "value": "7%", "label": { "zh": "PUE 降低", "en": "PUE Reduction" } },
+    { "value": "15%", "label": { "zh": "LED 體積縮小", "en": "LED Volume Cut" } },
+    { "value": "10%", "label": { "zh": "亮度提升", "en": "Brightness Gain" } }
+  ]
+}
