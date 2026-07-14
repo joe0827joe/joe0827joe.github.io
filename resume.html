@@ -1,59 +1,117 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>許應良｜一頁式履歷 · Joe Hsu Resume</title>
-    <meta name="description" content="許應良 (Joe Hsu) ATS-friendly one-page resume — AI / Computer Vision / Automation Engineer.">
-    <meta name="robots" content="index,follow">
-    <link rel="canonical" href="https://joe0827joe.github.io/resume.html">
-    <link rel="stylesheet" href="resume.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>許應良｜一頁式履歷 · Joe Hsu Resume</title>
+  <meta name="description" content="許應良 (Joe Hsu) ATS-friendly one-page resume — AI / Computer Vision / Automation Engineer.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://joe0827joe.github.io/resume.html">
+  <link rel="stylesheet" href="resume.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <div class="toolbar no-print">
-        <a class="toolbar-link" href="./">← Portfolio</a>
-        <div class="toolbar-actions">
-            <button type="button" class="btn" id="lang-zh" data-lang="zh">中文</button>
-            <button type="button" class="btn" id="lang-en" data-lang="en">EN</button>
-            <button type="button" class="btn btn-primary" id="btn-print"
-                data-zh="下載 PDF" data-en="Download PDF">下載 PDF</button>
-        </div>
+  <div class="toolbar no-print">
+    <a class="toolbar-link" href="./">← Portfolio</a>
+    <div class="toolbar-actions">
+      <button type="button" class="btn" id="lang-zh" data-lang="zh">中文</button>
+      <button type="button" class="btn" id="lang-en" data-lang="en">EN</button>
+      <a class="btn btn-primary" id="btn-pdf-zh" href="Joe_Hsu_Resume_ZH.pdf" download data-zh="下載中文 PDF" data-en="Download ZH PDF">下載中文 PDF</a>
+      <a class="btn" id="btn-pdf-en" href="Joe_Hsu_Resume_EN.pdf" download data-zh="Download EN PDF" data-en="Download EN PDF">Download EN PDF</a>
     </div>
+  </div>
 
-    <main class="resume" id="resume" aria-live="polite">
-        <!-- Filled by resume.js from data/resume.json; noscript fallback below -->
-        <p class="loading no-print" id="loading">Loading resume…</p>
-    </main>
+  <main class="resume" id="resume">
 
-    <noscript>
-        <article class="resume">
-            <header class="resume-header">
-                <h1>許應良 · Joe Hsu</h1>
-                <p class="resume-title">演算法工程師｜AI / Computer Vision / Automation</p>
-                <p class="resume-links">
-                    joe0827joe@yahoo.com.tw · 0930-227-913 · New Taipei City ·
-                    <a href="https://joe0827joe.github.io/">Portfolio</a> ·
-                    <a href="https://github.com/joe0827joe">GitHub</a>
-                </p>
-            </header>
-            <section>
-                <h2>Professional Summary</h2>
-                <p>北科大自動化科技碩士，專長深度學習、影像辨識與工業 AOI 系統落地。具備從模型訓練、推論優化到跨部門工程驗證的完整實作經驗。</p>
-            </section>
-            <section>
-                <h2>Enable JavaScript</h2>
-                <p>請啟用 JavaScript 以載入完整一頁式履歷，或造訪
-                    <a href="https://joe0827joe.github.io/">網站作品集</a>。
-                </p>
-            </section>
-        </article>
-    </noscript>
+    <header class="resume-header">
+      <h1><span class="i18n" data-lang="zh">許應良 · Joe Hsu</span><span class="i18n" data-lang="en">Joe Hsu · Yingliang Hsu</span></h1>
+      <p class="resume-title"><span class="i18n" data-lang="zh">演算法工程師｜AI / Computer Vision / Automation</span><span class="i18n" data-lang="en">AI / Computer Vision / Automation Engineer</span></p>
+      <p class="resume-links">
+        <span class="i18n" data-lang="zh"><a href="mailto:joe0827joe@yahoo.com.tw">joe0827joe@yahoo.com.tw</a> · 新北市, 台灣 · <a href="https://joe0827joe.github.io/">Portfolio</a> · <a href="https://github.com/joe0827joe">GitHub</a></span>
+        <span class="i18n" data-lang="en"><a href="mailto:joe0827joe@yahoo.com.tw">joe0827joe@yahoo.com.tw</a> · New Taipei City, Taiwan · <a href="https://joe0827joe.github.io/">Portfolio</a> · <a href="https://github.com/joe0827joe">GitHub</a></span>
+      </p>
+    </header>
+    <section>
+      <h2><span class="i18n" data-lang="zh">專業摘要</span><span class="i18n" data-lang="en">Professional Summary</span></h2>
+      <p class="summary"><span class="i18n" data-lang="zh">北科大自動化科技碩士，專長深度學習、影像辨識與工業 AOI 系統落地。具備從模型訓練、推論優化到跨部門工程驗證的完整實作經驗，能把演算法轉成可量化、可部署的解決方案。</span><span class="i18n" data-lang="en">Automation Technology M.S. (NTUT) specializing in deep learning, computer vision, and industrial AOI delivery. Experienced from model training and inference optimization to cross-functional validation—turning algorithms into measurable, deployable systems.</span></p>
+    </section>
+    <section>
+      <h2><span class="i18n" data-lang="zh">關鍵成果</span><span class="i18n" data-lang="en">Key Results</span></h2>
+      <div class="highlights"><span><strong>94.44%</strong> <span class="i18n" data-lang="zh">AOI 召回率</span><span class="i18n" data-lang="en">AOI Recall</span></span><span><strong>7%</strong> <span class="i18n" data-lang="zh">PUE 降低</span><span class="i18n" data-lang="en">PUE Reduction</span></span><span><strong>15%</strong> <span class="i18n" data-lang="zh">LED 體積縮小</span><span class="i18n" data-lang="en">LED Volume Cut</span></span><span><strong>10%</strong> <span class="i18n" data-lang="zh">亮度提升</span><span class="i18n" data-lang="en">Brightness Gain</span></span></div>
+    </section>
+    <section>
+      <h2><span class="i18n" data-lang="zh">專業技能</span><span class="i18n" data-lang="en">Technical Skills</span></h2>
+      <div class="skills-grid"><div class="skill-row"><strong><span class="i18n" data-lang="zh">Languages</span><span class="i18n" data-lang="en">Languages</span></strong><span>Python · C/C++ · C# · JavaScript · VBA</span></div><div class="skill-row"><strong><span class="i18n" data-lang="zh">AI / CV</span><span class="i18n" data-lang="en">AI / CV</span></strong><span>PyTorch · TensorFlow · OpenCV · Scikit-learn · NumPy · Pandas</span></div><div class="skill-row"><strong><span class="i18n" data-lang="zh">Deployment</span><span class="i18n" data-lang="en">Deployment</span></strong><span>ONNX · TensorRT · OpenVINO · Docker · Linux</span></div><div class="skill-row"><strong><span class="i18n" data-lang="zh">Engineering</span><span class="i18n" data-lang="en">Engineering</span></strong><span>Git · GitHub Actions · Pytest · CI Workflows</span></div></div>
+    </section>
+    <section>
+      <h2><span class="i18n" data-lang="zh">工作經歷</span><span class="i18n" data-lang="en">Professional Experience</span></h2>
+      
+      <article class="item">
+        <div class="item-head">
+          <h3><span class="i18n" data-lang="zh">軟體工程師</span><span class="i18n" data-lang="en">Software Engineer</span></h3>
+          <span class="item-meta"><span class="i18n" data-lang="zh">2023/07 – 至今</span><span class="i18n" data-lang="en">2023/07 – Present</span></span>
+        </div>
+        <div class="item-sub"><span class="i18n" data-lang="zh">易豐購企業社</span><span class="i18n" data-lang="en">Yifong Enterprise Co., Ltd.</span> · <span class="i18n" data-lang="zh">新北市</span><span class="i18n" data-lang="en">New Taipei City</span></div>
+        <ul><li><span class="i18n" data-lang="zh">開發 Python 自動化與跨平台資料轉譯，涵蓋 API Schema Mapping、SKU 屬性整理與非結構化資料轉換</span><span class="i18n" data-lang="en">Built Python automation and cross-platform data translation for API schema mapping, SKU attribute processing, and unstructured data conversion</span></li><li><span class="i18n" data-lang="zh">依 ROI、流量成本與商品條件設計規則型邏輯，支援自動化篩選、排序與資源分配</span><span class="i18n" data-lang="en">Designed rule-based logic using ROI, traffic cost, and product conditions to support automated filtering, ranking, and resource allocation</span></li><li><span class="i18n" data-lang="zh">導入 Git、例外處理與日誌追蹤，提升無人值守腳本的穩定性與可維護性</span><span class="i18n" data-lang="en">Improved unattended script reliability with Git version control, exception handling, and log tracking</span></li></ul>
+      </article>
+      <article class="item">
+        <div class="item-head">
+          <h3><span class="i18n" data-lang="zh">車用 LED 元件研發工程師（研替）</span><span class="i18n" data-lang="en">Automotive LED R&amp;D Engineer (Alternative Service)</span></h3>
+          <span class="item-meta"><span class="i18n" data-lang="zh">2022/01 – 2023/06</span><span class="i18n" data-lang="en">2022/01 – 2023/06</span></span>
+        </div>
+        <div class="item-sub"><span class="i18n" data-lang="zh">億光電子工業股份有限公司</span><span class="i18n" data-lang="en">Everlight Electronics Co., Ltd.</span> · <span class="i18n" data-lang="zh">新北市</span><span class="i18n" data-lang="en">New Taipei City</span></div>
+        <ul><li><span class="i18n" data-lang="zh">導入 Top Contact 散熱與新晶片架構，達成體積縮小 15%、亮度提升 10%，並完成車用信賴性驗證</span><span class="i18n" data-lang="en">Implemented top-contact thermal path and new die design, achieving 15% volume reduction and 10% brightness gain while completing automotive reliability validation</span></li><li><span class="i18n" data-lang="zh">依 APQP / AEC-Q 管控專案節點，協作品保與製程縮短驗證時程</span><span class="i18n" data-lang="en">Managed APQP/AEC-Q gates and coordinated QA/process partners to shorten validation cycles</span></li></ul>
+      </article>
+      <article class="item">
+        <div class="item-head">
+          <h3><span class="i18n" data-lang="zh">CNC 技術人員（實習）</span><span class="i18n" data-lang="en">CNC Technician (Intern)</span></h3>
+          <span class="item-meta"><span class="i18n" data-lang="zh">2016/08 – 2018/07</span><span class="i18n" data-lang="en">2016/08 – 2018/07</span></span>
+        </div>
+        <div class="item-sub"><span class="i18n" data-lang="zh">群光電能科技股份有限公司</span><span class="i18n" data-lang="en">Chicony Power Technology Co., Ltd.</span> · <span class="i18n" data-lang="zh">新北市</span><span class="i18n" data-lang="en">New Taipei City</span></div>
+        <ul><li><span class="i18n" data-lang="zh">開發深孔加工治具抑制震動與飄移，治具成本降低 20%</span><span class="i18n" data-lang="en">Developed deep-bore fixtures to suppress vibration and drift, cutting jig cost by 20%</span></li><li><span class="i18n" data-lang="zh">與研發進行 DFM 評估並優化加工路徑，誤差率下降 30%</span><span class="i18n" data-lang="en">Partnered with R&amp;D on DFM reviews and tool-path optimization, lowering error rate by 30%</span></li></ul>
+      </article>
+    </section>
+    <section>
+      <h2><span class="i18n" data-lang="zh">精選專案</span><span class="i18n" data-lang="en">Selected Projects</span></h2>
+      
+      <article class="item">
+        <div class="item-head"><h3><span class="i18n" data-lang="zh">PCB 混合動力瑕疵檢測系統</span><span class="i18n" data-lang="en">PCB Hybrid Defect Detection System</span><span class="i18n" data-lang="zh">（主打）</span><span class="i18n" data-lang="en"> (Featured)</span></h3></div>
+        <div class="stack">C++ · Python · OpenCV · OpenVINO · Deep Learning · <a href="https://github.com/joe0827joe/pcb-hybrid-aoi" target="_blank" rel="noopener"><span class="i18n" data-lang="zh">專案連結</span><span class="i18n" data-lang="en">Link</span></a></div>
+        <ul><li><span class="i18n" data-lang="zh">整合規則式 ROI 定位與深度學習分類，於工業 IPC 環境達成低延遲、高精度檢測，無需高階 GPU</span><span class="i18n" data-lang="en">Combined rule-based ROI localization with DL classification for low-latency, high-accuracy inspection on industrial IPCs without high-end GPUs</span></li><li><span class="i18n" data-lang="zh">CV Engine 於 10ms 內完成 ROI 定位，節省約 80% AI 推論算力；OpenVINO INT8 優化 Intel CPU 推論</span><span class="i18n" data-lang="en">CV engine localized ROI in &lt;10ms, cutting ~80% AI inference cost; OpenVINO INT8 optimized Intel CPU inference</span></li><li><span class="i18n" data-lang="zh">DL Engine 支援 6 類疵點分類；導入 Pytest 與 CI 確保演算法迭代穩定</span><span class="i18n" data-lang="en">DL engine classifies 6 defect types; Pytest + CI keep algorithm iterations stable</span></li></ul>
+      </article>
+      <article class="item">
+        <div class="item-head"><h3><span class="i18n" data-lang="zh">資料中心冷卻節能優化</span><span class="i18n" data-lang="en">Data Center Cooling Optimization</span></h3></div>
+        <div class="stack">Python · DE-MRBFNN · NSGA3</div>
+        <ul><li><span class="i18n" data-lang="zh">以 DE-MRBFNN + NSGA3 建立氣冷單元式資料中心節能模型，實驗環境降低 7% PUE</span><span class="i18n" data-lang="en">Built DE-MRBFNN + NSGA3 energy model for an air-cooled modular data center, cutting PUE by 7% in experiments</span></li><li><span class="i18n" data-lang="zh">將 CFD 模擬耗時由數小時降至秒級，並以研討會論文發表成果</span><span class="i18n" data-lang="en">Reduced CFD simulation runtime from hours to seconds; published in a peer-reviewed symposium</span></li></ul>
+      </article>
+      <article class="item">
+        <div class="item-head"><h3><span class="i18n" data-lang="zh">Anime4K C# 影像強化工具</span><span class="i18n" data-lang="en">Anime4K C# Image Enhancer</span></h3></div>
+        <div class="stack">C# · .NET 9 · WinForms · <a href="https://github.com/joe0827joe/Anime4K_C_Sharp" target="_blank" rel="noopener"><span class="i18n" data-lang="zh">專案連結</span><span class="i18n" data-lang="en">Link</span></a></div>
+        <ul><li><span class="i18n" data-lang="zh">實作 Anime4K 核心演算法與 WinForms 即時參數調校介面，強化動漫風格邊緣與質感</span><span class="i18n" data-lang="en">Implemented Anime4K core algorithm with WinForms live tuning for anime-style edge and texture enhancement</span></li><li><span class="i18n" data-lang="zh">以 LockBits 直接操作記憶體優化 CPU 效能，支援 Scale／Strength／迭代參數即時調整</span><span class="i18n" data-lang="en">Used LockBits for CPU-efficient memory access; real-time Scale/Strength/iteration controls</span></li></ul>
+      </article>
+    </section>
+    <section>
+      <h2><span class="i18n" data-lang="zh">學歷</span><span class="i18n" data-lang="en">Education</span></h2>
+      
+      <article class="item">
+        <div class="item-head">
+          <h3><span class="i18n" data-lang="zh">自動化科技研究所 碩士</span><span class="i18n" data-lang="en">M.S., Automation Technology</span></h3>
+          <span class="item-meta"><span class="i18n" data-lang="zh">2019/08 – 2021/09</span><span class="i18n" data-lang="en">2019/08 – 2021/09</span></span>
+        </div>
+        <div class="item-sub"><span class="i18n" data-lang="zh">國立臺北科技大學</span><span class="i18n" data-lang="en">National Taipei University of Technology</span></div>
+        <ul><li><span class="i18n" data-lang="zh">氣冷資料中心多目標節能模型（DE-MRBFNN + NSGA3），PUE 降低 7%，研討會論文發表</span><span class="i18n" data-lang="en">Multi-objective data-center energy model (DE-MRBFNN + NSGA3); 7% PUE reduction; symposium paper</span></li></ul>
+      </article>
+      <article class="item">
+        <div class="item-head">
+          <h3><span class="i18n" data-lang="zh">機械工程系 學士</span><span class="i18n" data-lang="en">B.S., Mechanical Engineering</span></h3>
+          <span class="item-meta"><span class="i18n" data-lang="zh">2015/09 – 2019/06</span><span class="i18n" data-lang="en">2015/09 – 2019/06</span></span>
+        </div>
+        <div class="item-sub"><span class="i18n" data-lang="zh">國立臺北科技大學</span><span class="i18n" data-lang="en">National Taipei University of Technology</span></div>
+        <ul><li><span class="i18n" data-lang="zh">機構與製造基礎，支撐後續電／光／熱與系統整合跨域工作</span><span class="i18n" data-lang="en">Mechanical/manufacturing foundation supporting later electrical, optical, thermal, and system-integration work</span></li></ul>
+      </article>
+    </section>
+  </main>
 
-    <script src="resume.js"></script>
+  <script src="resume.js"></script>
 </body>
-
 </html>

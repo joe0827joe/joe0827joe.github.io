@@ -1,0 +1,13 @@
+{
+  "name": "joe0827joe-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:resume": "node scripts/build-resume.mjs",
+    "build": "npm run build:resume"
+  },
+  "devDependencies": {
+    "pdf-lib": "^1.17.1",
+    "playwright": "^1.52.0"
+  }
+}

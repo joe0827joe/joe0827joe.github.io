@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build-and-deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -23,12 +23,45 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build resume HTML + one-page PDFs
+        run: npm run build:resume
+
+      - name: Prepare deploy folder
+        run: |
+          rm -rf _site
+          mkdir _site
+          rsync -a \
+            --exclude node_modules \
+            --exclude .git \
+            --exclude _site \
+            --exclude scripts \
+            --exclude package.json \
+            --exclude package-lock.json \
+            --exclude .gitignore \
+            --exclude '.tmp-resume-*.html' \
+            ./ _site/
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'   # 這裡的 '.' 指 repo 根目錄（有 index.html）
+          path: '_site'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
