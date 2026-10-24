@@ -1,6 +1,8 @@
-# 許應良 - AI 工程師履歷
+# 許應良｜AI / Machine Learning Engineer
 
-這是我的個人履歷網站，展示專業技能、專案作品與工作經歷。
+這是我的雙語履歷／作品集網站，依 2026/10/24 匯出的 104 履歷，聚焦 Machine Learning、Industrial AI、Optimization 與 Python。
+
+職務與求職定位分別顯示：**廣達電腦 AI 數據工程師（2026/10–至今）**、**希望職稱 AI / Machine Learning Engineer**。易豐購任職期間為 **2023/07–2026/09**。公開網站不包含 104 PDF 的完整通訊地址。
 
 ## 技術棧
 - HTML5 / CSS3 / JavaScript
@@ -29,9 +31,16 @@
 
 ## 部署狀態
 - GitHub Pages: https://joe0827joe.github.io
-- 最後更新: 2026年7月14日
+- 最後更新: 2026年10月24日
 
 ## 聯絡方式
 - Email: joe0827joe@yahoo.com.tw
 - Phone: 0930-227-913
 - GitHub: https://github.com/joe0827joe
+
+## 履歷資料維護原則
+- 104 PDF 作為職務、任職期間及研究成果的正式內容基準。
+- `data/resume.json` 是一頁式履歷的來源；首頁 `index.html` 需同步調整對應欄位。
+- 研究成果分開標示「模擬可用能損耗降低 9.2%」與「實際場域 PUE 降低 7%」，不混用驗證環境。
+- 現任廣達職務只描述已參與的資料分析、可行性評估與 PoC／整合規劃，不宣稱模型已上線。
+- GitHub Pages 正式部署前以 Pull Request 執行履歷生成測試，PDF 需符合一頁限制。
