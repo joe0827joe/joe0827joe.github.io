@@ -1,46 +1,127 @@
 {
   "profile": {
-    "name": { "zh": "許應良", "en": "Yingliang Hsu" },
+    "name": {
+      "zh": "許應良",
+      "en": "Yingliang Hsu"
+    },
     "englishName": "Joe Hsu",
     "title": {
-      "zh": "演算法工程師｜AI / Computer Vision / Automation",
-      "en": "AI / Computer Vision / Automation Engineer"
+      "zh": "智慧製造與工業 AI 工程師｜最佳化・Python 自動化",
+      "en": "Industrial AI & Optimization Engineer"
     },
-    "location": { "zh": "新北市, 台灣", "en": "New Taipei City, Taiwan" },
+    "location": {
+      "zh": "新北市, 台灣",
+      "en": "New Taipei City, Taiwan"
+    },
     "email": "joe0827joe@yahoo.com.tw",
     "phone": "0930-227-913",
     "github": "https://github.com/joe0827joe",
     "portfolio": "https://joe0827joe.github.io/",
     "summary": {
-      "zh": "北科大自動化科技碩士，專長深度學習、影像辨識與工業 AOI 系統落地。具備從模型訓練、推論優化到跨部門工程驗證的完整實作經驗，能把演算法轉成可量化、可部署的解決方案。",
-      "en": "Automation Technology M.S. (NTUT) specializing in deep learning, computer vision, and industrial AOI delivery. Experienced from model training and inference optimization to cross-functional validation—turning algorithms into measurable, deployable systems."
+      "zh": "北科大自動化科技碩士，具機械工程背景，專長工業 AI、代理模型、多目標最佳化與 Python 流程自動化。研究所完成資料中心冷卻最佳化，模擬可用能損耗降低 9.2%、實際場域 PUE 降低 7%。現於智慧工廠團隊評估設備與能源資料的 AI 應用，重視需求定義、資料可用性與可驗證成果。",
+      "en": "M.S. in Automation Technology (NTUT) with a mechanical engineering background, focused on industrial AI, surrogate modeling, multi-objective optimization and Python automation. Data-center cooling research reduced simulated exergy loss by 9.2% and field PUE by 7%. Currently evaluating equipment- and energy-data AI use cases in a smart-factory team, with an emphasis on measurable validation."
     }
   },
   "skills": [
     {
-      "label": { "zh": "Languages", "en": "Languages" },
-      "items": ["Python", "C/C++", "C#", "JavaScript", "VBA"]
+      "label": {
+        "zh": "程式與資料",
+        "en": "Programming & Data"
+      },
+      "items": [
+        "Python",
+        "C/C++",
+        "C#",
+        "JavaScript",
+        "Pandas"
+      ]
     },
     {
-      "label": { "zh": "AI / CV", "en": "AI / CV" },
-      "items": ["PyTorch", "TensorFlow", "OpenCV", "Scikit-learn", "NumPy", "Pandas"]
+      "label": {
+        "zh": "AI 與最佳化",
+        "en": "AI & Optimization"
+      },
+      "items": [
+        "DE-MRBFNN",
+        "NSGA-III",
+        "Surrogate Models",
+        "Scikit-learn"
+      ]
     },
     {
-      "label": { "zh": "Deployment", "en": "Deployment" },
-      "items": ["ONNX", "TensorRT", "OpenVINO", "Docker", "Linux"]
+      "label": {
+        "zh": "視覺與模型",
+        "en": "Vision & Models"
+      },
+      "items": [
+        "PyTorch",
+        "TensorFlow",
+        "OpenCV",
+        "ONNX",
+        "OpenVINO"
+      ]
     },
     {
-      "label": { "zh": "Engineering", "en": "Engineering" },
-      "items": ["Git", "GitHub Actions", "Pytest", "CI Workflows"]
+      "label": {
+        "zh": "工程流程",
+        "en": "Engineering"
+      },
+      "items": [
+        "Git",
+        "GitHub Actions",
+        "Docker",
+        "Testing / CI"
+      ]
     }
   ],
   "experience": [
     {
-      "title": { "zh": "軟體工程師", "en": "Software Engineer" },
-      "company": { "zh": "易豐購企業社", "en": "Yifong Enterprise Co., Ltd." },
-      "location": { "zh": "新北市", "en": "New Taipei City" },
+      "title": {
+        "zh": "智慧工廠 AI 工程師",
+        "en": "Smart Factory AI Engineer"
+      },
+      "company": {
+        "zh": "廣達電腦股份有限公司",
+        "en": "Quanta Computer"
+      },
+      "location": {
+        "zh": "桃園市",
+        "en": "Taoyuan, Taiwan"
+      },
+      "start": "2026/10",
+      "end": {
+        "zh": "至今",
+        "en": "Present"
+      },
+      "bullets": [
+        {
+          "zh": "參與智慧工廠設備、能源與製程相關 AI 應用的需求釐清、可行性評估與 PoC 規劃",
+          "en": "Assess AI use cases for smart-factory equipment, energy and processes; scope requirements, feasibility and proof-of-concept plans"
+        },
+        {
+          "zh": "整理資料取得條件、驗證指標與實作階段，銜接現場需求與資料分析工作",
+          "en": "Define data-readiness checks, validation criteria and implementation phases to bridge site needs and data analysis"
+        }
+      ]
+    },
+    {
+      "title": {
+        "zh": "AI 軟體工程師｜流程自動化",
+        "en": "AI Software Engineer | Workflow Automation"
+      },
+      "company": {
+        "zh": "易豐購企業社",
+        "en": "Yifong Enterprise Co., Ltd."
+      },
+      "location": {
+        "zh": "新北市",
+        "en": "New Taipei City"
+      },
       "start": "2023/07",
-      "end": { "zh": "至今", "en": "Present" },
+      "end": {
+        "zh": "至今",
+        "en": "Present"
+      },
       "bullets": [
         {
           "zh": "開發 Python 自動化與跨平台資料轉譯，涵蓋 API Schema Mapping、SKU 屬性整理與非結構化資料轉換",
@@ -57,9 +138,18 @@
       ]
     },
     {
-      "title": { "zh": "車用 LED 元件研發工程師（研替）", "en": "Automotive LED R&D Engineer (Alternative Service)" },
-      "company": { "zh": "億光電子工業股份有限公司", "en": "Everlight Electronics Co., Ltd." },
-      "location": { "zh": "新北市", "en": "New Taipei City" },
+      "title": {
+        "zh": "車用 LED 元件研發工程師（研替）",
+        "en": "Automotive LED R&D Engineer (Alternative Service)"
+      },
+      "company": {
+        "zh": "億光電子工業股份有限公司",
+        "en": "Everlight Electronics Co., Ltd."
+      },
+      "location": {
+        "zh": "新北市",
+        "en": "New Taipei City"
+      },
       "start": "2022/01",
       "end": "2023/06",
       "bullets": [
@@ -72,30 +162,45 @@
           "en": "Managed APQP/AEC-Q gates and coordinated QA/process partners to shorten validation cycles"
         }
       ]
-    },
-    {
-      "title": { "zh": "CNC 技術人員（實習）", "en": "CNC Technician (Intern)" },
-      "company": { "zh": "群光電能科技股份有限公司", "en": "Chicony Power Technology Co., Ltd." },
-      "location": { "zh": "新北市", "en": "New Taipei City" },
-      "start": "2016/08",
-      "end": "2018/07",
-      "bullets": [
-        {
-          "zh": "開發深孔加工治具抑制震動與飄移，治具成本降低 20%",
-          "en": "Developed deep-bore fixtures to suppress vibration and drift, cutting jig cost by 20%"
-        },
-        {
-          "zh": "與研發進行 DFM 評估並優化加工路徑，誤差率下降 30%",
-          "en": "Partnered with R&D on DFM reviews and tool-path optimization, lowering error rate by 30%"
-        }
-      ]
     }
   ],
   "projects": [
     {
-      "name": { "zh": "PCB 混合動力瑕疵檢測系統", "en": "PCB Hybrid Defect Detection System" },
+      "name": {
+        "zh": "資料中心冷卻節能優化",
+        "en": "Data Center Cooling Optimization"
+      },
       "featured": true,
-      "stack": ["C++", "Python", "OpenCV", "OpenVINO", "Deep Learning"],
+      "stack": [
+        "Python",
+        "DE-MRBFNN",
+        "NSGA3"
+      ],
+      "link": null,
+      "bullets": [
+        {
+          "zh": "以 DE-MRBFNN 代理模型結合 NSGA-III 多目標最佳化，分析氣冷單元式資料中心冷卻參數",
+          "en": "Combined a DE-MRBFNN surrogate model and NSGA-III multi-objective optimization for modular data-center cooling"
+        },
+        {
+          "zh": "模擬可用能損耗降低 9.2%，實際場域 PUE 降低 7%；研究成果發表於研討會",
+          "en": "Reduced simulated exergy loss by 9.2% and field PUE by 7%; presented results at a symposium"
+        }
+      ]
+    },
+    {
+      "name": {
+        "zh": "PCB 混合動力瑕疵檢測系統",
+        "en": "PCB Hybrid Defect Detection System"
+      },
+      "featured": false,
+      "stack": [
+        "C++",
+        "Python",
+        "OpenCV",
+        "OpenVINO",
+        "Deep Learning"
+      ],
       "link": "https://github.com/joe0827joe/pcb-hybrid-aoi",
       "bullets": [
         {
@@ -113,25 +218,16 @@
       ]
     },
     {
-      "name": { "zh": "資料中心冷卻節能優化", "en": "Data Center Cooling Optimization" },
+      "name": {
+        "zh": "Anime4K C# 影像強化工具",
+        "en": "Anime4K C# Image Enhancer"
+      },
       "featured": false,
-      "stack": ["Python", "DE-MRBFNN", "NSGA3"],
-      "link": null,
-      "bullets": [
-        {
-          "zh": "以 DE-MRBFNN + NSGA3 建立氣冷單元式資料中心節能模型，實驗環境降低 7% PUE",
-          "en": "Built DE-MRBFNN + NSGA3 energy model for an air-cooled modular data center, cutting PUE by 7% in experiments"
-        },
-        {
-          "zh": "將 CFD 模擬耗時由數小時降至秒級，並以研討會論文發表成果",
-          "en": "Reduced CFD simulation runtime from hours to seconds; published in a peer-reviewed symposium"
-        }
-      ]
-    },
-    {
-      "name": { "zh": "Anime4K C# 影像強化工具", "en": "Anime4K C# Image Enhancer" },
-      "featured": false,
-      "stack": ["C#", ".NET 9", "WinForms"],
+      "stack": [
+        "C#",
+        ".NET 9",
+        "WinForms"
+      ],
       "link": "https://github.com/joe0827joe/Anime4K_C_Sharp",
       "bullets": [
         {
@@ -147,8 +243,14 @@
   ],
   "education": [
     {
-      "degree": { "zh": "自動化科技研究所 碩士", "en": "M.S., Automation Technology" },
-      "school": { "zh": "國立臺北科技大學", "en": "National Taipei University of Technology" },
+      "degree": {
+        "zh": "自動化科技研究所 碩士",
+        "en": "M.S., Automation Technology"
+      },
+      "school": {
+        "zh": "國立臺北科技大學",
+        "en": "National Taipei University of Technology"
+      },
       "start": "2019/08",
       "end": "2021/09",
       "note": {
@@ -157,8 +259,14 @@
       }
     },
     {
-      "degree": { "zh": "機械工程系 學士", "en": "B.S., Mechanical Engineering" },
-      "school": { "zh": "國立臺北科技大學", "en": "National Taipei University of Technology" },
+      "degree": {
+        "zh": "機械工程系 學士",
+        "en": "B.S., Mechanical Engineering"
+      },
+      "school": {
+        "zh": "國立臺北科技大學",
+        "en": "National Taipei University of Technology"
+      },
       "start": "2015/09",
       "end": "2019/06",
       "note": {
@@ -168,9 +276,33 @@
     }
   ],
   "highlights": [
-    { "value": "94.44%", "label": { "zh": "AOI 召回率", "en": "AOI Recall" } },
-    { "value": "7%", "label": { "zh": "PUE 降低", "en": "PUE Reduction" } },
-    { "value": "15%", "label": { "zh": "LED 體積縮小", "en": "LED Volume Cut" } },
-    { "value": "10%", "label": { "zh": "亮度提升", "en": "Brightness Gain" } }
+    {
+      "value": "9.2%",
+      "label": {
+        "zh": "模擬可用能損耗降低",
+        "en": "Simulated Exergy Loss Reduction"
+      }
+    },
+    {
+      "value": "7%",
+      "label": {
+        "zh": "PUE 降低",
+        "en": "PUE Reduction"
+      }
+    },
+    {
+      "value": "15%",
+      "label": {
+        "zh": "LED 體積縮小",
+        "en": "LED Volume Cut"
+      }
+    },
+    {
+      "value": "10%",
+      "label": {
+        "zh": "亮度提升",
+        "en": "Brightness Gain"
+      }
+    }
   ]
 }
