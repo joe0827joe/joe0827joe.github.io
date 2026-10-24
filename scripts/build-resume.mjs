@@ -164,7 +164,7 @@ function writeResumeHtml(data) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>許應良｜一頁式履歷 · Joe Hsu Resume</title>
-  <meta name="description" content="許應良 (Joe Hsu) ATS-friendly one-page resume — AI / Computer Vision / Automation Engineer.">
+  <meta name="description" content="許應良 (Joe Hsu) ATS-friendly one-page resume — AI / Machine Learning Engineer, Industrial AI and Optimization.">
   <meta name="robots" content="noindex,follow">
   <link rel="canonical" href="https://joe0827joe.github.io/resume.html">
   <link rel="stylesheet" href="resume.css">
