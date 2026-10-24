@@ -36,6 +36,15 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Validate HTML and one-page PDFs
         run: npm run build:resume
+      - name: Browser E2E desktop / mobile / bilingual
+        run: npm run test:portfolio
+      - name: Upload portfolio previews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-screenshots
+          path: artifacts/portfolio/
+          if-no-files-found: ignore
   build-and-deploy:
     if: github.event_name != 'pull_request'
     environment:
@@ -61,6 +70,9 @@ jobs:
       - name: Build resume HTML + one-page PDFs
         run: npm run build:resume
 
+      - name: Browser E2E desktop / mobile / bilingual
+        run: npm run test:portfolio
+
       - name: Prepare deploy folder
         run: |
           rm -rf _site
@@ -70,6 +82,7 @@ jobs:
             --exclude .git \
             --exclude _site \
             --exclude scripts \
+            --exclude artifacts \
             --exclude package.json \
             --exclude package-lock.json \
             --exclude .gitignore \
