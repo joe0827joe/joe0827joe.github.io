@@ -1,439 +1,203 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-TW">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-zh="許應良｜AI / Machine Learning Engineer" data-en="Joe Hsu | AI / Machine Learning Engineer">許應良｜AI / Machine Learning Engineer</title>
-
-    <meta name="description" content="許應良（Joe Hsu）｜廣達電腦 AI 數據工程師，專注 Machine Learning、Industrial AI、Optimization、Python 與工程驗證。">
-    <meta name="keywords"
-        content="許應良, 智慧製造與工業 AI 工程師, 深度學習, 影像辨識, AI 工程師, 臺北科技大學, AOI, 電腦視覺, 智慧製造, 最佳化, Python, Resume, Industrial AI Engineer">
-    <meta name="author" content="許應良">
-    <link rel="canonical" href="https://joe0827joe.github.io/">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://joe0827joe.github.io/">
-    <meta property="og:title" content="許應良｜AI / Machine Learning Engineer">
-    <meta property="og:description" content="Industrial AI · Machine Learning · Optimization · Python · Smart Manufacturing">
-    <meta property="og:image" content="https://joe0827joe.github.io/og-preview.png">
-    <meta property="og:image:width" content="1456">
-    <meta property="og:image:height" content="816">
-
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://joe0827joe.github.io/">
-    <meta property="twitter:title" content="Joe Hsu | AI / Machine Learning Engineer">
-    <meta property="twitter:description" content="Industrial AI, Machine Learning, Optimization and Python.">
-    <meta property="twitter:image" content="https://joe0827joe.github.io/og-preview.png">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "許應良",
-      "alternateName": "YINGLIANG HSU",
-      "jobTitle": "AI Data Engineer",
-      "url": "https://joe0827joe.github.io/",
-      "image": "https://joe0827joe.github.io/S__46940421_218x280.png",
-      "alumniOf": {
-        "@type": "CollegeOrUniversity",
-        "name": "National Taipei University of Technology",
-        "alternateName": "國立臺北科技大學"
-      },
-      "description": "聚焦工業 AI、多目標最佳化、Python 自動化與系統整合。",
-      "knowsAbout": [
-        "Artificial Intelligence",
-        "Deep Learning",
-        "Computer Vision",
-        "Algorithm Development",
-        "C++",
-        "Python",
-        "PyTorch",
-        "TensorFlow",
-        "OpenCV"
-      ],
-      "sameAs": [
-        "https://github.com/joe0827joe"
-      ]
-    }
-    </script>
-
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101f30">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="許應良 Joe Hsu｜AI / Machine Learning Engineer。從工程問題與資料品質出發，結合最佳化、機器學習與系統驗證，讓 AI 成果可衡量。廣達 AI 數據工程師，北科大自動化科技碩士。">
+  <meta name="keywords" content="Joe Hsu, 許應良, AI Engineer, Machine Learning, Industrial AI, Optimization, Smart Manufacturing, Python, Data Analysis">
+  <meta name="author" content="Joe Hsu">
+  <link rel="canonical" href="https://joe0827joe.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://joe0827joe.github.io/">
+  <meta property="og:title" content="Joe Hsu｜AI / Machine Learning Engineer">
+  <meta property="og:description" content="從工程問題、資料分析、AI 最佳化到場域驗證。探索我的研究、作品及經驗。">
+  <meta property="og:image" content="https://joe0827joe.github.io/og-preview.png">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Joe Hsu｜AI / Machine Learning Engineer">
+  <meta property="twitter:description" content="Industrial AI · Optimization · Python · Engineering Validation">
+  <meta property="twitter:image" content="https://joe0827joe.github.io/og-preview.png">
+  <title>許應良 Joe Hsu｜AI / Machine Learning Engineer</title>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"許應良","alternateName":"Joe Hsu","jobTitle":"AI Data Engineer","url":"https://joe0827joe.github.io/","alumniOf":{"@type":"CollegeOrUniversity","name":"National Taipei University of Technology"},"knowsAbout":["Machine Learning","Industrial AI","Multi-objective Optimization","Python","Data Analysis","Model Evaluation","Smart Manufacturing"],"sameAs":["https://github.com/joe0827joe"]}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
-    <header class="header">
-        <div class="container">
-            <nav class="nav" aria-label="Main">
-                <div class="nav-brand">
-                    <h1 data-zh="許應良 · Industrial AI" data-en="Joe Hsu · Industrial AI">許應良 · Industrial AI</h1>
-                    <span class="nav-role" data-zh="AI / Machine Learning Engineer" data-en="AI / Machine Learning Engineer">AI / Machine Learning Engineer</span>
-                </div>
-                <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu"
-                    aria-expanded="false" aria-controls="nav-menu">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-                <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#projects" data-zh="專案" data-en="Projects">專案</a></li>
-                    <li><a href="#experience" data-zh="經歷" data-en="Experience">經歷</a></li>
-                    <li><a href="#skills" data-zh="技能" data-en="Skills">技能</a></li>
-                    <li><a href="#education" data-zh="學歷" data-en="Education">學歷</a></li>
-                    <li><a href="#contact" data-zh="聯絡" data-en="Contact">聯絡</a></li>
-                    <li><a href="resume.html" class="nav-pdf" data-zh="履歷" data-en="Resume">履歷</a></li>
-                    <li class="language-switcher">
-                        <button class="lang-btn" type="button" onclick="switchLanguage('zh')" data-zh="中文"
-                            data-en="中文">中文</button>
-                        <span class="lang-separator">|</span>
-                        <button class="lang-btn" type="button" onclick="switchLanguage('en')" data-zh="EN"
-                            data-en="English">EN</button>
-                    </li>
-                    <li><a href="https://github.com/joe0827joe" target="_blank" rel="noopener" class="nav-github"
-                            aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a></li>
-                </ul>
-            </nav>
+  <a class="skip-link" href="#main"><span data-zh="跳至主要內容" data-en="Skip to main content">跳至主要內容</span></a>
+  <div class="reading-progress" aria-hidden="true" id="reading-progress"></div>
+  <header class="site-header" id="top">
+    <div class="shell nav-shell">
+      <a class="brand" href="#top" aria-label="Joe Hsu Home"><span class="brand-mark">J<span class="brand-dot">.</span></span><span class="brand-copy"><strong>JOE HSU</strong><small>INDUSTRIAL AI / ML</small></span></a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#impact"><span data-zh="成果" data-en="Impact">成果</span></a>
+        <a href="#case-study"><span data-zh="代表研究" data-en="Research">代表研究</span></a>
+        <a href="#projects"><span data-zh="作品" data-en="Projects">作品</span></a>
+        <a href="#experience"><span data-zh="經歷" data-en="Experience">經歷</span></a>
+        <a href="#contact"><span data-zh="聯絡" data-en="Contact">聯絡</span></a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-control" role="group" aria-label="Language">
+          <button type="button" data-language="zh" aria-pressed="true">中</button>
+          <button type="button" data-language="en" aria-pressed="false">EN</button>
         </div>
-    </header>
-
-    <!-- Hero -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title" data-zh="許應良" data-en="YINGLIANG HSU">許應良</h1>
-                    <h2 class="hero-subtitle" data-zh="AI / Machine Learning Engineer｜Industrial AI・Optimization" data-en="AI / Machine Learning Engineer | Industrial AI & Optimization">AI / Machine Learning Engineer｜Industrial AI・Optimization</h2>
-                    <p class="hero-description" data-zh="目前於廣達電腦擔任 AI 數據工程師，參與設備與製造資料的 AI 應用規劃、資料分析及 Machine Learning 可行性評估。專長 Python、多目標最佳化、AOI 模型評估及工程驗證，重視資料品質與可驗證的成果。" data-en="AI Data Engineer at Quanta Computer, assessing ML feasibility for equipment and manufacturing data. Experienced in Python, optimization, AOI model evaluation and engineering validation, with an emphasis on data quality and measurable results.">目前於廣達電腦擔任 AI 數據工程師，參與設備與製造資料的 AI 應用規劃、資料分析及 Machine Learning 可行性評估。專長 Python、多目標最佳化、AOI 模型評估及工程驗證。</p>
-                    <div class="hero-actions">
-                        <a href="#projects" class="btn btn-primary" data-zh="查看精選專案"
-                            data-en="View Featured Projects">查看精選專案</a>
-                        <a href="Joe_Hsu_Resume_ZH.pdf" class="btn btn-secondary" download data-zh="下載 PDF 履歷"
-                            data-en="Download Resume PDF">下載 PDF 履歷</a>
-                        <a href="https://github.com/joe0827joe" target="_blank" rel="noopener" class="btn btn-icon"
-                            aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <div class="avatar-container">
-                        <img src="S__46940421_218x280.png" alt="許應良" class="avatar-image" width="218" height="280">
-                    </div>
-                </div>
-            </div>
+        <a class="header-resume" href="resume.html"><span data-zh="查看履歷" data-en="Resume">查看履歷</span> <span aria-hidden="true">↗</span></a>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Toggle navigation" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <nav id="mobile-menu" class="mobile-nav" aria-label="Mobile navigation" hidden>
+      <a href="#impact"><span data-zh="成果" data-en="Impact">成果</span></a><a href="#case-study"><span data-zh="代表研究" data-en="Research">代表研究</span></a><a href="#projects"><span data-zh="作品" data-en="Projects">作品</span></a><a href="#experience"><span data-zh="經歷" data-en="Experience">經歷</span></a><a href="#contact"><span data-zh="聯絡" data-en="Contact">聯絡</span></a><a href="resume.html"><span data-zh="一頁式履歷" data-en="One-page resume">一頁式履歷</span></a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-decoration hero-decoration-one" aria-hidden="true"></div>
+      <div class="hero-decoration hero-decoration-two" aria-hidden="true"></div>
+      <div class="shell hero-grid">
+        <div class="hero-main">
+          <div class="eyebrow"><span class="eyebrow-line"></span><span data-zh="AI / MACHINE LEARNING ENGINEER" data-en="AI / MACHINE LEARNING ENGINEER">AI / MACHINE LEARNING ENGINEER</span></div>
+          <h1 id="hero-title"><span class="hero-line" data-zh="讓工程問題" data-en="Turn engineering">讓工程問題</span> <span class="hero-line" data-zh="成為可驗證的" data-en="problems into">成為可驗證的</span> <span class="accent-text"><span data-zh="AI 價值。" data-en="measurable AI.">AI 價值。</span></span></h1>
+          <p class="hero-lead" data-zh="我將機械、自動化與實際場域的工程知識，結合 Machine Learning、最佳化與 Python 系統開發。從正確定義問題到驗證效益，讓技術真正回答現場的需求。" data-en="I connect physical engineering with machine learning, optimization and Python systems—turning real-world constraints into testable, measurable results.">我將機械、自動化與實際場域的工程知識，結合 Machine Learning、最佳化與 Python 系統開發。從正確定義問題到驗證效益，讓技術真正回答現場的需求。</p>
+          <div class="hero-identity"><span class="identity-dot"></span><span data-zh="現任廣達電腦 AI 數據工程師" data-en="AI Data Engineer at Quanta Computer">現任廣達電腦 AI 數據工程師</span><span class="identity-separator">/</span><span data-zh="北科大自動化科技碩士" data-en="M.S. Automation Technology, NTUT">北科大自動化科技碩士</span></div>
+          <div class="hero-buttons">
+            <a href="#case-study" class="btn btn-primary"><span data-zh="看代表研究" data-en="Explore research">看代表研究</span> <span aria-hidden="true">↗</span></a>
+            <a href="Joe_Hsu_Resume_ZH.pdf" id="resume-download" class="btn btn-outline" download><span data-zh="下載一頁履歷" data-en="Download résumé">下載一頁履歷</span> <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-mini"><span class="status-led" aria-hidden="true"></span><span data-zh="研究實證、工程實務、系統化思考" data-en="Research evidence · engineering practice · systematic thinking">研究實證、工程實務、系統化思考</span></div>
         </div>
+        <aside class="hero-visual" aria-label="Engineering-to-AI methodology">
+          <div class="visual-header"><span class="signal-title">ENGINEERING → INTELLIGENCE</span><span class="visual-icon" aria-hidden="true">✳</span></div>
+          <div class="workflow-card">
+            <div class="workflow-heading"><span>METHOD / 01—04</span><span data-zh="我的工作方法" data-en="How I approach problems">我的工作方法</span></div>
+            <ol class="workflow-list">
+            <li class="workflow-step"><span class="workflow-index">01</span><span class="workflow-copy"><strong>DEFINE</strong><span class="workflow-main" data-zh="場域需求與資料需求" data-en="Operational &amp; data needs">場域需求與資料需求</span><small class="workflow-sub" data-zh="先理解限制、目標及訊號" data-en="Understand constraints and signals">先理解限制、目標及訊號</small></span><span class="workflow-dot" aria-hidden="true"></span></li>
+            <li class="workflow-step"><span class="workflow-index">02</span><span class="workflow-copy"><strong>ASSESS</strong><span class="workflow-main" data-zh="分析、模型與最佳化" data-en="Analysis, models &amp; optimization">分析、模型與最佳化</span><small class="workflow-sub" data-zh="選擇合適的方法" data-en="Choose fit-for-purpose methods">選擇合適的方法</small></span><span class="workflow-dot" aria-hidden="true"></span></li>
+            <li class="workflow-step"><span class="workflow-index">03</span><span class="workflow-copy"><strong>VALIDATE</strong><span class="workflow-main" data-zh="比較基準、驗證成效" data-en="Baseline &amp; validation">比較基準、驗證成效</span><small class="workflow-sub" data-zh="用資料證據檢查價值" data-en="Test the value with evidence">用資料證據檢查價值</small></span><span class="workflow-dot" aria-hidden="true"></span></li>
+            <li class="workflow-step"><span class="workflow-index">04</span><span class="workflow-copy"><strong>INTEGRATE</strong><span class="workflow-main" data-zh="規劃導入與可靠性" data-en="Integration &amp; reliability">規劃導入與可靠性</span><small class="workflow-sub" data-zh="建立可交接的工程流程" data-en="Design a maintainable workflow">建立可交接的工程流程</small></span><span class="workflow-dot" aria-hidden="true"></span></li>
+            </ol>
+          </div>
+          <div class="visual-bottom"><div class="visual-avatar"><img src="S__46940421_218x280.png" alt="Joe Hsu profile portrait" width="64" height="64" loading="lazy"></div><div><strong>Joe Hsu</strong><small data-zh="AI × Engineering × Optimization" data-en="AI × Engineering × Optimization">AI × Engineering × Optimization</small></div><span class="visual-code">25°N · TAIWAN</span></div>
+          <div class="visual-corner" aria-hidden="true">01 / PROFILE</div>
+        </aside>
+      </div>
     </section>
-
-    <!-- Key Results -->
-    <section class="highlights" aria-label="Key results">
-        <div class="container">
-            <div class="highlights-grid">
-                <div class="highlight-item reveal-item">
-                    <strong>9.2%</strong>
-                    <span data-zh="模擬可用能損耗降低" data-en="Simulated Exergy Loss Reduction">模擬可用能損耗降低</span>
-                </div>
-                <div class="highlight-item reveal-item">
-                    <strong>7%</strong>
-                    <span data-zh="實際場域 PUE 降低" data-en="Field PUE Reduction">資料中心 PUE 降低</span>
-                </div>
-                <div class="highlight-item reveal-item">
-                    <strong>15%</strong>
-                    <span data-zh="車用 LED 體積縮小" data-en="Automotive LED Volume Cut">車用 LED 體積縮小</span>
-                </div>
-                <div class="highlight-item reveal-item">
-                    <strong>10%</strong>
-                    <span data-zh="亮度提升" data-en="Brightness Gain">亮度提升</span>
-                </div>
-            </div>
+    <section class="proof" id="impact" aria-labelledby="impact-heading">
+      <div class="shell">
+        <div class="proof-header"><div><span class="section-overline">TRACK RECORD / 01</span><h2 class="proof-heading" data-zh="用具體結果說明價值" data-en="Evidence, not buzzwords">用具體結果說明價值</h2></div><p class="proof-explanation" data-zh="不同成果來自不同專案及驗證條件，沒有把研究模擬與正式導入混為一談。" data-en="Each result has its own context. Simulated research results and real-world validation are identified separately.">不同成果來自不同專案及驗證條件，沒有把研究模擬與正式導入混為一談。</p></div>
+        <div class="metric-grid">
+          <div class="metric"><strong>9.2%</strong><span class="metric-label" data-zh="模擬可用能損耗降低" data-en="Lower simulated exergy loss">模擬可用能損耗降低</span><span class="metric-source" data-zh="資料中心冷卻研究 · CFD" data-en="Data-center research · CFD">資料中心冷卻研究 · CFD</span></div>
+          <div class="metric"><strong>7%</strong><span class="metric-label" data-zh="實際場域 PUE 降低" data-en="Lower field PUE">實際場域 PUE 降低</span><span class="metric-source" data-zh="資料中心冷卻研究 · 場域驗證" data-en="Data-center research · Field test">資料中心冷卻研究 · 場域驗證</span></div>
+          <div class="metric"><strong>15%</strong><span class="metric-label" data-zh="車用 LED 體積縮小" data-en="Smaller automotive LED">車用 LED 體積縮小</span><span class="metric-source" data-zh="億光電子 · 產品研發" data-en="Everlight · Product R&amp;D">億光電子 · 產品研發</span></div>
+          <div class="metric"><strong>10%</strong><span class="metric-label" data-zh="車用 LED 亮度提升" data-en="Higher LED brightness">車用 LED 亮度提升</span><span class="metric-source" data-zh="億光電子 · 工程驗證" data-en="Everlight · Engineering validation">億光電子 · 工程驗證</span></div>
         </div>
+      </div>
     </section>
-
-    <!-- Projects -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title" data-zh="精選專案" data-en="Featured Projects">精選專案</h2>
-            <div class="projects-grid">
-                <!-- Research · 104 source -->
-                <div class="project-card featured reveal-item">
-                    <span class="project-badge" data-zh="研究專案" data-en="Research Project">研究專案</span>
-                    <div class="project-header">
-                        <h3 data-zh="資料中心冷卻 AI 代理模型與多目標最佳化" data-en="Data Center Cooling AI Surrogate &amp; Optimization">資料中心冷卻 AI 代理模型與多目標最佳化</h3>
-                        <div class="project-tags"><span class="tag">DE-MRBFNN</span><span class="tag">NSGA-III</span><span class="tag">CFD</span></div>
-                    </div>
-                    <div class="project-content">
-                        <p data-zh="利用 DE-MRBFNN 建立 AI 代理模型，結合 NSGA-III 處理氣冷單元式資料中心的多目標最佳化，並經 CFD 與實際場域驗證。" data-en="Built a DE-MRBFNN AI surrogate model combined with NSGA-III for multi-objective data-center cooling optimization, validated with CFD and field tests.">利用 DE-MRBFNN 建立 AI 代理模型，結合 NSGA-III 處理氣冷單元式資料中心的多目標最佳化，並經 CFD 與實際場域驗證。</p>
-                        <ul class="project-features stagger-reveal">
-                            <li data-zh="模擬可用能損耗降低 9.2%" data-en="9.2% lower simulated exergy loss">模擬可用能損耗降低 9.2%</li>
-                            <li data-zh="實際場域 PUE 降低 7%" data-en="7% lower field PUE">實際場域 PUE 降低 7%</li>
-                        </ul>
-                        <div class="project-actions"><a href="ERAC2021-基於DE-MRBFNN與NSGA3之新式資料中心冷卻系統節能優化V2.pdf" target="_blank" rel="noopener" class="btn btn-github"><i class="fas fa-file-pdf"></i> <span data-zh="查看論文" data-en="View Paper">查看論文</span></a></div>
-                    </div>
-                </div>
-                <!-- IC substrate AOI from 104 -->
-                <div class="project-card reveal-item">
-                    <div class="project-header"><h3 data-zh="IC 載板 AOI 模型評估" data-en="IC Substrate AOI Model Evaluation">IC 載板 AOI 模型評估</h3>
-                        <div class="project-tags"><span class="tag">Machine Learning</span><span class="tag">AOI</span><span class="tag">Model Evaluation</span></div></div>
-                    <div class="project-content"><p data-zh="參與瑕疵影像標註、特徵分析、模型訓練與評估，重視資料品質、低漏判率、誤判成本與場域驗證。" data-en="Participated in image annotation, feature analysis, model training and evaluation with a focus on data quality, missed defects and false positives.">參與瑕疵影像標註、特徵分析、模型訓練與評估，重視資料品質、低漏判率、誤判成本與場域驗證。</p></div>
-                </div>
-                <!-- Featured: PCB Hybrid AOI -->
-                <div class="project-card reveal-item">
-                    <div class="project-layout">
-                        <div>
-                            <span class="project-badge" data-zh="個人作品" data-en="Personal Project">個人作品</span>
-                            <div class="project-header">
-                                <h3 data-zh="PCB 混合動力瑕疵檢測系統" data-en="PCB Hybrid Defect Detection System">PCB
-                                    混合動力瑕疵檢測系統</h3>
-                                <div class="project-tags">
-                                    <span class="tag">C++ / Python</span>
-                                    <span class="tag">OpenCV</span>
-                                    <span class="tag">OpenVINO</span>
-                                    <span class="tag">Deep Learning</span>
-                                </div>
-                            </div>
-                            <div class="project-content">
-                                <p data-zh="針對工業產線 IPC 環境開發的混合式 AOI 系統。整合『規則式定位』與『深度學習分類』，在不依賴高階 GPU 的情況下，實現低延遲與高精度的雙重指標。"
-                                    data-en="A hybrid AOI system designed for industrial IPC environments. It integrates rule-based localization with DL classification to achieve low latency and high accuracy without high-end GPUs.">
-                                    針對工業產線 IPC 環境開發的混合式 AOI 系統。整合『規則式定位』與『深度學習分類』，在不依賴高階 GPU 的情況下，實現低延遲與高精度的雙重指標。
-                                </p>
-                                <ul class="project-features stagger-reveal">
-                                    <li data-zh="雙架構工作流：CV Engine 負責 10ms 內 ROI 定位，節省 80% AI 推論算力開銷"
-                                        data-en="Hybrid Pipeline: CV Engine handles ROI localization in 10ms, saving 80% AI inference cost">
-                                        雙架構工作流：CV Engine 負責 10ms 內 ROI 定位，節省 80% AI 推論算力開銷</li>
-                                    <li data-zh="推論引擎優化：利用 OpenVINO INT-8 量化技術，針對 Intel CPU 指令集深度優化"
-                                        data-en="Inference Optimization: Utilized OpenVINO INT-8 quantization for Intel CPU instruction sets">
-                                        推論引擎優化：利用 OpenVINO INT-8 量化技術，針對 Intel CPU 指令集深度優化</li>
-                                    <li data-zh="精準分類：DL Engine 負責 6 類疵點分類，有效解決複雜紋理下的誤報痛點"
-                                        data-en="Precise Classification: DL Engine identifies 6 defect types, reducing false alarms on complex textures">
-                                        精準分類：DL Engine 負責 6 類疵點分類，有效解決複雜紋理下的誤報痛點</li>
-                                    <li data-zh="軟體工程實踐：導入 Pytest 自動化測試與 CI 流程，確保演算法迭代的穩定性"
-                                        data-en="SE Practices: Implemented Pytest automation and CI workflows to ensure algorithm stability">
-                                        軟體工程實踐：導入 Pytest 自動化測試與 CI 流程，確保演算法迭代的穩定性</li>
-                                </ul>
-                                <div class="project-actions">
-                                    <a href="https://github.com/joe0827joe/pcb-hybrid-aoi" target="_blank"
-                                        rel="noopener" class="btn btn-github">
-                                        <i class="fab fa-github"></i> <span data-zh="查看專案"
-                                            data-en="View Project">查看專案</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-visual" aria-hidden="true">
-                            <div class="flow-step"><span class="flow-num">1</span><span>Image Capture</span></div>
-                            <div class="flow-arrow">↓</div>
-                            <div class="flow-step"><span class="flow-num">2</span><span>CV ROI &lt; 10ms</span></div>
-                            <div class="flow-arrow">↓</div>
-                            <div class="flow-step"><span class="flow-num">3</span><span>OpenVINO INT8</span></div>
-                            <div class="flow-arrow">↓</div>
-                            <div class="flow-step"><span class="flow-num">4</span><span>6-Class Defect DL</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Anime4K -->
-                <div class="project-card reveal-item">
-                    <div class="project-header">
-                        <h3 data-zh="Anime4K C# 影像強化工具" data-en="Anime4K C# Image Enhancer">Anime4K C# 影像強化工具
-                        </h3>
-                        <div class="project-tags">
-                            <span class="tag">C#</span>
-                            <span class="tag">.NET 9</span>
-                            <span class="tag">WinForms</span>
-                            <span class="tag">DIP</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <p data-zh="基於 C# 實作的 Anime4K 影像強化演算法，提供 WinForms 介面進行即時參數調校，專注於動漫風格影像的邊緣銳化與質感提升。"
-                            data-en="C# implementation of the Anime4K algorithm with a WinForms GUI for real-time parameter tuning, specializing in edge sharpening and texture enhancement for anime-style images.">
-                            基於 C# 實作的 Anime4K 影像強化演算法，提供 WinForms 介面進行即時參數調校，專注於動漫風格影像的邊緣銳化與質感提升。
-                        </p>
-                        <ul class="project-features stagger-reveal">
-                            <li data-zh="核心演算法：方向性三點混合（Combined Directional Push）實作"
-                                data-en="Core Algorithm: Implementation of Combined Directional Push-pull">
-                                核心演算法：方向性三點混合（Combined Directional Push）實作</li>
-                            <li data-zh="高效處理：利用 LockBits 直接操作記憶體，優化 CPU 運算效能"
-                                data-en="Efficient Processing: Utilized LockBits for direct memory access to optimize CPU performance">
-                                高效處理：利用 LockBits 直接操作記憶體，優化 CPU 運算效能</li>
-                            <li data-zh="影像優化：結合亮度/梯度遮罩與 Unsharp Mask 做細節收線"
-                                data-en="Vision Optimization: Combined luminance/gradient masks with Unsharp Mask for refinement">
-                                影像優化：結合亮度/梯度遮罩與 Unsharp Mask 做細節收線</li>
-                            <li data-zh="參數調校：支援即時調整 Scale、Strength 與可迭代次數"
-                                data-en="Live Tuning: Supports real-time adjustment of Scale, Strength, and Iterations">
-                                參數調校：支援即時調整 Scale、Strength 與可迭代次數</li>
-                        </ul>
-                        <div class="project-actions">
-                            <a href="https://github.com/joe0827joe/Anime4K_C_Sharp" target="_blank" rel="noopener"
-                                class="btn btn-github">
-                                <i class="fab fa-github"></i> <span data-zh="查看專案" data-en="View Project">查看專案</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section class="section capabilities" id="approach" aria-labelledby="approach-title">
+      <div class="shell">
+        <div class="section-heading"><div><span class="section-overline">HOW I CREATE VALUE / 02</span><h2 class="section-title" data-zh="不只訓練模型，而是解決問題" data-en="Beyond model training">不只訓練模型，而是解決問題</h2></div><p class="section-intro" data-zh="好的 AI 專案，從正確的問題與驗證方式開始。" data-en="Useful AI begins with a well-defined problem and meaningful validation.">好的 AI 專案，從正確的問題與驗證方式開始。</p></div>
+        <div class="value-grid">
+          <article class="value-card"><div class="value-card-top"><span class="value-symbol" aria-hidden="true">◈</span><span class="value-index">01</span></div><h3 data-zh="理解場域，定義正確問題" data-en="Frame the right problem">理解場域，定義正確問題</h3><p data-zh="結合設備特性、工程限制、使用者需求與資料來源，先確認目標是否值得用 AI 解決。" data-en="Start with operational constraints, user needs and available signals before selecting AI.">結合設備特性、工程限制、使用者需求與資料來源，先確認目標是否值得用 AI 解決。</p><span class="value-tag">Problem Framing</span><span class="value-tag">Data Readiness</span><span class="value-tag">SCADA</span></article>
+          <article class="value-card"><div class="value-card-top"><span class="value-symbol" aria-hidden="true">⌁</span><span class="value-index">02</span></div><h3 data-zh="選擇能證明價值的方法" data-en="Choose methods that prove value">選擇能證明價值的方法</h3><p data-zh="從資料探索、Machine Learning 基準比較，到代理模型及多目標最佳化，避免只追求複雜模型。" data-en="Explore data, compare baselines and apply surrogate models or optimization only where useful.">從資料探索、Machine Learning 基準比較，到代理模型及多目標最佳化，避免只追求複雜模型。</p><span class="value-tag">ML Evaluation</span><span class="value-tag">Optimization</span><span class="value-tag">Python</span></article>
+          <article class="value-card"><div class="value-card-top"><span class="value-symbol" aria-hidden="true">↗</span><span class="value-index">03</span></div><h3 data-zh="讓驗證與系統交接成為設計的一部分" data-en="Design for validation">讓驗證與系統交接成為設計的一部分</h3><p data-zh="從模型指標、實際測試到整合規劃，讓分析成果能被檢查、追蹤與持續改善。" data-en="Plan testing, validation criteria and integration paths so results can be reviewed and improved.">從模型指標、實際測試到整合規劃，讓分析成果能被檢查、追蹤與持續改善。</p><span class="value-tag">Validation</span><span class="value-tag">CI/CD</span><span class="value-tag">Integration</span></article>
         </div>
+      </div>
     </section>
-
-    <!-- Experience · synchronized with data/resume.json -->
-    <section id="experience" class="experience"><div class="container">
-        <h2 class="section-title" data-zh="工作經歷" data-en="Experience">工作經歷</h2>
-        <div class="timeline"><div class="timeline-item reveal-item">
-    <div class="timeline-aside"><span class="timeline-date" data-zh="2026/10 – 至今" data-en="2026/10 – Present">2026/10 – 至今</span></div>
-    <div class="timeline-main"><div class="timeline-marker"></div><div class="timeline-header"><h3 data-zh="AI 數據工程師" data-en="AI Data Engineer">AI 數據工程師</h3><span class="timeline-company" data-zh="廣達電腦股份有限公司" data-en="Quanta Computer Inc.">廣達電腦股份有限公司</span></div>
-    <ul class="timeline-details"><li data-zh="與 SCADA、自動化及設備團隊協作，定義設備資料欄位、時間戳記、取樣頻率與資料品質需求" data-en="Work with SCADA, automation and equipment teams on data fields, timestamps, sampling frequency and quality requirements">與 SCADA、自動化及設備團隊協作，定義設備資料欄位、時間戳記、取樣頻率與資料品質需求</li><li data-zh="盤點設備時序與製造資料，進行探索與品質檢查，評估異常偵測、設備健康度、預測維護與能源管理的 Machine Learning 可行性" data-en="Explore equipment time series and manufacturing data; assess ML feasibility for anomaly detection, equipment health, predictive maintenance and energy management">盤點設備時序與製造資料，進行探索與品質檢查，評估異常偵測、設備健康度、預測維護與能源管理的 Machine Learning 可行性</li><li data-zh="規劃模型驗證方式及與智慧工廠平台、Dashboard、告警系統整合的後續方向" data-en="Plan model validation and potential integration with smart-factory platforms, dashboards and alerting systems">規劃模型驗證方式及與智慧工廠平台、Dashboard、告警系統整合的後續方向</li></ul></div>
-</div>
-<div class="timeline-item reveal-item">
-    <div class="timeline-aside"><span class="timeline-date" data-zh="2023/07 – 2026/09" data-en="2023/07 – 2026/09">2023/07 – 2026/09</span></div>
-    <div class="timeline-main"><div class="timeline-marker"></div><div class="timeline-header"><h3 data-zh="AI 軟體工程師" data-en="AI Software Engineer">AI 軟體工程師</h3><span class="timeline-company" data-zh="易豐購企業社" data-en="Yifong Enterprise">易豐購企業社</span></div>
-    <ul class="timeline-details"><li data-zh="以 Python 建構倉儲、庫存、補貨及商品主資料的內部自動化與資料處理工具" data-en="Developed Python tools for warehouse operations, inventory, replenishment and product master data">以 Python 建構倉儲、庫存、補貨及商品主資料的內部自動化與資料處理工具</li><li data-zh="整合跨平台資料與規則型決策邏輯，開發文字分類及客服輔助等 AI workflow" data-en="Integrated cross-platform data and rule-based decision support; developed text classification and customer-service AI workflows">整合跨平台資料與規則型決策邏輯，開發文字分類及客服輔助等 AI workflow</li><li data-zh="以功能規格、日誌、回歸測試與 CI/CD 流程改善系統的可驗證性及維護性" data-en="Improved testability and maintainability through specifications, logging, regression tests and CI/CD">以功能規格、日誌、回歸測試與 CI/CD 流程改善系統的可驗證性及維護性</li></ul></div>
-</div>
-<div class="timeline-item reveal-item">
-    <div class="timeline-aside"><span class="timeline-date" data-zh="2022/01 – 2023/06" data-en="2022/01 – 2023/06">2022/01 – 2023/06</span></div>
-    <div class="timeline-main"><div class="timeline-marker"></div><div class="timeline-header"><h3 data-zh="研發工程師（研發替代役）" data-en="R&amp;D Engineer (Alternative Service)">研發工程師（研發替代役）</h3><span class="timeline-company" data-zh="億光電子工業股份有限公司" data-en="Everlight Electronics">億光電子工業股份有限公司</span></div>
-    <ul class="timeline-details"><li data-zh="參與高功率車用 LED 新產品開發，導入 Top Contact 散熱設計及新型晶片，協助體積縮小 15%、亮度提升 10%" data-en="Supported automotive LED NPI using top-contact thermal design and a new die architecture, contributing to 15% smaller volume and 10% higher brightness">參與高功率車用 LED 新產品開發，導入 Top Contact 散熱設計及新型晶片，協助體積縮小 15%、亮度提升 10%</li><li data-zh="依 APQP、AEC-Q 進行工程與可靠度驗證，協作分析光、電、熱及製程問題" data-en="Conducted APQP/AEC-Q engineering and reliability validation, investigating optical, electrical, thermal and process issues">依 APQP、AEC-Q 進行工程與可靠度驗證，協作分析光、電、熱及製程問題</li></ul></div>
-</div></div>
-    </div></section>
-
-<!-- Skills -->
-    <section id="skills" class="skills"><div class="container">
-        <h2 class="section-title" data-zh="專業技能" data-en="Professional Skills">專業技能</h2>
-        <p class="skills-lead" data-zh="Machine Learning × Optimization × Python × Smart Manufacturing" data-en="Machine Learning × Optimization × Python × Smart Manufacturing">Machine Learning × Optimization × Python × Smart Manufacturing</p>
-        <div class="skills-grid">
-          <div class="skill-card reveal-item"><div class="skill-card-header"><i class="fas fa-brain"></i><span data-zh="Machine Learning &amp; Industrial AI" data-en="Machine Learning &amp; Industrial AI">Machine Learning & Industrial AI</span></div><ul class="stagger-reveal"><li>Data Exploration / Model Evaluation</li><li>AOI / Time Series Assessment</li><li>Data Quality / Error Analysis</li></ul></div>
-          <div class="skill-card reveal-item"><div class="skill-card-header"><i class="fas fa-code"></i><span data-zh="Python / Software Engineering" data-en="Python / Software Engineering">Python / Software Engineering</span></div><ul class="stagger-reveal"><li>Python / API Integration</li><li>Data Processing / Automation</li><li>Git / Docker / GitHub Actions / CI/CD</li></ul></div>
-          <div class="skill-card reveal-item"><div class="skill-card-header"><i class="fas fa-chart-line"></i><span data-zh="Optimization &amp; Engineering Modeling" data-en="Optimization &amp; Engineering Modeling">Optimization & Engineering Modeling</span></div><ul class="stagger-reveal"><li>DE / GA / NSGA-II / NSGA-III</li><li>DE-MRBFNN / Surrogate Model</li><li>CFD / Multi-objective Validation</li></ul></div>
-          <div class="skill-card reveal-item"><div class="skill-card-header"><i class="fas fa-industry"></i><span data-zh="Engineering &amp; Smart Manufacturing" data-en="Engineering &amp; Smart Manufacturing">Engineering & Smart Manufacturing</span></div><ul class="stagger-reveal"><li>SCADA / Equipment Data Requirements</li><li>ML Feasibility / PoC Planning</li><li>NPI / APQP / AEC-Q</li></ul></div>
-        </div>
-    </div></section>
-
-    <!-- Education -->
-    <section id="education" class="education">
-        <div class="container">
-            <h2 class="section-title" data-zh="學歷背景" data-en="Education">學歷背景</h2>
-            <div class="timeline">
-                <div class="timeline-item reveal-item">
-                    <div class="timeline-aside"><span class="timeline-date" data-zh="2026/10 – 至今" data-en="2026/10 – Present">2026/10 – 至今</span></div>
-                    <div class="timeline-main">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-header">
-                            <h3 data-zh="智慧工廠 AI 工程師" data-en="Smart Factory AI Engineer">智慧工廠 AI 工程師</h3>
-                            <span class="timeline-company" data-zh="廣達電腦股份有限公司" data-en="Quanta Computer">廣達電腦股份有限公司</span>
-                        </div>
-                        <ul class="timeline-details">
-                            <li data-zh="評估設備、能源與製程相關的 AI 應用需求、資料可行性與 PoC 驗證方向" data-en="Assess smart-factory AI use cases for equipment, energy and processes, including data readiness and PoC validation">評估設備、能源與製程相關的 AI 應用需求、資料可行性與 PoC 驗證方向</li>
-                            <li data-zh="定義可驗證的目標、交付階段與技術限制，銜接現場需求與資料分析" data-en="Define measurable targets, delivery stages and technical constraints to bridge operational needs and data analysis">定義可驗證的目標、交付階段與技術限制，銜接現場需求與資料分析</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item reveal-item">
-                    <div class="timeline-aside">
-                        <span class="timeline-date">2019/08 – 2021/09</span>
-                    </div>
-                    <div class="timeline-main">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-header">
-                            <h3 data-zh="自動化科技研究所 碩士" data-en="Master of Automation Technology">自動化科技研究所 碩士</h3>
-                            <span class="timeline-company" data-zh="臺北科技大學"
-                                data-en="National Taipei University of Technology">臺北科技大學</span>
-                        </div>
-                        <div class="timeline-details">
-                            <p data-zh="以 DE-MRBFNN + NSGA3 建構多目標節能模型，成功讓資料中心 PUE 降低 7% 並發表研討會論文。"
-                                data-en="Built a DE-MRBFNN + NSGA3 multi-objective energy model that reduced data-center PUE by 7% and was published in a symposium paper.">
-                                以 DE-MRBFNN + NSGA3 建構多目標節能模型，成功讓資料中心 PUE 降低 7% 並發表研討會論文。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item reveal-item">
-                    <div class="timeline-aside">
-                        <span class="timeline-date">2015/09 – 2019/06</span>
-                    </div>
-                    <div class="timeline-main">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-header">
-                            <h3 data-zh="機械工程系" data-en="Bachelor of Mechanical Engineering">機械工程系</h3>
-                            <span class="timeline-company" data-zh="臺北科技大學"
-                                data-en="National Taipei University of Technology">臺北科技大學</span>
-                        </div>
-                        <div class="timeline-details">
-                            <p data-zh="累積機構與製造背景，奠定後續在電、光、熱控制與系統整合的跨域視角。"
-                                data-en="Built mechanical and manufacturing fundamentals that anchor my later cross-domain work across electrical, optical, thermal, and system integration topics.">
-                                累積機構與製造背景，奠定後續在電、光、熱控制與系統整合的跨域視角。
-                            </p>
-                        </div>
-                    </div>
-                </div>
+    <section class="section case-section" id="case-study" aria-labelledby="case-title">
+      <div class="shell">
+        <div class="section-heading"><div><span class="section-overline">FEATURED CASE STUDY / 03</span><h2 class="section-title" data-zh="代表研究：資料中心冷卻最佳化" data-en="Featured research: Data-center cooling">代表研究：資料中心冷卻最佳化</h2></div><p class="section-intro" data-zh="研究模型、最佳化演算法，以及 CFD／場域驗證的一套完整流程。" data-en="One end-to-end research workflow—from surrogate modeling to CFD and field validation.">研究模型、最佳化演算法，以及 CFD／場域驗證的一套完整流程。</p></div>
+        <div class="case-grid">
+          <article class="case-main">
+            <div class="case-kicker"><span class="case-live-dot"></span> RESEARCH / INDUSTRIAL OPTIMIZATION</div>
+            <h3 class="case-headline" data-zh="用 AI 代理模型，降低探索最佳控制參數的成本" data-en="Use surrogate models to explore better cooling strategies">用 AI 代理模型，降低探索最佳控制參數的成本</h3>
+            <p class="case-description" data-zh="氣冷單元式資料中心存在多個相互影響的控制參數。研究以 DE-MRBFNN 建立代理模型，再利用 NSGA-III 尋找多目標條件下的較佳解，最後以 CFD 與實際場域驗證。" data-en="Cooling a modular data center involves interacting parameters. The research built a DE-MRBFNN surrogate model, applied NSGA-III for multi-objective optimization, and validated the outcomes through CFD and field testing.">氣冷單元式資料中心存在多個相互影響的控制參數。研究以 DE-MRBFNN 建立代理模型，再利用 NSGA-III 尋找多目標條件下的較佳解，最後以 CFD 與實際場域驗證。</p>
+            <div class="case-method"><span>DE-MRBFNN</span><i aria-hidden="true">→</i><span>NSGA-III</span><i aria-hidden="true">→</i><span>CFD</span><i aria-hidden="true">→</i><span>FIELD TEST</span></div>
+            <div class="case-result-grid">
+              <div class="case-result"><span class="case-result-label">SIMULATION</span><strong>−9.2%</strong><small data-zh="可用能損耗" data-en="Exergy loss">可用能損耗</small></div>
+              <div class="case-result"><span class="case-result-label">FIELD VALIDATION</span><strong>−7%</strong><small data-zh="PUE" data-en="PUE">PUE</small></div>
             </div>
+            <a class="case-link" href="ERAC2021-基於DE-MRBFNN與NSGA3之新式資料中心冷卻系統節能優化V2.pdf" target="_blank" rel="noopener noreferrer"><span data-zh="閱讀研究論文" data-en="Read the research paper">閱讀研究論文</span> <span aria-hidden="true">↗</span></a>
+          </article>
+          <div class="case-diagram" aria-label="Research approach diagram">
+            <div class="diagram-top"><span>RESEARCH SYSTEM</span><span>ARCHITECTURE / 01</span></div>
+            <div class="diagram-panel">
+              <span class="diagram-caption">01 · DATA / PHYSICS</span><div class="diagram-block diagram-sensor"><span class="diagram-glyph">≋</span><div><strong data-zh="冷卻參數與工程限制" data-en="Cooling parameters &amp; constraints">冷卻參數與工程限制</strong><small data-zh="INPUT / CONDITIONS" data-en="INPUT / CONDITIONS">INPUT / CONDITIONS</small></div></div>
+              <div class="diagram-connector" aria-hidden="true"></div>
+              <span class="diagram-caption">02 · SURROGATE MODEL</span><div class="diagram-block diagram-model"><span class="diagram-glyph">◎</span><div><strong>DE-MRBFNN</strong><small data-zh="預測與代理模型" data-en="Prediction / surrogate">預測與代理模型</small></div></div>
+              <div class="diagram-connector" aria-hidden="true"></div>
+              <span class="diagram-caption">03 · OPTIMIZATION</span><div class="diagram-block diagram-optim"><span class="diagram-glyph">◇</span><div><strong>NSGA-III</strong><small data-zh="多目標尋優" data-en="Multi-objective search">多目標尋優</small></div></div>
+              <div class="diagram-connector" aria-hidden="true"></div>
+              <span class="diagram-caption">04 · VALIDATION</span><div class="diagram-block diagram-test"><span class="diagram-glyph">✓</span><div><strong data-zh="CFD 與場域驗證" data-en="CFD and field validation">CFD 與場域驗證</strong><small data-zh="EVIDENCE / OUTCOMES" data-en="EVIDENCE / OUTCOMES">EVIDENCE / OUTCOMES</small></div></div>
+            </div>
+            <div class="diagram-foot"><span>EXPERIMENTAL RESEARCH</span><span>2019 — 2021</span></div>
+          </div>
         </div>
+      </div>
     </section>
-
-<!-- About -->
-    <section id="about" class="about"><div class="container"><h2 class="section-title" data-zh="關於我" data-en="About Me">關於我</h2><div class="about-content"><div class="about-text" id="about-text">
-        <p data-zh="我畢業於北科大自動化科技研究所，具機械工程、Machine Learning、最佳化演算法與 Python 軟體開發背景。目前於廣達電腦擔任 AI 數據工程師，參與設備與製造資料的 AI 應用規劃、分析及技術評估。" data-en="I hold an M.S. in Automation Technology from NTUT, and currently work as an AI Data Engineer at Quanta Computer, assessing machine-learning applications for equipment and manufacturing data.">我畢業於北科大自動化科技研究所，具機械工程、Machine Learning、最佳化演算法與 Python 軟體開發背景。目前於廣達電腦擔任 AI 數據工程師。</p>
-        <div class="about-extra">
-            <p data-zh="研究所以 DE-MRBFNN 代理模型結合 NSGA-III 進行資料中心冷卻最佳化，透過 CFD 與實際場域驗證，模擬可用能損耗下降 9.2%、場域 PUE 降低 7%。另參與 IC 載板 AOI 瑕疵辨識與模型評估。" data-en="For my graduate research, I combined DE-MRBFNN surrogate modeling and NSGA-III for data-center cooling optimization, validated with CFD and field tests: 9.2% less simulated exergy loss and 7% lower field PUE. I also participated in IC-substrate AOI model assessment.">研究所以 DE-MRBFNN 代理模型結合 NSGA-III 進行資料中心冷卻最佳化，透過 CFD 與實際場域驗證，模擬可用能損耗下降 9.2%、場域 PUE 降低 7%。另參與 IC 載板 AOI 模型評估。</p>
-            <p data-zh="於億光電子參與高功率車用 LED 新產品開發，累積 NPI、APQP、AEC-Q 與工程驗證經驗；其後運用 Python 建構倉儲、庫存、補貨及營運資料處理與決策支援工具。" data-en="At Everlight I gained automotive LED NPI, APQP/AEC-Q and engineering validation experience, then developed Python workflows and decision support for warehouse and inventory operations.">於億光電子參與高功率車用 LED 新產品開發，累積 NPI、APQP、AEC-Q 與工程驗證經驗；其後運用 Python 建構倉儲、庫存、補貨及營運資料處理與決策支援工具。</p>
-            <p data-zh="面對工程問題，我先釐清場域限制、資料條件、模型驗證方法與實際效益，再決定合適的 AI 或最佳化方法。" data-en="My approach is to clarify engineering constraints, data conditions, validation methods and practical value before selecting ML or optimization techniques.">面對工程問題，我先釐清場域限制、資料條件、模型驗證方法與實際效益，再決定合適的 AI 或最佳化方法。</p>
-        </div><button type="button" class="about-toggle" id="about-toggle" data-zh="展開完整介紹" data-en="Show full introduction" data-zh-expanded="收合介紹" data-en-expanded="Show less">展開完整介紹</button>
-    </div></div></div></section>
-
-    <!-- Contact -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title" data-zh="聯絡方式" data-en="Contact">聯絡方式</h2>
-            <div class="contact-grid">
-                <div class="contact-item reveal-item">
-                    <i class="fas fa-envelope"></i>
-                    <h4 data-zh="電子信箱" data-en="Email">電子信箱</h4>
-                    <p><a href="mailto:joe0827joe@yahoo.com.tw" class="contact-link">joe0827joe@yahoo.com.tw</a></p>
-                </div>
-                <div class="contact-item reveal-item">
-                    <i class="fas fa-phone"></i>
-                    <h4 data-zh="手機" data-en="Mobile">手機</h4>
-                    <p><a href="tel:0930227913" class="contact-link">0930-227-913</a></p>
-                </div>
-                <div class="contact-item reveal-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h4 data-zh="所在地" data-en="Location">所在地</h4>
-                    <p data-zh="新北市" data-en="New Taipei City">新北市</p>
-                </div>
-            </div>
-            <div class="contact-cta reveal-item">
-                <h3 data-zh="需要快速轉寄履歷？" data-en="Need a quick resume copy?">需要快速轉寄履歷？</h3>
-                <p class="contact-cta-note"
-                    data-zh="一頁式履歷與網站共用 data/resume.json；PDF 於部署時自動產生。"
-                    data-en="The one-page resume shares data/resume.json; PDFs are generated at deploy time.">
-                    一頁式履歷與網站共用 data/resume.json；PDF 於部署時自動產生。
-                </p>
-                <div class="contact-cta-actions">
-                    <a href="resume.html" class="btn btn-secondary" data-zh="開啟一頁履歷"
-                        data-en="Open One-Page Resume">開啟一頁履歷</a>
-                    <a href="Joe_Hsu_Resume_ZH.pdf" class="btn btn-primary" download data-zh="下載中文 PDF"
-                        data-en="Download ZH PDF">下載中文 PDF</a>
-                    <a href="Joe_Hsu_Resume_EN.pdf" class="btn btn-secondary" download data-zh="Download EN PDF"
-                        data-en="Download EN PDF">Download EN PDF</a>
-                </div>
-            </div>
+    <section class="section project-section" id="projects" aria-labelledby="projects-title">
+      <div class="shell">
+        <div class="section-heading"><div><span class="section-overline">SELECTED WORK / 04</span><h2 class="section-title" data-zh="從研究到實際工具的作品" data-en="Research meets practical software">從研究到實際工具的作品</h2></div><p class="section-intro" data-zh="不同的專案，共同聚焦精準定義、可驗證與可維護。" data-en="Different projects, connected by evidence, clear requirements and maintainability.">不同的專案，共同聚焦精準定義、可驗證與可維護。</p></div>
+        <div class="project-grid">
+          <article class="project-card">
+<div class="project-top"><span class="project-number">01</span><span class="project-kind" data-zh="工業視覺 / 原型作品" data-en="Industrial vision / Prototype">工業視覺 / 原型作品</span></div>
+<div class="project-content"><h3 data-zh="PCB Hybrid AOI" data-en="PCB Hybrid AOI">PCB Hybrid AOI</h3><p data-zh="以規則式影像定位搭配深度學習分類，探索產線視覺檢測的效能與準確度取捨。" data-en="Explores a hybrid rule-based vision and deep-learning pipeline for industrial inspection, balancing latency and accuracy.">以規則式影像定位搭配深度學習分類，探索產線視覺檢測的效能與準確度取捨。</p><div class="project-tech"><span>C++</span><span>Python</span><span>OpenCV</span><span>OpenVINO</span></div></div>
+<a class="project-link" href="https://github.com/joe0827joe/pcb-hybrid-aoi" target="_blank" rel="noopener noreferrer"><span data-zh="查看原始碼" data-en="View repository">查看原始碼</span> <span aria-hidden="true">↗</span></a>
+</article>
+          <article class="project-card">
+<div class="project-top"><span class="project-number">02</span><span class="project-kind" data-zh="電商系統 / 軟體工程" data-en="Commerce systems / Engineering">電商系統 / 軟體工程</span></div>
+<div class="project-content"><h3 data-zh="倉儲與補貨決策支援" data-en="Warehouse &amp; Replenishment Systems">倉儲與補貨決策支援</h3><p data-zh="使用 Python、資料轉換及規則型判斷，將庫存、補貨及營運資訊整合成可追蹤的工作流程。" data-en="Python workflows and rule-based decision support for inventory, replenishment and operations data.">使用 Python、資料轉換及規則型判斷，將庫存、補貨及營運資訊整合成可追蹤的工作流程。</p><div class="project-tech"><span>Python</span><span>Data Integration</span><span>CI/CD</span><span>Automation</span></div></div>
+<a class="project-link" href="https://github.com/ematchorganization/WMS_Center" target="_blank" rel="noopener noreferrer"><span data-zh="查看系統專案" data-en="View project">查看系統專案</span> <span aria-hidden="true">↗</span></a>
+</article>
+          <article class="project-card">
+<div class="project-top"><span class="project-number">03</span><span class="project-kind" data-zh="影像處理 / 個人作品" data-en="Image processing / Personal work">影像處理 / 個人作品</span></div>
+<div class="project-content"><h3 data-zh="Anime4K 影像強化工具" data-en="Anime4K Image Enhancer">Anime4K 影像強化工具</h3><p data-zh="以 C# 實作影像強化處理與參數調整介面，展示演算法落地到桌面工具的實作能力。" data-en="A C# image-enhancement implementation with user-adjustable parameters, showcasing desktop software engineering.">以 C# 實作影像強化處理與參數調整介面，展示演算法落地到桌面工具的實作能力。</p><div class="project-tech"><span>C#</span><span>.NET</span><span>WinForms</span><span>Image Processing</span></div></div>
+<a class="project-link" href="https://github.com/joe0827joe/Anime4K_C_Sharp" target="_blank" rel="noopener noreferrer"><span data-zh="查看原始碼" data-en="View repository">查看原始碼</span> <span aria-hidden="true">↗</span></a>
+</article>
         </div>
+      </div>
     </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p><span data-zh="&copy; 2026 許應良. 保留所有權利."
-                        data-en="&copy; 2026 YINGLIANG HSU. All rights reserved.">&copy; 2026 許應良. 保留所有權利.</span></p>
-                <p data-zh="「以探索驅動創新，以修正淬煉卓越」"
-                    data-en="&quot;Driving innovation through exploration, refining excellence through correction&quot;">
-                    「以探索驅動創新，以修正淬煉卓越」</p>
-            </div>
+    <section class="section experience-section" id="experience" aria-labelledby="experience-title">
+      <div class="shell">
+        <div class="section-heading"><div><span class="section-overline">CAREER / 05</span><h2 class="section-title" data-zh="跨越 AI、軟體與實體工程" data-en="A career connecting software and engineering">跨越 AI、軟體與實體工程</h2></div><p class="section-intro" data-zh="職務名稱及期間依 2026 年 10 月的 104 履歷整理。" data-en="Titles and dates are aligned with the October 2026 resume.">職務名稱及期間依 2026 年 10 月的 104 履歷整理。</p></div>
+        <div class="career-layout">
+          <div class="career-list">
+            <article class="career-entry">
+<div class="career-date"><span class="timeline-marker" aria-hidden="true"></span><time>2026 / 10 — NOW</time></div>
+<div class="career-details"><h3 data-zh="AI 數據工程師" data-en="AI Data Engineer">AI 數據工程師</h3><p class="career-org" data-zh="廣達電腦股份有限公司 · 智慧工廠" data-en="Quanta Computer · Smart Factory">廣達電腦股份有限公司 · 智慧工廠</p><ul><li><span data-zh="與 SCADA、自動化及設備團隊協作，釐清設備資料欄位、取樣頻率、時間戳記與品質規範。" data-en="Work with SCADA and equipment teams on data fields, sampling frequency, timestamps and quality.">與 SCADA、自動化及設備團隊協作，釐清設備資料欄位、取樣頻率、時間戳記與品質規範。</span></li><li><span data-zh="評估異常偵測、預測維護與能源管理等 Machine Learning 應用的資料可行性、驗證方式及系統整合方向。" data-en="Assess ML feasibility, validation and integration directions for anomaly detection, predictive maintenance and energy management.">評估異常偵測、預測維護與能源管理等 Machine Learning 應用的資料可行性、驗證方式及系統整合方向。</span></li></ul></div>
+</article>
+            <article class="career-entry">
+<div class="career-date"><span class="timeline-marker" aria-hidden="true"></span><time>2023 / 07 — 2026 / 09</time></div>
+<div class="career-details"><h3 data-zh="AI 軟體工程師" data-en="AI Software Engineer">AI 軟體工程師</h3><p class="career-org" data-zh="易豐購企業社 · Python 自動化" data-en="Yifong Enterprise · Python Automation">易豐購企業社 · Python 自動化</p><ul><li><span data-zh="開發倉儲、庫存、補貨、商品資料及跨平台資料處理工具。" data-en="Built tools for inventory, replenishment, product data and cross-platform transformation.">開發倉儲、庫存、補貨、商品資料及跨平台資料處理工具。</span></li><li><span data-zh="將營運規則與人工工作轉化成可測試、可追蹤的資料及 AI 工作流程。" data-en="Turned manual operational rules into testable and traceable data and AI workflows.">將營運規則與人工工作轉化成可測試、可追蹤的資料及 AI 工作流程。</span></li></ul></div>
+</article>
+            <article class="career-entry">
+<div class="career-date"><span class="timeline-marker" aria-hidden="true"></span><time>2022 / 01 — 2023 / 06</time></div>
+<div class="career-details"><h3 data-zh="研發工程師（研發替代役）" data-en="R&amp;D Engineer (Alternative Service)">研發工程師（研發替代役）</h3><p class="career-org" data-zh="億光電子工業股份有限公司 · 車用 LED" data-en="Everlight Electronics · Automotive LED">億光電子工業股份有限公司 · 車用 LED</p><ul><li><span data-zh="參與高功率車用 LED 新產品研發，以熱設計與晶片架構改善體積及亮度。" data-en="Contributed to automotive LED NPI through thermal design and chip architecture improvements.">參與高功率車用 LED 新產品研發，以熱設計與晶片架構改善體積及亮度。</span></li><li><span data-zh="依 APQP、AEC-Q 進行可靠度驗證，協作分析跨光、電、熱領域的工程問題。" data-en="Performed APQP/AEC-Q validation and cross-disciplinary optical, electrical and thermal analysis.">依 APQP、AEC-Q 進行可靠度驗證，協作分析跨光、電、熱領域的工程問題。</span></li></ul></div>
+</article>
+          </div>
+          <aside class="experience-aside">
+            <span class="aside-topline">FOUNDATION</span>
+            <div class="degree-icon" aria-hidden="true">✦</div>
+            <h3 data-zh="機械工程底子，讓 AI 更貼近現場" data-en="Engineering roots. AI perspective.">機械工程底子，讓 AI 更貼近現場</h3>
+            <strong data-zh="國立臺北科技大學" data-en="National Taipei University of Technology">國立臺北科技大學</strong>
+            <p data-zh="自動化科技研究所 · 碩士" data-en="M.S. in Automation Technology">自動化科技研究所 · 碩士</p>
+            <div class="degree-divider"></div>
+            <p data-zh="機械工程系 · 學士" data-en="B.S. in Mechanical Engineering">機械工程系 · 學士</p>
+            <a href="resume.html" class="aside-link"><span data-zh="查看完整經歷" data-en="Full resume">查看完整經歷</span> ↗</a>
+          </aside>
         </div>
-    </footer>
-
-    <script src="script.js"></script>
+      </div>
+    </section>
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="shell contact-layout">
+        <div><span class="section-overline">LET'S CONNECT / 06</span><h2 class="contact-head" data-zh="有值得解決的問題，" data-en="Have a problem">有值得解決的問題，</h2><h2 class="contact-head accent-text" data-zh="從對話開始。" data-en="worth solving?">從對話開始。</h2><p class="contact-text" data-zh="歡迎交流 Machine Learning、工業 AI、最佳化、工程驗證與軟體系統整合。" data-en="Let's discuss machine learning, industrial AI, optimization, engineering validation and software systems.">歡迎交流 Machine Learning、工業 AI、最佳化、工程驗證與軟體系統整合。</p></div>
+        <div class="contact-actions"><a class="contact-email" href="mailto:joe0827joe@yahoo.com.tw"><span>EMAIL / CONTACT</span><strong>joe0827joe@yahoo.com.tw</strong><span aria-hidden="true">↗</span></a><a class="contact-secondary" href="https://github.com/joe0827joe" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a class="contact-secondary" href="Joe_Hsu_Resume_EN.pdf" download><span data-zh="英文 PDF 履歷" data-en="English PDF résumé">英文 PDF 履歷</span> ↓</a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="shell footer-inner"><span class="footer-logo">J<span>.</span></span><p>© <span id="copyright-year">2026</span> Joe Hsu. <span data-zh="以工程證據創造價值。" data-en="Engineering value through evidence.">以工程證據創造價值。</span></p><a href="#top"><span data-zh="回到頂端" data-en="Back to top">回到頂端</span> ↑</a></div></footer>
 </body>
-
 </html>
