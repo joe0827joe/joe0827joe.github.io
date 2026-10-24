@@ -68,7 +68,7 @@ try {
   await mobile.locator('#mobile-menu a[href="#projects"]').click();
   assert.equal(await mobile.locator('#mobile-menu').isVisible(), false);
   await mobile.locator('[data-language="en"]').click();
-  assert.match(await mobile.locator('#hero-title').innerText(), /measurable AI/);
+  assert.match(await mobile.locator('#hero-title').innerText(), /Measure the outcome/);
   const overflow = await mobile.evaluate(() => Math.max(0, document.documentElement.scrollWidth - window.innerWidth));
   assert.ok(overflow <= 2, 'Mobile horizontal overflow: ' + overflow + 'px');
   await mobile.screenshot({ path: path.join(outDir, 'mobile-en.png'), fullPage: true, animations: 'disabled' });
