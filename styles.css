@@ -103,8 +103,8 @@ ul,ol{padding:0;margin:0}
 .workflow-sub{color:#9ab1bc;font-size:.72rem}
 .workflow-dot{height:8px;width:8px;background:var(--mint);border-radius:2px;box-shadow:0 0 0 5px rgba(143,220,196,.08);transform:rotate(45deg)}
 .visual-bottom{display:flex;align-items:center;gap:12px;margin-top:20px;color:#fff}
-.visual-avatar{width:48px;height:48px;border:2px solid rgba(184,242,222,.56);border-radius:50%;padding:2px;flex:none}
-.visual-avatar img{height:100%;width:100%;border-radius:50%;object-fit:cover;object-position:center 22%}
+.visual-avatar{width:64px;height:64px;border:2px solid rgba(184,242,222,.56);border-radius:50%;padding:2px;flex:none}
+.visual-avatar img{height:100%;width:100%;border-radius:50%;object-fit:cover;object-position:center center}
 .visual-bottom>div:nth-child(2){display:grid;line-height:1.4;gap:3px}
 .visual-bottom strong{font-size:.85rem}
 .visual-bottom small{font-size:.71rem;color:#a8c3c4}
