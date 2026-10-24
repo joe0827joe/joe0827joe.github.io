@@ -21,7 +21,7 @@ assert.equal(resume.experience[1].end, '2026/09');
 assert.ok(html.includes('9.2%') && html.includes('7%'));
 assert.ok(!html.includes('2023/07 – 至今'));
 assert.equal((html.match(/class="career-entry"/g) || []).length, 3);
-for (const href of ['resume.html', 'Joe_Hsu_Resume_ZH.pdf', 'Joe_Hsu_Resume_EN.pdf', 'styles.css', 'script.js']) {
+for (const href of ['resume.html', 'Joe_Hsu_Resume_ZH.pdf', 'Joe_Hsu_Resume_EN.pdf', 'styles.css', 'script.js', 'assets/joe-hsu-profile.webp']) {
   assert.ok(fs.existsSync(path.join(root, href)), 'Missing linked asset: ' + href);
 }
 
@@ -35,6 +35,9 @@ try {
   assert.match(await desktop.locator('#hero-title').innerText(), /AI 價值|measurable AI/);
   assert.equal(await desktop.locator('.metric').count(), 4);
   assert.equal(await desktop.locator('.project-card').count(), 3);
+  const avatar = desktop.locator('.visual-avatar img');
+  assert.match(await avatar.getAttribute('src'), /assets\/joe-hsu-profile\.webp$/);
+  assert.ok(await avatar.evaluate(img => img.complete && img.naturalWidth > 0), 'Updated profile image rendered');
   assert.equal(await desktop.locator('.career-entry').count(), 3);
   assert.equal(await desktop.locator('h1').count(), 1, 'One semantic H1');
   const anchors = await desktop.locator('a[href^="#"]').evaluateAll(nodes =>
