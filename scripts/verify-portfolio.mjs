@@ -32,7 +32,14 @@ try {
   desktop.on('pageerror', err => errors.push('desktop: ' + err.message));
   await desktop.goto(pageURL, { waitUntil: 'domcontentloaded' });
   await desktop.evaluate(() => document.fonts.ready);
-  assert.match(await desktop.locator('#hero-title').innerText(), /AI 價值|measurable AI/);
+  assert.match(await desktop.locator('#hero-title').innerText(), /以數據驗證成果|Measure the outcome/);
+  const htmlSource = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  for (const internalLabel of ['HOW I CREATE VALUE', 'METHOD / 01—04', '沒有把研究模擬與正式導入混為一談', '職務名稱及期間依 2026 年']) {
+    assert.ok(!htmlSource.includes(internalLabel), 'Internal-facing copy leaked into portfolio: ' + internalLabel);
+  }
+  assert.ok(htmlSource.includes('模擬可用能損耗降低'), 'Simulation result must retain context');
+  assert.ok(htmlSource.includes('實際場域 PUE 降低'), 'Field test must retain context');
+  assert.match(await desktop.locator('#contact').innerText(), /工程與 AI 經驗|engineering and AI work/i);
   assert.equal(await desktop.locator('.metric').count(), 4);
   assert.equal(await desktop.locator('.project-card').count(), 3);
   assert.equal(await desktop.locator('.career-entry').count(), 3);
@@ -46,7 +53,7 @@ try {
   await desktop.locator('[data-language="en"]').click();
   assert.equal(await desktop.locator('html').getAttribute('lang'), 'en');
   assert.equal(await desktop.locator('[data-language="en"]').getAttribute('aria-pressed'), 'true');
-  assert.match(await desktop.locator('#hero-title').innerText(), /measurable AI/);
+  assert.match(await desktop.locator('#hero-title').innerText(), /Measure the outcome/);
   assert.ok((await desktop.locator('#resume-download').getAttribute('href')).endsWith('_EN.pdf'));
   await desktop.locator('[data-language="zh"]').click();
   assert.ok((await desktop.locator('#resume-download').getAttribute('href')).endsWith('_ZH.pdf'));
@@ -61,7 +68,7 @@ try {
   await mobile.locator('#mobile-menu a[href="#projects"]').click();
   assert.equal(await mobile.locator('#mobile-menu').isVisible(), false);
   await mobile.locator('[data-language="en"]').click();
-  assert.match(await mobile.locator('#hero-title').innerText(), /measurable AI/);
+  assert.match(await mobile.locator('#hero-title').innerText(), /Measure the outcome/);
   const overflow = await mobile.evaluate(() => Math.max(0, document.documentElement.scrollWidth - window.innerWidth));
   assert.ok(overflow <= 2, 'Mobile horizontal overflow: ' + overflow + 'px');
   await mobile.screenshot({ path: path.join(outDir, 'mobile-en.png'), fullPage: true, animations: 'disabled' });

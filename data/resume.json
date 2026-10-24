@@ -18,8 +18,8 @@
     "github": "https://github.com/joe0827joe",
     "portfolio": "https://joe0827joe.github.io/",
     "summary": {
-      "zh": "國立臺北科技大學自動化科技碩士，具機械工程背景，現於廣達電腦擔任 AI 數據工程師，參與設備與製造資料 AI 應用規劃、資料分析與 Machine Learning 可行性評估。專長 Python、多目標最佳化、AOI 模型評估與工程驗證。研究所建立資料中心冷卻 AI 代理模型，模擬可用能損耗降低 9.2%、實際場域 PUE 降低 7%。",
-      "en": "M.S. in Automation Technology from NTUT with a mechanical engineering background. Currently an AI Data Engineer at Quanta Computer, evaluating machine-learning applications for equipment and manufacturing data. Experienced in Python, multi-objective optimization, AOI model assessment, and engineering validation. Data-center cooling research reduced simulated exergy loss by 9.2% and field PUE by 7%."
+      "zh": "北科大自動化科技碩士，具機械工程背景，現任廣達電腦 AI 數據工程師，參與設備時序資料盤點與 Machine Learning 應用可行性評估。研究所使用 DE-MRBFNN 代理模型與 NSGA-III 進行資料中心冷卻最佳化，模擬可用能損耗降低 9.2%、實際場域 PUE 降低 7%。另具 Python 營運自動化、AOI 模型評估及車用 LED 研發驗證經驗。",
+      "en": "AI Data Engineer at Quanta with an M.S. in Automation Technology and a mechanical engineering background. I assess equipment time-series data and ML feasibility. My data-center research combined DE-MRBFNN and NSGA-III, reducing simulated exergy loss by 9.2% and field PUE by 7%. I also bring Python automation, AOI model evaluation, and automotive LED R&D experience."
     }
   },
   "skills": [

@@ -93,10 +93,10 @@ function renderBody(data, { includePhone }) {
   const projects = (data.projects || [])
     .map((proj) => {
       const link = proj.link
-        ? ` · <a href="${esc(proj.link)}" target="_blank" rel="noopener"><span class="i18n" data-lang="zh">專案連結</span><span class="i18n" data-lang="en">Link</span></a>`
+        ? ` · <a href="${esc(proj.link)}" target="_blank" rel="noopener"><span class="i18n" data-lang="zh">查看程式作品</span><span class="i18n" data-lang="en">View project</span></a>`
         : '';
       const badge = proj.featured
-        ? `<span class="i18n" data-lang="zh">（主打）</span><span class="i18n" data-lang="en"> (Featured)</span>`
+        ? `<span class="i18n" data-lang="zh">（研究）</span><span class="i18n" data-lang="en"> (Research)</span>`
         : '';
       return `
       <article class="item">
