@@ -3,13 +3,13 @@ let currentLanguage = 'zh';
 
 const languageData = {
     zh: {
-        title: '許應良 - 演算法工程師履歷',
+        title: '許應良｜AI / Machine Learning Engineer',
         copyMessage: '已複製！',
         copyTooltip: '點擊複製',
         copyError: '複製失敗'
     },
     en: {
-        title: 'YINGLIANG HSU - Algorithm Engineer Resume',
+        title: 'Joe Hsu | AI / Machine Learning Engineer',
         copyMessage: 'Copied!',
         copyTooltip: 'Click to copy',
         copyError: 'Copy failed'
