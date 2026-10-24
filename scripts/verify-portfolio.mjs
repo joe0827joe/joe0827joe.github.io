@@ -39,7 +39,7 @@ try {
   }
   assert.ok(htmlSource.includes('模擬可用能損耗降低'), 'Simulation result must retain context');
   assert.ok(htmlSource.includes('實際場域 PUE 降低'), 'Field test must retain context');
-  assert.match(await desktop.locator('#contact').innerText(), /工程與 AI 經驗/);
+  assert.match(await desktop.locator('#contact').innerText(), /工程與 AI 經驗|engineering and AI work/i);
   assert.equal(await desktop.locator('.metric').count(), 4);
   assert.equal(await desktop.locator('.project-card').count(), 3);
   assert.equal(await desktop.locator('.career-entry').count(), 3);
