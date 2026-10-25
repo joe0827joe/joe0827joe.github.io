@@ -74,7 +74,7 @@ ul,ol{padding:0;margin:0}
 .hero h1{font-size:clamp(3.2rem,5.35vw,5.85rem);color:#fff;line-height:1.16;letter-spacing:-.065em;font-weight:800;margin:34px 0 25px;word-break:normal;overflow-wrap:anywhere}
 .hero-line{display:block}
 .accent-text{color:var(--mint)}
-.hero-lead{font-size:1.02rem;line-height:1.98;max-width:590px;color:#cad8df;margin-bottom:28px;letter-spacing:.002em}
+.hero-narrative{font-size:1.02rem;line-height:1.98;max-width:590px;color:#cad8df;margin-bottom:28px;letter-spacing:.002em}
 .hero-identity{display:flex;flex-wrap:wrap;align-items:center;gap:11px;font-size:.82rem;color:#d9e9e9;font-weight:700;line-height:1.6}
 .identity-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#8ce4c4;box-shadow:0 0 0 5px rgba(140,228,196,.11)}
 .identity-separator{opacity:.44}
@@ -216,7 +216,7 @@ ul,ol{padding:0;margin:0}
  .header-resume{display:none}
  .hero{padding:62px 0 65px}
  .hero h1{font-size:clamp(2.8rem,10.2vw,4.3rem);letter-spacing:-.055em;margin:25px 0 20px}
- .hero-lead{font-size:.9rem;line-height:1.95}
+ .hero-narrative{font-size:.9rem;line-height:1.95}
  .hero-identity{font-size:.78rem;gap:8px}
  .hero-buttons{gap:10px}
  .btn{padding:13px 14px;min-height:48px;font-size:.79rem;gap:12px}
@@ -349,14 +349,14 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
   }
   .hero .eyebrow,
   .hero h1,
-  .hero-lead,
+  .hero-narrative,
   .hero-identity,
   .hero-buttons {
     animation: hero-arrive 680ms cubic-bezier(.22, 1, .36, 1) both;
   }
   .hero .eyebrow { animation-delay: 50ms; }
   .hero h1 { animation-delay: 130ms; }
-  .hero-lead { animation-delay: 215ms; }
+  .hero-narrative { animation-delay: 215ms; }
   .hero-identity { animation-delay: 285ms; }
   .hero-buttons { animation-delay: 360ms; }
   .portrait-showcase { animation: portrait-arrive 880ms cubic-bezier(.22, 1, .36, 1) 190ms both; }
@@ -425,7 +425,7 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
   /* Do not use !important on hero opacity/transform: an explicit WAAPI
      replay must be able to animate once after the user's direct click. */
   html:not(.motion-opt-in) .hero .eyebrow, html:not(.motion-opt-in) .hero h1,
-  html:not(.motion-opt-in) .hero-lead, html:not(.motion-opt-in) .hero-identity,
+  html:not(.motion-opt-in) .hero-narrative, html:not(.motion-opt-in) .hero-identity,
   html:not(.motion-opt-in) .hero-buttons, html:not(.motion-opt-in) .portrait-showcase {
     opacity: 1;
     transform: none;
@@ -520,12 +520,12 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
   }
   .hero-decoration-one{animation:ambient-drift 9s ease-in-out infinite alternate}
   .hero-decoration-two{animation:ambient-drift 14s ease-in-out -4s infinite alternate-reverse}
-  .hero .eyebrow,.hero h1,.hero-lead,.hero-identity,.hero-buttons{
+  .hero .eyebrow,.hero h1,.hero-narrative,.hero-identity,.hero-buttons{
     animation-duration:950ms;
   }
   .hero .eyebrow{animation-delay:90ms}
   .hero h1{animation-delay:220ms}
-  .hero-lead{animation-delay:370ms}
+  .hero-narrative{animation-delay:370ms}
   .hero-identity{animation-delay:510ms}
   .hero-buttons{animation-delay:640ms}
   .portrait-showcase{animation-duration:1200ms;animation-delay:280ms}
@@ -549,7 +549,7 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
 .hero.motion-resetting .accent-text::after{animation:none!important;transform:scaleX(0);opacity:0}
 .hero.manual-replay .eyebrow,
 .hero.manual-replay h1,
-.hero.manual-replay .hero-lead,
+.hero.manual-replay .hero-narrative,
 .hero.manual-replay .hero-identity,
 .hero.manual-replay .hero-buttons,
 .hero.manual-replay .portrait-showcase{animation:none!important;opacity:1;transform:none}
@@ -577,98 +577,58 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
 }
 
 
-/* Motion preference: OS remains the default. A deliberate opt-in overrides
-   reduced motion on this portfolio only, without changing Windows settings. */
-.motion-toggle[aria-pressed="true"]{
-  background:rgba(98,234,187,.16);
-  border-color:rgba(157,255,221,.65);
-  color:#e7fff5;
-}
-.motion-toggle:focus-visible,.motion-replay:focus-visible{
-  outline:2px solid #b6f7dd;outline-offset:3px;
-}
-html.motion-forced-off *,
-html.motion-forced-off *::before,
-html.motion-forced-off *::after{
-  animation:none!important;
-  transition-duration:0ms!important;
-}
-html.motion-forced-off .motion-reveal{
-  opacity:1!important;
-  transform:none!important;
-}
 
-/* Explicit opt-in under a reduced-motion operating-system preference. */
-@keyframes opted-hero-arrive{
-  from{opacity:0;transform:translate3d(0,28px,0)}
-  to{opacity:1;transform:translate3d(0,0,0)}
+/* Narrative hero: legible typography with balanced sentence breaks. */
+.hero{padding:76px 0 88px}
+.hero-grid{grid-template-columns:minmax(0,1.24fr) minmax(315px,.78fr);gap:40px;align-items:center}
+.hero-main,.hero-visual{min-width:0}
+.hero #hero-title{
+ color:#fff;font-size:clamp(2.1rem,2.75vw,2.65rem);line-height:1.4;
+ letter-spacing:-.035em;font-weight:800;max-width:100%;margin:27px 0 26px;
+ word-break:normal;overflow-wrap:normal;line-break:strict;text-wrap:pretty
 }
-@keyframes opted-portrait-arrive{
-  from{opacity:0;transform:translate3d(0,22px,0) scale(.96)}
-  to{opacity:1;transform:translate3d(0,0,0) scale(1)}
+.hero-headline-line{display:block;text-wrap:balance}
+.hero-narrative{max-width:710px;display:grid;gap:17px}
+.hero-narrative p{margin:0}
+.hero-story,.hero-belief{
+ color:#d2e1e5;font-size:clamp(.94rem,1.13vw,1.025rem);
+ line-height:1.92;letter-spacing:.005em;overflow-wrap:break-word;text-wrap:pretty
 }
-@keyframes opted-arrow-travel{
-  0%,100%{transform:translateY(-2px);opacity:.42}
-  50%{transform:translateY(6px);opacity:1}
+.hero-conviction{
+ color:var(--mint);border-left:3px solid var(--mint);padding:5px 0 5px 18px;
+ font-size:clamp(1.055rem,1.34vw,1.21rem);line-height:1.88;
+ letter-spacing:.005em;text-wrap:pretty
 }
-@keyframes opted-cue-travel{
-  0%,18%{transform:translate(-50%,0);opacity:1}
-  67%,100%{transform:translate(-50%,10px);opacity:0}
+.hero-conviction strong{font-weight:750}
+.hero-identity{margin-top:26px;font-size:.79rem;line-height:1.85;gap:10px;overflow-wrap:anywhere}
+.hero-identity .identity-separator{color:rgba(173,235,216,.65)}
+.hero-buttons{margin-top:25px;gap:13px}
+.hero-buttons .btn{min-width:170px;gap:16px}
+@media(max-width:1100px){
+ .hero-grid{grid-template-columns:minmax(0,1.13fr) minmax(265px,.77fr);gap:30px}
+ .hero #hero-title{font-size:clamp(2rem,3.3vw,2.5rem)}
 }
-@keyframes opted-data-travel{
-  0%{transform:translateY(-2px);opacity:0}
-  15%,70%{opacity:1}
-  100%{transform:translateY(27px);opacity:0}
+@media(max-width:920px){
+ .hero-grid{grid-template-columns:minmax(0,1fr);gap:33px}
+ .hero-main{max-width:760px}
+ .hero #hero-title{font-size:clamp(2.05rem,4.8vw,2.6rem)}
+ .portrait-showcase{margin-inline:auto}
 }
-@keyframes opted-accent{
-  0%,100%{opacity:.8;box-shadow:0 0 0 rgba(118,237,196,0)}
-  50%{opacity:1;box-shadow:0 0 15px rgba(118,237,196,.48)}
+@media(max-width:720px){
+ .hero{padding:49px 0 67px}
+ .hero #hero-title{font-size:clamp(1.77rem,7.15vw,2.25rem);line-height:1.47;
+  letter-spacing:-.025em;margin:23px 0 25px;overflow-wrap:normal;text-wrap:pretty}
+ .hero-headline-line{display:block;text-wrap:balance}
+ .hero-narrative{gap:16px}
+ .hero-story,.hero-belief{font-size:.925rem;line-height:1.87}
+ .hero-conviction{font-size:1.04rem;line-height:1.82;padding-left:13px}
+ .hero-identity{margin-top:21px;font-size:.76rem;gap:7px 9px}
+ .hero-buttons{margin-top:24px;gap:10px}
+ .hero-buttons .btn{min-width:0;flex:1 1 150px}
 }
-
-@media (prefers-reduced-motion: reduce){
-  html.motion-opt-in{scroll-behavior:smooth}
-  html.motion-opt-in .hero .eyebrow,
-  html.motion-opt-in .hero h1,
-  html.motion-opt-in .hero-lead,
-  html.motion-opt-in .hero-identity,
-  html.motion-opt-in .hero-buttons{
-    animation:opted-hero-arrive 950ms cubic-bezier(.22,1,.36,1) both;
-  }
-  html.motion-opt-in .hero .eyebrow{animation-delay:70ms}
-  html.motion-opt-in .hero h1{animation-delay:180ms}
-  html.motion-opt-in .hero-lead{animation-delay:310ms}
-  html.motion-opt-in .hero-identity{animation-delay:420ms}
-  html.motion-opt-in .hero-buttons{animation-delay:530ms}
-  html.motion-opt-in .portrait-showcase{
-    animation:opted-portrait-arrive 1100ms cubic-bezier(.22,1,.36,1) 260ms both;
-  }
-  html.motion-opt-in .scroll-cue-arrow{
-    animation:opted-arrow-travel 1.8s ease-in-out infinite;
-  }
-  html.motion-opt-in .scroll-cue-icon>span{
-    animation:opted-cue-travel 1.8s ease-in-out infinite;
-  }
-  html.motion-opt-in .diagram-connector::before{
-    display:block;animation:opted-data-travel 2.1s ease-in-out infinite;
-  }
-  html.motion-opt-in .hero .accent-text::after{
-    transform:scaleX(1);
-    animation:opted-accent 4s ease-in-out infinite;
-  }
-  html.motion-opt-in.motion-enabled .motion-reveal{
-    opacity:0;
-    transform:translate3d(0,34px,0);
-    transition:opacity 850ms ease var(--reveal-delay,0ms),
-      transform 1050ms cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms);
-  }
-  html.motion-opt-in.motion-enabled .motion-reveal.is-visible{
-    opacity:1;transform:translate3d(0,0,0);
-  }
-}
-@media (hover:hover) and (pointer:fine){
-  html.motion-opt-in .portrait-photo{transition:transform 600ms ease}
-  html.motion-opt-in .portrait-frame:hover .portrait-photo{transform:scale(1.03)}
-  html.motion-opt-in .project-card:hover{box-shadow:0 18px 36px rgba(10,41,52,.14)}
+@media(max-width:380px){
+ .hero #hero-title{font-size:clamp(1.65rem,7vw,1.8rem)}
+ .hero-buttons .btn{flex:1 1 auto}
 }
 
 @media print{
