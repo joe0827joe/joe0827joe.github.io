@@ -538,6 +538,20 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
   }
 }
 .hero.motion-resetting .accent-text::after{animation:none!important;transform:scaleX(0);opacity:0}
+.hero.manual-replay .eyebrow,
+.hero.manual-replay h1,
+.hero.manual-replay .hero-lead,
+.hero.manual-replay .hero-identity,
+.hero.manual-replay .hero-buttons,
+.hero.manual-replay .portrait-showcase{animation:none!important;opacity:1;transform:none}
+.motion-preference-note{
+  flex-basis:100%;color:#b8cfca;max-width:100%;
+  font-size:.7rem;line-height:1.65;overflow-wrap:anywhere
+}
+.motion-preference-note[hidden]{display:none!important}
+.motion-replay:focus-visible{
+  outline:2px solid #b6f7dd;outline-offset:3px
+}
 
 @media (prefers-reduced-motion: reduce){
   .hero .accent-text::after{transform:scaleX(1);opacity:1}
@@ -548,7 +562,8 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
   .hero-decoration-two,.portrait-corner-mark,.hero .accent-text::after{
     animation:none!important
   }
-  .motion-replay{display:none!important}
+  /* Keep the user-initiated replay available even with reduced motion. */
+  .motion-replay{animation:none!important}
 }
 
 @media print{
