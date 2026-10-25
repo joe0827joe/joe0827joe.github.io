@@ -94,3 +94,10 @@
 - Hover 回饋僅限支援滑鼠的裝置；手機不套用桌機 Hover 效果。
 - `prefers-reduced-motion: reduce` 禁用進場動畫並顯示所有內容；無 JavaScript 或無 IntersectionObserver 時仍正常顯示所有資訊。
 - E2E 驗證：正常動態、滑動進場、降低動態、JS 關閉後內容可讀、既有跨裝置排版與私人專案保護。
+
+## Motion v2 — 可見性修正（2026/10/25）
+- 防止 CSS/JS 長時間快取：首頁採用版本參數 `styles.css?v=20261025-motion-v2` 與 `script.js?v=20261025-motion-v2`。
+- 延長首屏階梯式進場；加上可持續辨識的動態捲動提示、標題底線光暈、研究流程移動光點及低頻環境光。
+- 提供「重播動態」按鈕，訪客不需要重新整理就能觀察進場動畫；停用 JavaScript 時按鈕不顯示，頁面仍可讀。
+- Respect OS `prefers-reduced-motion`：取消循環動畫及進場效果，隱藏重播按鈕。
+- Playwright 驗證**實際 computed transform 隨時間變化**，避免只有 CSS class 名稱存在卻沒有可觀察動畫。
