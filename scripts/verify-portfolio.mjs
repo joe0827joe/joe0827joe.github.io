@@ -21,8 +21,8 @@ assert.equal(resume.experience[1].end, '2026/09');
 assert.ok(html.includes('9.2%') && html.includes('7%'));
 assert.ok(!html.includes('2023/07 – 至今'));
 assert.ok(html.includes('<body id="top">') && !html.includes('<header class="site-header" id="top">'), 'Return-to-top target must not be the sticky header');
-assert.ok(html.includes('styles.css?v=20261025-motion-v3') &&
-  html.includes('script.js?v=20261025-motion-v3'), 'New styles and scripts must bypass previously cached asset URLs');
+assert.ok(html.includes('styles.css?v=20261025-motion-v4') &&
+  html.includes('script.js?v=20261025-motion-v4'), 'New styles and scripts must bypass previously cached asset URLs');
 assert.ok(html.includes('id="motion-replay"') && html.includes('class="scroll-cue"'),
   'A discoverable visual cue and motion replay control are required');
 assert.ok(!html.includes('id="motion-replay" class="motion-replay" hidden'),
@@ -124,6 +124,14 @@ try {
   assert.equal(await desktop.locator('.diagram-connector').first().evaluate(el => getComputedStyle(el, '::before').display),
     'none', 'Research signal animation must respect reduced-motion');
 
+  assert.ok(await desktop.locator('#motion-toggle').isVisible(),
+    'A PC with reduced motion must offer an opt-in control');
+  assert.equal(await desktop.locator('#motion-toggle').getAttribute('aria-pressed'), 'false');
+  assert.match(await desktop.locator('#motion-toggle').innerText(), /開啟動態|Enable motion/);
+  assert.equal(
+    await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).animationName),
+    'none', 'OS reduced-motion preference must disable ambient loops by default');
+
   assert.ok(await desktop.locator('#motion-replay').isVisible(),
     'Motion replay must remain visible when OS prefers reduced motion');
   assert.match(await desktop.locator('#motion-replay').innerText(), /播放動態|Play animation/,
@@ -142,6 +150,28 @@ try {
     'Explicitly requested motion must visibly change the hero over time');
   await desktop.waitForTimeout(950);
   assert.equal(await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).opacity), '1');
+
+  // Desktop opt-in: emulate Windows/Edge reduced motion, not just mobile defaults.
+  await desktop.locator('#motion-toggle').click();
+  assert.equal(await desktop.locator('#motion-toggle').getAttribute('aria-pressed'), 'true');
+  assert.ok(await desktop.locator('html').evaluate(el => el.classList.contains('motion-opt-in')));
+  assert.equal(
+    await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).animationName),
+    'opted-arrow-travel', 'Explicit opt-in should restore continuous desktop effects');
+  const optedBefore = await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).transform);
+  await desktop.waitForTimeout(270);
+  const optedAfter = await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).transform);
+  assert.notEqual(optedBefore, optedAfter, 'Desktop opt-in must produce observable animation');
+  await desktop.reload({ waitUntil: 'domcontentloaded' });
+  assert.equal(await desktop.locator('#motion-toggle').getAttribute('aria-pressed'), 'true',
+    'User motion opt-in must survive a page reload');
+  assert.equal(await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).animationName),
+    'opted-arrow-travel', 'Reloaded desktop must retain motion');
+  await desktop.locator('#motion-toggle').click();
+  assert.equal(await desktop.locator('#motion-toggle').getAttribute('aria-pressed'), 'false');
+  assert.equal(await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).animationName),
+    'none', 'User must be able to turn motion off again');
+
 
 
   const reducedRevealStyles = await desktop.locator('.motion-reveal').evaluateAll(nodes =>
@@ -179,11 +209,17 @@ try {
     '1', 'Content stays visible without JavaScript');
   assert.equal(await noJavaScript.locator('#motion-replay').isVisible(), false,
     'Replay control must not be inert when scripting is disabled');
+  assert.equal(await noJavaScript.locator('#motion-toggle').isVisible(), false,
+    'Motion opt-in must not be a dead button without JavaScript');
   await noJavaScript.close();
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
   mobile.on('pageerror', err => errors.push('mobile: ' + err.message));
   await mobile.goto(pageURL, { waitUntil: 'domcontentloaded' });
+  assert.ok(await mobile.locator('#motion-toggle').isVisible(), 'Mobile retains motion controls');
+  assert.equal(await mobile.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).animationName),
+    'arrow-travel', 'Mobile motion remains enabled under its normal setting');
+
   assert.equal(await mobile.locator('#mobile-menu').isVisible(), false);
   await mobile.locator('#menu-toggle').click();
   assert.equal(await mobile.locator('#menu-toggle').getAttribute('aria-expanded'), 'true');
