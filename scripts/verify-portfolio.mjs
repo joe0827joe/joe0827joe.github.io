@@ -48,8 +48,8 @@ try {
   for (const internalLabel of ['HOW I CREATE VALUE', 'METHOD / 01—04', '沒有把研究模擬與正式導入混為一談', '職務名稱及期間依 2026 年']) {
     assert.ok(!htmlSource.includes(internalLabel), 'Internal-facing copy leaked into portfolio: ' + internalLabel);
   }
-  assert.ok(htmlSource.includes('模擬可用能損耗降低'), 'Simulation result must retain context');
-  assert.ok(htmlSource.includes('實際場域 PUE 降低'), 'Field test must retain context');
+  assert.ok(htmlSource.includes('SIMULATION') && htmlSource.includes('−9.2%'), 'Research shows the simulated outcome');
+  assert.ok(htmlSource.includes('FIELD VALIDATION') && htmlSource.includes('−7%'), 'Research shows the field-verified outcome');
   assert.match(await desktop.locator('#contact').innerText(), /工程與 AI 經驗|engineering and AI work/i);
   assert.equal(await desktop.locator('.case-result').count(), 2, 'Research contains the two validated outcome figures');
   assert.equal(await desktop.locator('#impact').count(), 0, 'Remove duplicated metric section');
