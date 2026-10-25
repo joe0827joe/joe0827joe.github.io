@@ -21,6 +21,13 @@ assert.equal(resume.experience[1].end, '2026/09');
 assert.ok(html.includes('9.2%') && html.includes('7%'));
 assert.ok(!html.includes('2023/07 – 至今'));
 assert.equal((html.match(/class="career-entry"/g) || []).length, 3);
+assert.ok(!html.includes('id="impact"') && !html.includes('id="approach"'), 'Duplicate page sections removed');
+for (const token of ['−9.2%', '−7%']) {
+  assert.equal(html.split(token).length - 1, 1, token + ' must appear once on the homepage');
+}
+for (const token of ['9.2%', '7%', '15%', '10%']) {
+  assert.equal((JSON.stringify(resume).match(new RegExp('"' + token.replace('.', '\\.') + '"', 'g')) || []).length, 1, token + ' belongs only in résumé highlights');
+}
 assert.ok(!html.includes('github.com/ematchorganization/WMS_Center'), 'Never expose private WMS source URL in portfolio');
 assert.ok(!(JSON.stringify(resume).includes('github.com/ematchorganization/WMS_Center')), 'Private WMS URL must not appear in resume PDF source');
 assert.ok(html.includes('class="project-private-note"'), 'Internal software case study should remain visible without a source link');
@@ -44,8 +51,13 @@ try {
   assert.ok(htmlSource.includes('模擬可用能損耗降低'), 'Simulation result must retain context');
   assert.ok(htmlSource.includes('實際場域 PUE 降低'), 'Field test must retain context');
   assert.match(await desktop.locator('#contact').innerText(), /工程與 AI 經驗|engineering and AI work/i);
-  assert.equal(await desktop.locator('.metric').count(), 4);
+  assert.equal(await desktop.locator('.case-result').count(), 2, 'Research contains the two validated outcome figures');
+  assert.equal(await desktop.locator('#impact').count(), 0, 'Remove duplicated metric section');
+  assert.equal(await desktop.locator('#approach').count(), 0, 'Remove repeated capability cards');
   assert.equal(await desktop.locator('.project-card').count(), 3);
+  assert.equal(await desktop.locator('.portrait-caption').count(), 0, 'No repeated portrait identity labels');
+  assert.equal(await desktop.locator('.hero-mini').count(), 0, 'No second skills list in the hero');
+  assert.equal(await desktop.locator('.case-method').count(), 0, 'Diagram is the single model pipeline illustration');
   assert.equal(await desktop.locator('.project-card').nth(1).locator('a').count(), 0, 'Private project must not link to repository');
   const portrait = desktop.locator('.portrait-showcase .portrait-photo');
   assert.equal(await portrait.count(), 1, 'Prominent hero portrait required');
