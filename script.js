@@ -179,6 +179,32 @@
     });
   }
 
+  // Replay is an explicit, testable way for visitors to see the entrance
+  // effect even if they arrived after the page initially animated.
+  const replayButton = document.getElementById('motion-replay');
+  if (replayButton) {
+    const hero = document.querySelector('.hero');
+    const replayTargets = [...document.querySelectorAll(
+      '.hero .eyebrow, .hero h1, .hero-lead, .hero-identity, ' +
+      '.hero-buttons, .portrait-showcase'
+    )];
+    const syncReplayVisibility = () => {
+      replayButton.hidden = motionPreference.matches;
+    };
+    syncReplayVisibility();
+    replayButton.addEventListener('click', () => {
+      if (motionPreference.matches || !hero) return;
+      hero.classList.add('motion-resetting');
+      for (const el of replayTargets) el.style.animation = 'none';
+      void hero.offsetWidth; // restart after style has been flushed
+      hero.classList.remove('motion-resetting');
+      for (const el of replayTargets) el.style.removeProperty('animation');
+    });
+    if (typeof motionPreference.addEventListener === 'function') {
+      motionPreference.addEventListener('change', syncReplayVisibility);
+    }
+  }
+
   const year = document.getElementById('copyright-year');
   if (year) year.textContent = String(new Date().getFullYear());
   setLanguage(preferredLanguage());
