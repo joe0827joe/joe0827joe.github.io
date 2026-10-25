@@ -126,8 +126,10 @@
     for (const section of sections) observer.observe(section);
   }
 
-  // One-time motion, automatically triggered for users without reduced-motion
-  // preference; keep the content visible when JavaScript is unavailable.
+  // Progressive enhancement: attach reveal styles before the first paint
+  // and reveal visible sections only in a subsequent animation frame.
+  // This prevents the starting and ending styles being applied in the same
+  // frame, which previously made the animation impossible to notice.
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const motionTargets = [...document.querySelectorAll(
     '.section-heading, .case-main, .case-diagram, .project-card, ' +
@@ -143,36 +145,47 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' })
     : null;
 
-  if (revealObserver) {
-    for (const target of motionTargets) {
-      target.classList.add('motion-reveal');
-      const siblings = target.matches('.project-card, .career-entry')
-        ? [...target.parentElement.children].filter(el => el.matches('.project-card, .career-entry'))
-        : [];
-      target.style.setProperty('--reveal-delay',
-        ((siblings.length ? siblings.indexOf(target) % 3 : 0) * 90) + 'ms');
-    }
+  for (const target of motionTargets) {
+    target.classList.add('motion-reveal');
+    const siblings = target.matches('.project-card, .career-entry')
+      ? [...target.parentElement.children].filter(el => el.matches('.project-card, .career-entry'))
+      : [];
+    target.style.setProperty('--reveal-delay',
+      ((siblings.length ? siblings.indexOf(target) % 3 : 0) * 90) + 'ms');
   }
 
-  const syncMotion = () => {
+  let scheduledReveal = 0;
+  function syncMotion() {
+    if (scheduledReveal) cancelAnimationFrame(scheduledReveal);
     const enabled = !motionPreference.matches && !!revealObserver;
     document.documentElement.classList.toggle('motion-enabled', enabled);
+
     for (const target of motionTargets) {
-      if (!enabled) {
-        target.classList.add('is-visible');
-        revealObserver?.unobserve(target);
-        continue;
-      }
-      const bounds = target.getBoundingClientRect();
-      if (bounds.top < window.innerHeight * .92 || bounds.bottom < 0) {
-        target.classList.add('is-visible');
-        revealObserver.observe(target);
-      } else {
-        target.classList.remove('is-visible');
-        revealObserver.observe(target);
-      }
+      revealObserver?.unobserve(target);
+      if (!enabled) target.classList.add('is-visible');
+      else target.classList.remove('is-visible');
     }
-  };
+    if (!enabled) return;
+
+    // Deliberately separate the initial hidden state and visible state.
+    // This is required for a CSS transition to actually run on page entry.
+    scheduledReveal = requestAnimationFrame(() => {
+      scheduledReveal = requestAnimationFrame(() => {
+        for (const target of motionTargets) {
+          const bounds = target.getBoundingClientRect();
+          if (bounds.bottom < 0) {
+            // Already scrolled past this section: do not hide earlier content.
+            target.classList.add('is-visible');
+          } else if (bounds.top < window.innerHeight * .92) {
+            target.classList.add('is-visible');
+          } else {
+            revealObserver.observe(target);
+          }
+        }
+        scheduledReveal = 0;
+      });
+    });
+  }
 
   syncMotion();
   if (typeof motionPreference.addEventListener === 'function')
