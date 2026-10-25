@@ -86,3 +86,11 @@
 - 保留 GitHub Repository / GitHub Pages 的同網域圖片來源：`assets/joe-hsu-profile.webp`，不改用 GitHub Raw URL。
 - 使用原選定肖像（1145 × 1374）重新以 WebP quality 82 編碼；原本檔案僅 4.6 KB，更新後約 97 KB，並加版本參數避免瀏覽器繼續快取舊照片。
 - CI 增加圖片解析度與檔案大小下限、桌機／手機回頂端 E2E，避免低畫質或捲動問題回歸。
+
+## 2026/10/25 — Subtle motion design
+
+- 首屏使用短暫的文字階梯式淡入與人像進場，完成後維持靜態，不讓肖像持續晃動。
+- 研究、作品與經歷採 IntersectionObserver 單次進場；只使用 `opacity`／`transform`，不引入額外動畫套件。
+- Hover 回饋僅限支援滑鼠的裝置；手機不套用桌機 Hover 效果。
+- `prefers-reduced-motion: reduce` 禁用進場動畫並顯示所有內容；無 JavaScript 或無 IntersectionObserver 時仍正常顯示所有資訊。
+- E2E 驗證：正常動態、滑動進場、降低動態、JS 關閉後內容可讀、既有跨裝置排版與私人專案保護。

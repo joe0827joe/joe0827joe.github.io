@@ -126,6 +126,59 @@
     for (const section of sections) observer.observe(section);
   }
 
+  // Lightweight, one-time entry animation. Content remains visible when JS,
+  // IntersectionObserver or animation support is unavailable.
+  // Respect reduced-motion at startup and when the setting changes.
+  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const motionTargets = [
+    ...document.querySelectorAll(
+      '.section-heading, .case-main, .case-diagram, .project-card, ' +
+      '.career-entry, .experience-aside, .contact-layout'
+    )
+  ];
+  const canReveal = 'IntersectionObserver' in window && !motionPreference.matches;
+  if (canReveal && motionTargets.length) {
+    const revealObserver = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+    for (const [index, target] of motionTargets.entries()) {
+      target.classList.add('motion-reveal');
+      const siblings = target.matches('.project-card, .career-entry')
+        ? [...target.parentElement.children].filter(el => el.matches('.project-card, .career-entry'))
+        : [];
+      const stagger = siblings.length ? siblings.indexOf(target) % 3 : 0;
+      target.style.setProperty('--reveal-delay', (stagger * 90) + 'ms');
+      revealObserver.observe(target);
+    }
+    document.documentElement.classList.add('motion-enabled');
+
+    const revealAll = () => {
+      if (!motionPreference.matches) return;
+      for (const target of motionTargets) {
+        target.classList.add('is-visible');
+        revealObserver.unobserve(target);
+      }
+      document.documentElement.classList.remove('motion-enabled');
+    };
+    if (typeof motionPreference.addEventListener === 'function') {
+      motionPreference.addEventListener('change', revealAll);
+    }
+    // Initial navigation may open the page at an anchor rather than at the top.
+    requestAnimationFrame(() => {
+      for (const target of motionTargets) {
+        const bounds = target.getBoundingClientRect();
+        if (bounds.top < window.innerHeight && bounds.bottom > 0) {
+          target.classList.add('is-visible');
+          revealObserver.unobserve(target);
+        }
+      }
+    });
+  }
+
   const year = document.getElementById('copyright-year');
   if (year) year.textContent = String(new Date().getFullYear());
   setLanguage(preferredLanguage());

@@ -47,6 +47,19 @@ try {
   await desktop.goto(pageURL, { waitUntil: 'domcontentloaded' });
   await desktop.evaluate(() => document.fonts.ready);
   assert.match(await desktop.locator('#hero-title').innerText(), /以數據驗證成果|Measure the outcome/);
+  // Motion should feel subtle on normal devices, without hiding page content.
+  await desktop.waitForFunction(() => document.documentElement.classList.contains('motion-enabled'));
+  assert.match(
+    await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).animationName),
+    /hero-arrive/,
+    'Hero has a real CSS entrance animation'
+  );
+  assert.equal(await desktop.locator('.project-card.motion-reveal').count(), 3);
+  await desktop.locator('.project-card').first().scrollIntoViewIfNeeded();
+  await desktop.waitForFunction(() => document.querySelector('.project-card')?.classList.contains('is-visible'));
+  await desktop.waitForFunction(() => Number(getComputedStyle(document.querySelector('.project-card')).opacity) >= 0.98);
+  assert.ok(await desktop.locator('.project-card').first().isVisible(), 'Revealed project remains readable');
+
   const htmlSource = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   for (const internalLabel of ['HOW I CREATE VALUE', 'METHOD / 01—04', '沒有把研究模擬與正式導入混為一談', '職務名稱及期間依 2026 年']) {
     assert.ok(!htmlSource.includes(internalLabel), 'Internal-facing copy leaked into portfolio: ' + internalLabel);
@@ -71,6 +84,18 @@ try {
   assert.equal(await desktop.locator('.career-entry').count(), 3);
   assert.equal(await desktop.locator('h1').count(), 1, 'One semantic H1');
   await desktop.emulateMedia({ reducedMotion: 'reduce' });
+  // Accessible reduced motion must immediately remove animation and never
+  // leave lower-page elements translucent or offset offscreen.
+  assert.equal(
+    await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).animationName),
+    'none', 'No hero animation when reduced-motion is requested'
+  );
+  const reducedRevealStyles = await desktop.locator('.motion-reveal').evaluateAll(nodes =>
+    nodes.map(el => ({ opacity: getComputedStyle(el).opacity, transform: getComputedStyle(el).transform }))
+  );
+  assert.ok(reducedRevealStyles.every(s => s.opacity === '1' && s.transform === 'none'),
+    'Reduced-motion content should be fully visible and stationary');
+
   await desktop.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
   await desktop.waitForFunction(() => window.scrollY > 500);
   await desktop.locator('.site-footer .back-to-top').click();
@@ -93,6 +118,12 @@ try {
   assert.ok((await desktop.locator('#resume-download').getAttribute('href')).endsWith('_EN.pdf'));
   await desktop.locator('[data-language="zh"]').click();
   assert.ok((await desktop.locator('#resume-download').getAttribute('href')).endsWith('_ZH.pdf'));
+
+  const noJavaScript = await browser.newPage({ viewport: { width: 1280, height: 800 }, javaScriptEnabled: false });
+  await noJavaScript.goto(pageURL, { waitUntil: 'load' });
+  assert.equal(await noJavaScript.locator('.project-card').first().evaluate(el => getComputedStyle(el).opacity),
+    '1', 'Content stays visible without JavaScript');
+  await noJavaScript.close();
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
   mobile.on('pageerror', err => errors.push('mobile: ' + err.message));

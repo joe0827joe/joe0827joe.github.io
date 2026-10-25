@@ -337,6 +337,94 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
   .contact-email{padding:20px 40px 20px 17px}
 }
 
+/* Subtle editorial motion: transform/opacity only, never blocking content. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes hero-arrive {
+    from { opacity: 0; transform: translate3d(0, 18px, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+  @keyframes portrait-arrive {
+    from { opacity: 0; transform: translate3d(0, 16px, 0) scale(.975); }
+    to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  }
+  .hero .eyebrow,
+  .hero h1,
+  .hero-lead,
+  .hero-identity,
+  .hero-buttons {
+    animation: hero-arrive 680ms cubic-bezier(.22, 1, .36, 1) both;
+  }
+  .hero .eyebrow { animation-delay: 50ms; }
+  .hero h1 { animation-delay: 130ms; }
+  .hero-lead { animation-delay: 215ms; }
+  .hero-identity { animation-delay: 285ms; }
+  .hero-buttons { animation-delay: 360ms; }
+  .portrait-showcase { animation: portrait-arrive 880ms cubic-bezier(.22, 1, .36, 1) 190ms both; }
+
+  /* Enabled only after script.js attaches IntersectionObserver.
+     Without JavaScript, the site is always fully readable. */
+  .motion-enabled .motion-reveal {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+    transition:
+      opacity 620ms ease var(--reveal-delay, 0ms),
+      transform 720ms cubic-bezier(.22, 1, .36, 1) var(--reveal-delay, 0ms);
+  }
+  .motion-enabled .motion-reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .portrait-mat { overflow: hidden; }
+  .portrait-photo { transition: transform 600ms cubic-bezier(.22, 1, .36, 1); }
+  .portrait-frame:hover .portrait-photo { transform: scale(1.03); }
+
+  .project-card { position: relative; }
+  .project-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--mint));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 310ms ease;
+  }
+  .project-card:hover::before,
+  .project-card:focus-within::before { transform: scaleX(1); }
+  .motion-enabled .project-card.motion-reveal.is-visible:hover {
+    transform: translate3d(0, -5px, 0);
+  }
+  .project-link > span:last-child,
+  .case-link > span:last-child,
+  .aside-link {
+    transition: transform 240ms ease, color 240ms ease;
+  }
+  .project-link:hover > span:last-child,
+  .case-link:hover > span:last-child { transform: translateX(4px); }
+
+  .case-result { transition: background 250ms ease, border-color 250ms ease; }
+  .case-result:hover { background: #e8f6ee; border-color: #abdcca; }
+  .career-entry .timeline-marker { transition: box-shadow 240ms ease, background 240ms ease; }
+  .career-entry:hover .timeline-marker {
+    background: #14aa90;
+    box-shadow: 0 0 0 8px #d4f0e5;
+  }
+}
+
+/* Print and OS accessibility settings disable reveals and entrance effects. */
+@media (prefers-reduced-motion: reduce) {
+  .motion-reveal, .hero .eyebrow, .hero h1, .hero-lead,
+  .hero-identity, .hero-buttons, .portrait-showcase {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 @media(prefers-reduced-motion:reduce){
  html{scroll-behavior:auto}
  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
