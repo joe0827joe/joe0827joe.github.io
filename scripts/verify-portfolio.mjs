@@ -21,8 +21,8 @@ assert.equal(resume.experience[1].end, '2026/09');
 assert.ok(html.includes('9.2%') && html.includes('7%'));
 assert.ok(!html.includes('2023/07 – 至今'));
 assert.ok(html.includes('<body id="top">') && !html.includes('<header class="site-header" id="top">'), 'Return-to-top target must not be the sticky header');
-assert.ok(html.includes('styles.css?v=20261025-hero-v5') &&
-  html.includes('script.js?v=20261025-hero-v5'), 'New styles and scripts must bypass previously cached asset URLs');
+assert.ok(html.includes('styles.css?v=20261025-landing-v6') &&
+  html.includes('script.js?v=20261025-landing-v6'), 'New styles and scripts must bypass previously cached asset URLs');
 assert.ok(!/id="motion-(replay|toggle|preference-note)"/.test(html),
   'Portfolio should never display developer-facing animation controls');
 for (const snippet of [
@@ -56,6 +56,37 @@ for (const href of ['resume.html', 'Joe_Hsu_Resume_ZH.pdf', 'Joe_Hsu_Resume_EN.p
 const browser = await chromium.launch({ headless: true });
 const errors = [];
 try {
+  // The shared ChatGPT link accidentally included #case-study and skipped
+  // the first-screen intro. Only that tracked homepage link is normalized.
+  const trackedLanding = await browser.newPage({
+    viewport: { width: 1440, height: 900 }, reducedMotion: 'no-preference'
+  });
+  await trackedLanding.goto(pageURL + '?utm_source=chatgpt.com#case-study', { waitUntil: 'domcontentloaded' });
+  await trackedLanding.waitForTimeout(120);
+  assert.equal(await trackedLanding.evaluate(() => location.hash), '',
+    'ChatGPT-shared homepage link should discard accidental #case-study');
+  assert.ok(await trackedLanding.evaluate(() => window.scrollY <= 2),
+    'ChatGPT-shared link must start at hero, not the research case study');
+  assert.ok(await trackedLanding.locator('#hero-title').isVisible(),
+    'Engineering introduction must be visible at first load');
+  const heroMotionStart = await trackedLanding.locator('#hero-title').evaluate(el =>
+    getComputedStyle(el).transform
+  );
+  await trackedLanding.waitForTimeout(300);
+  const heroMotionEnd = await trackedLanding.locator('#hero-title').evaluate(el =>
+    getComputedStyle(el).transform
+  );
+  assert.notEqual(heroMotionStart, heroMotionEnd,
+    'Hero should visibly move after opening the normalized desktop landing page');
+  await trackedLanding.close();
+
+  const directCase = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  await directCase.goto(pageURL + '#case-study', { waitUntil: 'load' });
+  await directCase.waitForFunction(() => window.scrollY > 350);
+  assert.equal(await directCase.evaluate(() => location.hash), '#case-study',
+    'Intentional direct deep links must still work');
+  await directCase.close();
+
   const desktop = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
   desktop.on('pageerror', err => errors.push('desktop: ' + err.message));
   await desktop.goto(pageURL, { waitUntil: 'domcontentloaded' });
@@ -82,6 +113,10 @@ try {
     getComputedStyle(el, '::before').animationName
   );
   assert.equal(diagramFlow, 'data-travel', 'Research diagram must show moving signal flow');
+  const preScrollOpacity = await desktop.locator('.project-card').first().evaluate(el =>
+    Number(getComputedStyle(el).opacity)
+  );
+  assert.ok(preScrollOpacity < 0.2, 'Below-the-fold project card should start hidden before reveal');
   await desktop.locator('.project-card').first().scrollIntoViewIfNeeded();
   await desktop.waitForFunction(() => document.querySelector('.project-card')?.classList.contains('is-visible'));
   await desktop.waitForFunction(() => Number(getComputedStyle(document.querySelector('.project-card')).opacity) >= 0.98);
