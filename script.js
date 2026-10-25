@@ -158,6 +158,7 @@
   function syncMotion() {
     if (scheduledReveal) cancelAnimationFrame(scheduledReveal);
     const enabled = !motionPreference.matches && !!revealObserver;
+    document.documentElement.classList.remove('motion-ready');
     document.documentElement.classList.toggle('motion-enabled', enabled);
 
     for (const target of motionTargets) {
@@ -171,6 +172,7 @@
     // This is required for a CSS transition to actually run on page entry.
     scheduledReveal = requestAnimationFrame(() => {
       scheduledReveal = requestAnimationFrame(() => {
+        document.documentElement.classList.add('motion-ready');
         for (const target of motionTargets) {
           const bounds = target.getBoundingClientRect();
           if (bounds.bottom < 0) {
