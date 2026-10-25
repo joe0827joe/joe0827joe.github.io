@@ -366,6 +366,10 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
   .motion-enabled .motion-reveal {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
+  }
+  /* Only animate when the hidden initial state has already been painted.
+     Otherwise CSS can animate cards from visible -> hidden at startup. */
+  .motion-enabled.motion-ready .motion-reveal {
     transition:
       opacity 620ms ease var(--reveal-delay, 0ms),
       transform 720ms cubic-bezier(.22, 1, .36, 1) var(--reveal-delay, 0ms);
@@ -541,6 +545,8 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
   .diagram-connector:nth-of-type(6)::before{animation-delay:.8s}
   .motion-enabled .motion-reveal{
     transform:translate3d(0,34px,0);
+  }
+  .motion-enabled.motion-ready .motion-reveal{
     transition:
       opacity 850ms ease var(--reveal-delay,0ms),
       transform 1050ms cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms);
