@@ -179,30 +179,61 @@
     });
   }
 
-  // Replay is an explicit, testable way for visitors to see the entrance
-  // effect even if they arrived after the page initially animated.
+  // Respect reduced-motion for AUTOMATIC movement, but keep an explicit
+  // user-controlled replay available even when the OS prefers less motion.
   const replayButton = document.getElementById('motion-replay');
+  const motionNote = document.getElementById('motion-preference-note');
   if (replayButton) {
     const hero = document.querySelector('.hero');
     const replayTargets = [...document.querySelectorAll(
       '.hero .eyebrow, .hero h1, .hero-lead, .hero-identity, ' +
       '.hero-buttons, .portrait-showcase'
     )];
-    const syncReplayVisibility = () => {
-      replayButton.hidden = motionPreference.matches;
+    const replayLabel = replayButton.querySelector('[data-zh][data-en]');
+    const syncReplayState = () => {
+      const reduced = motionPreference.matches;
+      replayButton.hidden = false;
+      if (motionNote) motionNote.hidden = !reduced;
+      if (replayLabel) {
+        replayLabel.dataset.zh = reduced ? '播放動態' : '重播動態';
+        replayLabel.dataset.en = reduced ? 'Play animation' : 'Replay animation';
+        replayLabel.textContent = language === 'zh'
+          ? replayLabel.dataset.zh : replayLabel.dataset.en;
+      }
+      replayButton.setAttribute('aria-label', language === 'zh'
+        ? (reduced ? '手動播放一次動畫' : '重播首頁進場動畫')
+        : (reduced ? 'Play entrance animation once' : 'Replay hero entrance animation'));
     };
-    syncReplayVisibility();
+    syncReplayState();
     replayButton.addEventListener('click', () => {
-      if (motionPreference.matches || !hero) return;
-      hero.classList.add('motion-resetting');
-      for (const el of replayTargets) el.style.animation = 'none';
-      void hero.offsetWidth; // restart after style has been flushed
-      hero.classList.remove('motion-resetting');
-      for (const el of replayTargets) el.style.removeProperty('animation');
+      if (!hero || !replayTargets.length || typeof Element.prototype.animate !== 'function') return;
+      // Prevent existing CSS hero animations from competing with an explicit
+      // Web Animations API replay. The override remains after manual replay.
+      hero.classList.add('manual-replay');
+      for (const el of replayTargets) {
+        for (const animation of el.getAnimations()) animation.cancel();
+      }
+      for (const [i, el] of replayTargets.entries()) {
+        const animation = el.animate(
+          [
+            { opacity: 0, transform: 'translate3d(0, 32px, 0)' },
+            { opacity: 1, transform: 'translate3d(0, 0, 0)' }
+          ],
+          {
+            duration: 1000,
+            delay: i * 125,
+            easing: 'cubic-bezier(.22, 1, .36, 1)',
+            fill: 'both'
+          }
+        );
+        animation.finished.then(() => animation.cancel()).catch(() => {});
+      }
     });
     if (typeof motionPreference.addEventListener === 'function') {
-      motionPreference.addEventListener('change', syncReplayVisibility);
+      motionPreference.addEventListener('change', syncReplayState);
     }
+    // setLanguage initializes after this setup; sync on language changes too.
+    for (const btn of langButtons) btn.addEventListener('click', syncReplayState);
   }
 
   const year = document.getElementById('copyright-year');
