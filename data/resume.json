@@ -18,8 +18,8 @@
     "github": "https://github.com/joe0827joe",
     "portfolio": "https://joe0827joe.github.io/",
     "summary": {
-      "zh": "北科大自動化科技碩士，具機械工程背景，現任廣達電腦 AI 數據工程師，參與設備時序資料盤點與 Machine Learning 應用可行性評估。研究所使用 DE-MRBFNN 代理模型與 NSGA-III 進行資料中心冷卻最佳化，模擬可用能損耗降低 9.2%、實際場域 PUE 降低 7%。另具 Python 營運自動化、AOI 模型評估及車用 LED 研發驗證經驗。",
-      "en": "AI Data Engineer at Quanta with an M.S. in Automation Technology and a mechanical engineering background. I assess equipment time-series data and ML feasibility. My data-center research combined DE-MRBFNN and NSGA-III, reducing simulated exergy loss by 9.2% and field PUE by 7%. I also bring Python automation, AOI model evaluation, and automotive LED R&D experience."
+      "zh": "北科大自動化科技碩士，具機械工程背景。現任廣達電腦 AI 數據工程師，評估設備時序資料與 Machine Learning 應用可行性；具資料中心冷卻最佳化研究、Python 營運自動化、AOI 模型評估及車用 LED 研發驗證經驗。",
+      "en": "AI Data Engineer at Quanta with an M.S. in Automation Technology and a mechanical engineering background. Experienced in equipment time-series assessment, ML feasibility, data-center cooling research, Python automation, AOI evaluation and automotive LED R&D."
     }
   },
   "skills": [
@@ -184,12 +184,12 @@
       "link": null,
       "bullets": [
         {
-          "zh": "以 DE-MRBFNN 建立代理模型，結合 NSGA-III 多目標最佳化處理氣冷單元式資料中心冷卻參數",
-          "en": "Built a DE-MRBFNN surrogate model with NSGA-III multi-objective optimization for modular data-center cooling"
+          "zh": "以 DE-MRBFNN 建立冷卻參數代理模型，結合 NSGA-III 尋找多目標較佳解。",
+          "en": "Developed a DE-MRBFNN cooling surrogate and used NSGA-III for multi-objective optimization."
         },
         {
-          "zh": "經 CFD 與場域驗證：模擬可用能損耗降低 9.2%、實際場域 PUE 降低 7%",
-          "en": "Validated via CFD and field tests: 9.2% lower simulated exergy loss and 7% lower field PUE"
+          "zh": "使用 CFD 模擬與實際場域測試，分別驗證模型與冷卻效益。",
+          "en": "Evaluated the cooling configurations through CFD simulation and field testing."
         }
       ]
     },
@@ -245,11 +245,7 @@
         "en": "National Taipei University of Technology"
       },
       "start": "2019/08",
-      "end": "2021/09",
-      "note": {
-        "zh": "資料中心冷卻 DE-MRBFNN 代理模型與 NSGA-III 最佳化；模擬可用能損耗降低 9.2%、實際場域 PUE 降低 7%",
-        "en": "DE-MRBFNN surrogate modeling and NSGA-III optimization for data-center cooling; 9.2% lower simulated exergy loss and 7% lower field PUE"
-      }
+      "end": "2021/09"
     },
     {
       "degree": {
@@ -261,11 +257,7 @@
         "en": "National Taipei University of Technology"
       },
       "start": "2015/09",
-      "end": "2019/06",
-      "note": {
-        "zh": "機構與製造基礎，支撐後續電／光／熱與系統整合跨域工作",
-        "en": "Mechanical/manufacturing foundation supporting later electrical, optical, thermal, and system-integration work"
-      }
+      "end": "2019/06"
     }
   ],
   "highlights": [
