@@ -21,6 +21,11 @@ assert.equal(resume.experience[1].end, '2026/09');
 assert.ok(html.includes('9.2%') && html.includes('7%'));
 assert.ok(!html.includes('2023/07 – 至今'));
 assert.ok(html.includes('<body id="top">') && !html.includes('<header class="site-header" id="top">'), 'Return-to-top target must not be the sticky header');
+assert.ok(html.includes('styles.css?v=20261025-motion-v2') &&
+  html.includes('script.js?v=20261025-motion-v2'), 'New styles and scripts must bypass previously cached asset URLs');
+assert.ok(html.includes('id="motion-replay"') && html.includes('class="scroll-cue"'),
+  'A discoverable visual cue and motion replay control are required');
+
 const portraitAsset = path.join(root, 'assets/joe-hsu-profile.webp');
 assert.ok(fs.statSync(portraitAsset).size >= 65000, 'Portrait was overcompressed: expected at least 65 KB');
 assert.equal((html.match(/class="career-entry"/g) || []).length, 3);
@@ -55,6 +60,25 @@ try {
     'Hero has a real CSS entrance animation'
   );
   assert.equal(await desktop.locator('.project-card.motion-reveal').count(), 3);
+  assert.equal(await desktop.locator('.scroll-cue').count(), 1);
+  assert.ok(await desktop.locator('#motion-replay').isVisible(), 'Replay must be discoverable without scrolling');
+  assert.equal(
+    await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).animationName),
+    'arrow-travel', 'There must be a repeating motion hint visible after the entrance is over');
+  const cueBefore = await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).transform);
+  await desktop.waitForTimeout(250);
+  const cueAfter = await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).transform);
+  assert.notEqual(cueBefore, cueAfter, 'Scroll cue should visibly move over time');
+  await desktop.locator('#motion-replay').click();
+  const titleStart = await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).transform);
+  await desktop.waitForTimeout(280);
+  const titleLater = await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).transform);
+  assert.notEqual(titleStart, titleLater, 'Replay must restart a measurable hero entrance');
+
+  const diagramFlow = await desktop.locator('.diagram-connector').first().evaluate(el =>
+    getComputedStyle(el, '::before').animationName
+  );
+  assert.equal(diagramFlow, 'data-travel', 'Research diagram must show moving signal flow');
   await desktop.locator('.project-card').first().scrollIntoViewIfNeeded();
   await desktop.waitForFunction(() => document.querySelector('.project-card')?.classList.contains('is-visible'));
   await desktop.waitForFunction(() => Number(getComputedStyle(document.querySelector('.project-card')).opacity) >= 0.98);
@@ -90,6 +114,11 @@ try {
     await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).animationName),
     'none', 'No hero animation when reduced-motion is requested'
   );
+  assert.equal(await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).animationName),
+    'none', 'Repeating scroll cue must respect reduced-motion');
+  assert.equal(await desktop.locator('.diagram-connector').first().evaluate(el => getComputedStyle(el, '::before').display),
+    'none', 'Research signal animation must respect reduced-motion');
+
   const reducedRevealStyles = await desktop.locator('.motion-reveal').evaluateAll(nodes =>
     nodes.map(el => ({ opacity: getComputedStyle(el).opacity, transform: getComputedStyle(el).transform }))
   );
