@@ -25,8 +25,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261025-motion-v2">
+  <script src="script.js?v=20261025-motion-v2" defer></script>
 </head>
 <body id="top">
   <a class="skip-link" href="#main"><span data-zh="跳至主要內容" data-en="Skip to main content">跳至主要內容</span></a>
@@ -68,7 +68,17 @@
             <a href="#case-study" class="btn btn-primary"><span data-zh="查看研究成果" data-en="Explore research results">查看研究成果</span> <span aria-hidden="true">↗</span></a>
             <a href="Joe_Hsu_Resume_ZH.pdf" id="resume-download" class="btn btn-outline" download><span data-zh="下載一頁履歷" data-en="Download résumé">下載一頁履歷</span> <span aria-hidden="true">↓</span></a>
           </div>
-          
+          <div class="hero-motion-tools">
+            <a class="scroll-cue" href="#case-study">
+              <span class="scroll-cue-icon" aria-hidden="true"><span></span></span>
+              <span data-zh="向下探索" data-en="Scroll to explore">向下探索</span>
+              <span class="scroll-cue-arrow" aria-hidden="true">↓</span>
+            </a>
+            <button type="button" id="motion-replay" class="motion-replay" hidden>
+              <span aria-hidden="true">↻</span>
+              <span data-zh="重播動態" data-en="Replay motion">重播動態</span>
+            </button>
+          </div>
         </div>
         <aside class="hero-visual portrait-showcase" aria-label="Joe Hsu professional portrait">
           <div class="portrait-frame">
