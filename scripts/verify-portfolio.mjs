@@ -60,6 +60,7 @@ try {
   for (const anchor of anchors) {
     assert.ok(await desktop.locator('[id="' + anchor.slice(1) + '"]').count(), 'Missing anchor: ' + anchor);
   }
+  await desktop.locator('[data-language="zh"]').click();
   await desktop.screenshot({ path: path.join(outDir, 'desktop-zh.png'), fullPage: true, animations: 'disabled' });
   await desktop.locator('[data-language="en"]').click();
   assert.equal(await desktop.locator('html').getAttribute('lang'), 'en');
@@ -129,6 +130,8 @@ try {
   await mobile.locator('[data-language="en"]').click();
   await mobile.evaluate(() => scrollTo(0, 0));
   await mobile.screenshot({ path: path.join(outDir, 'mobile-en.png'), fullPage: true, animations: 'disabled' });
+  await mobile.locator('[data-language="zh"]').click();
+  await mobile.screenshot({ path: path.join(outDir, 'mobile-zh.png'), fullPage: true, animations: 'disabled' });
   assert.deepEqual(errors, [], 'No browser JavaScript errors');
   console.log('Portfolio E2E OK: desktop/mobile, bilingual, navigation, assets, 104 facts, no horizontal overflow.');
 } finally {
