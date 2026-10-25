@@ -416,7 +416,7 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
 
 /* Print and OS accessibility settings disable reveals and entrance effects. */
 @media (prefers-reduced-motion: reduce) {
-  .motion-reveal {
+  html:not(.motion-opt-in) .motion-reveal {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
@@ -424,8 +424,9 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
   }
   /* Do not use !important on hero opacity/transform: an explicit WAAPI
      replay must be able to animate once after the user's direct click. */
-  .hero .eyebrow, .hero h1, .hero-lead,
-  .hero-identity, .hero-buttons, .portrait-showcase {
+  html:not(.motion-opt-in) .hero .eyebrow, html:not(.motion-opt-in) .hero h1,
+  html:not(.motion-opt-in) .hero-lead, html:not(.motion-opt-in) .hero-identity,
+  html:not(.motion-opt-in) .hero-buttons, html:not(.motion-opt-in) .portrait-showcase {
     opacity: 1;
     transform: none;
     animation: none !important;
@@ -435,7 +436,7 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
 
 @media(prefers-reduced-motion:reduce){
  html{scroll-behavior:auto}
- *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+ html:not(.motion-opt-in) *,html:not(.motion-opt-in) *::before,html:not(.motion-opt-in) *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
 /* Motion v2 — visually discoverable, professional, and genuinely continuous. */
@@ -460,7 +461,7 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
   border-radius:6px;background:var(--mint)
 }
 .scroll-cue-arrow{display:inline-block;font-size:1.04rem;line-height:1}
-.motion-replay{
+.motion-replay,.motion-toggle{
   display:inline-flex;align-items:center;justify-content:center;gap:7px;
   border:1px solid rgba(172,239,217,.32);
   background:rgba(210,255,240,.055);
@@ -468,8 +469,8 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
   padding:7px 12px;font-size:.72rem;line-height:1.5;font-weight:700;
   transition:background-color .2s,border-color .2s;
 }
-.motion-replay[hidden]{display:none!important}
-.motion-replay:hover{background:rgba(210,255,240,.16);border-color:var(--mint)}
+.motion-replay[hidden],.motion-toggle[hidden]{display:none!important}
+.motion-replay:hover,.motion-toggle:hover{background:rgba(210,255,240,.16);border-color:var(--mint)}
 .hero .accent-text{display:inline-block;position:relative}
 .hero .accent-text::after{
   content:"";position:absolute;left:0;right:0;bottom:-.11em;height:3px;
@@ -562,16 +563,112 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
 }
 
 @media (prefers-reduced-motion: reduce){
-  .hero .accent-text::after{transform:scaleX(1);opacity:1}
-  .scroll-cue-icon>span{transform:translateX(-50%);opacity:1}
-  .scroll-cue-arrow{transform:none;opacity:1}
-  .diagram-connector::before{display:none}
-  .scroll-cue-icon>span,.scroll-cue-arrow,.hero-decoration-one,
-  .hero-decoration-two,.portrait-corner-mark,.hero .accent-text::after{
+  html:not(.motion-opt-in) .hero .accent-text::after{transform:scaleX(1);opacity:1}
+  html:not(.motion-opt-in) .scroll-cue-icon>span{transform:translateX(-50%);opacity:1}
+  html:not(.motion-opt-in) .scroll-cue-arrow{transform:none;opacity:1}
+  html:not(.motion-opt-in) .diagram-connector::before{display:none}
+  html:not(.motion-opt-in) .scroll-cue-icon>span, html:not(.motion-opt-in) .scroll-cue-arrow,
+  html:not(.motion-opt-in) .hero-decoration-one, html:not(.motion-opt-in) .hero-decoration-two,
+  html:not(.motion-opt-in) .portrait-corner-mark, html:not(.motion-opt-in) .hero .accent-text::after{
     animation:none!important
   }
   /* Keep the user-initiated replay available even with reduced motion. */
   .motion-replay{animation:none!important}
+}
+
+
+/* Motion preference: OS remains the default. A deliberate opt-in overrides
+   reduced motion on this portfolio only, without changing Windows settings. */
+.motion-toggle[aria-pressed="true"]{
+  background:rgba(98,234,187,.16);
+  border-color:rgba(157,255,221,.65);
+  color:#e7fff5;
+}
+.motion-toggle:focus-visible,.motion-replay:focus-visible{
+  outline:2px solid #b6f7dd;outline-offset:3px;
+}
+html.motion-forced-off *,
+html.motion-forced-off *::before,
+html.motion-forced-off *::after{
+  animation:none!important;
+  transition-duration:0ms!important;
+}
+html.motion-forced-off .motion-reveal{
+  opacity:1!important;
+  transform:none!important;
+}
+
+/* Explicit opt-in under a reduced-motion operating-system preference. */
+@keyframes opted-hero-arrive{
+  from{opacity:0;transform:translate3d(0,28px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+@keyframes opted-portrait-arrive{
+  from{opacity:0;transform:translate3d(0,22px,0) scale(.96)}
+  to{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+@keyframes opted-arrow-travel{
+  0%,100%{transform:translateY(-2px);opacity:.42}
+  50%{transform:translateY(6px);opacity:1}
+}
+@keyframes opted-cue-travel{
+  0%,18%{transform:translate(-50%,0);opacity:1}
+  67%,100%{transform:translate(-50%,10px);opacity:0}
+}
+@keyframes opted-data-travel{
+  0%{transform:translateY(-2px);opacity:0}
+  15%,70%{opacity:1}
+  100%{transform:translateY(27px);opacity:0}
+}
+@keyframes opted-accent{
+  0%,100%{opacity:.8;box-shadow:0 0 0 rgba(118,237,196,0)}
+  50%{opacity:1;box-shadow:0 0 15px rgba(118,237,196,.48)}
+}
+
+@media (prefers-reduced-motion: reduce){
+  html.motion-opt-in{scroll-behavior:smooth}
+  html.motion-opt-in .hero .eyebrow,
+  html.motion-opt-in .hero h1,
+  html.motion-opt-in .hero-lead,
+  html.motion-opt-in .hero-identity,
+  html.motion-opt-in .hero-buttons{
+    animation:opted-hero-arrive 950ms cubic-bezier(.22,1,.36,1) both;
+  }
+  html.motion-opt-in .hero .eyebrow{animation-delay:70ms}
+  html.motion-opt-in .hero h1{animation-delay:180ms}
+  html.motion-opt-in .hero-lead{animation-delay:310ms}
+  html.motion-opt-in .hero-identity{animation-delay:420ms}
+  html.motion-opt-in .hero-buttons{animation-delay:530ms}
+  html.motion-opt-in .portrait-showcase{
+    animation:opted-portrait-arrive 1100ms cubic-bezier(.22,1,.36,1) 260ms both;
+  }
+  html.motion-opt-in .scroll-cue-arrow{
+    animation:opted-arrow-travel 1.8s ease-in-out infinite;
+  }
+  html.motion-opt-in .scroll-cue-icon>span{
+    animation:opted-cue-travel 1.8s ease-in-out infinite;
+  }
+  html.motion-opt-in .diagram-connector::before{
+    display:block;animation:opted-data-travel 2.1s ease-in-out infinite;
+  }
+  html.motion-opt-in .hero .accent-text::after{
+    transform:scaleX(1);
+    animation:opted-accent 4s ease-in-out infinite;
+  }
+  html.motion-opt-in.motion-enabled .motion-reveal{
+    opacity:0;
+    transform:translate3d(0,34px,0);
+    transition:opacity 850ms ease var(--reveal-delay,0ms),
+      transform 1050ms cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms);
+  }
+  html.motion-opt-in.motion-enabled .motion-reveal.is-visible{
+    opacity:1;transform:translate3d(0,0,0);
+  }
+}
+@media (hover:hover) and (pointer:fine){
+  html.motion-opt-in .portrait-photo{transition:transform 600ms ease}
+  html.motion-opt-in .portrait-frame:hover .portrait-photo{transform:scale(1.03)}
+  html.motion-opt-in .project-card:hover{box-shadow:0 18px 36px rgba(10,41,52,.14)}
 }
 
 @media print{
