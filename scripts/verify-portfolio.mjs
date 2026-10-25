@@ -21,14 +21,18 @@ assert.equal(resume.experience[1].end, '2026/09');
 assert.ok(html.includes('9.2%') && html.includes('7%'));
 assert.ok(!html.includes('2023/07 – 至今'));
 assert.ok(html.includes('<body id="top">') && !html.includes('<header class="site-header" id="top">'), 'Return-to-top target must not be the sticky header');
-assert.ok(html.includes('styles.css?v=20261025-motion-v4') &&
-  html.includes('script.js?v=20261025-motion-v4'), 'New styles and scripts must bypass previously cached asset URLs');
-assert.ok(html.includes('id="motion-replay"') && html.includes('class="scroll-cue"'),
-  'A discoverable visual cue and motion replay control are required');
-assert.ok(!html.includes('id="motion-replay" class="motion-replay" hidden'),
-  'Replay must not be hidden by default in HTML');
-assert.ok(html.includes('id="motion-preference-note"'),
-  'Reduced motion preference must be explained on page');
+assert.ok(html.includes('styles.css?v=20261025-hero-v5') &&
+  html.includes('script.js?v=20261025-hero-v5'), 'New styles and scripts must bypass previously cached asset URLs');
+assert.ok(!/id="motion-(replay|toggle|preference-note)"/.test(html),
+  'Portfolio should never display developer-facing animation controls');
+for (const snippet of [
+  '我不是從 AI 開始，', '而是從真實的工程問題開始。',
+  '從機械製造、車用研發，到最佳化研究、軟體自動化與工業 AI',
+  '如何把複雜的問題看清楚，找到更好的解法，並讓改善真正發生。',
+  '我相信技術的價值，不在於使用了多先進的工具',
+  '現任廣達電腦智慧工廠 AI 數據工程師',
+  '查看代表研究', '探索我的作品'
+]) assert.ok(html.includes(snippet), 'Missing user-approved hero copy: ' + snippet);
 
 
 const portraitAsset = path.join(root, 'assets/joe-hsu-profile.webp');
@@ -56,7 +60,7 @@ try {
   desktop.on('pageerror', err => errors.push('desktop: ' + err.message));
   await desktop.goto(pageURL, { waitUntil: 'domcontentloaded' });
   await desktop.evaluate(() => document.fonts.ready);
-  assert.match(await desktop.locator('#hero-title').innerText(), /以數據驗證成果|Measure the outcome/);
+  assert.match(await desktop.locator('#hero-title').innerText(), /我不是從 AI 開始|I didn't start with AI/);
   // Motion should feel subtle on normal devices, without hiding page content.
   await desktop.waitForFunction(() => document.documentElement.classList.contains('motion-enabled'));
   assert.match(
@@ -65,20 +69,14 @@ try {
     'Hero has a real CSS entrance animation'
   );
   assert.equal(await desktop.locator('.project-card.motion-reveal').count(), 3);
-  assert.equal(await desktop.locator('.scroll-cue').count(), 1);
-  assert.ok(await desktop.locator('#motion-replay').isVisible(), 'Replay must be discoverable without scrolling');
-  assert.equal(
-    await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).animationName),
-    'arrow-travel', 'There must be a repeating motion hint visible after the entrance is over');
-  const cueBefore = await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).transform);
-  await desktop.waitForTimeout(250);
-  const cueAfter = await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).transform);
-  assert.notEqual(cueBefore, cueAfter, 'Scroll cue should visibly move over time');
-  await desktop.locator('#motion-replay').click();
-  const titleStart = await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).transform);
-  await desktop.waitForTimeout(280);
-  const titleLater = await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).transform);
-  assert.notEqual(titleStart, titleLater, 'Replay must restart a measurable hero entrance');
+  assert.equal(await desktop.locator('.hero-headline-line').count(), 2);
+  assert.equal(await desktop.locator('.hero-narrative p').count(), 3);
+  assert.equal(await desktop.locator('#motion-replay, #motion-toggle, #motion-preference-note').count(), 0);
+  assert.equal(await desktop.locator('.hero-buttons a').count(), 2);
+  assert.equal(await desktop.locator('.hero-buttons a[href="#case-study"]').count(), 1);
+  assert.equal(await desktop.locator('.hero-buttons a[href="#projects"]').count(), 1);
+  const heroTitleFontSize = await desktop.locator('#hero-title').evaluate(el => parseFloat(getComputedStyle(el).fontSize));
+  assert.ok(heroTitleFontSize <= 46, 'Heading must fit beside desktop portrait without awkward wrapping');
 
   const diagramFlow = await desktop.locator('.diagram-connector').first().evaluate(el =>
     getComputedStyle(el, '::before').animationName
@@ -119,60 +117,10 @@ try {
     await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).animationName),
     'none', 'No hero animation when reduced-motion is requested'
   );
-  assert.equal(await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).animationName),
-    'none', 'Repeating scroll cue must respect reduced-motion');
-  assert.equal(await desktop.locator('.diagram-connector').first().evaluate(el => getComputedStyle(el, '::before').display),
-    'none', 'Research signal animation must respect reduced-motion');
-
-  assert.ok(await desktop.locator('#motion-toggle').isVisible(),
-    'A PC with reduced motion must offer an opt-in control');
-  assert.equal(await desktop.locator('#motion-toggle').getAttribute('aria-pressed'), 'false');
-  assert.match(await desktop.locator('#motion-toggle').innerText(), /開啟動態|Enable motion/);
-  assert.equal(
-    await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).animationName),
-    'none', 'OS reduced-motion preference must disable ambient loops by default');
-
-  assert.ok(await desktop.locator('#motion-replay').isVisible(),
-    'Motion replay must remain visible when OS prefers reduced motion');
-  assert.match(await desktop.locator('#motion-replay').innerText(), /播放動態|Play animation/,
-    'Replay should switch to manual-play label with reduced motion');
-  assert.ok(await desktop.locator('#motion-preference-note').isVisible(),
-    'Explain why automatic animation is disabled');
-  await desktop.locator('#motion-replay').click();
-  const manualActive = await desktop.locator('.hero h1').evaluate(el =>
-    el.getAnimations().some(a => a.playState === 'running')
-  );
-  assert.ok(manualActive, 'Manual Web Animations API playback must run even with reduced motion');
-  const reducedManualBefore = await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).transform);
-  await desktop.waitForTimeout(260);
-  const reducedManualAfter = await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).transform);
-  assert.notEqual(reducedManualBefore, reducedManualAfter,
-    'Explicitly requested motion must visibly change the hero over time');
-  await desktop.waitForTimeout(950);
-  assert.equal(await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).opacity), '1');
-
-  // Desktop opt-in: emulate Windows/Edge reduced motion, not just mobile defaults.
-  await desktop.locator('#motion-toggle').click();
-  assert.equal(await desktop.locator('#motion-toggle').getAttribute('aria-pressed'), 'true');
-  assert.ok(await desktop.locator('html').evaluate(el => el.classList.contains('motion-opt-in')));
-  assert.equal(
-    await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).animationName),
-    'opted-arrow-travel', 'Explicit opt-in should restore continuous desktop effects');
-  const optedBefore = await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).transform);
-  await desktop.waitForTimeout(270);
-  const optedAfter = await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).transform);
-  assert.notEqual(optedBefore, optedAfter, 'Desktop opt-in must produce observable animation');
-  await desktop.reload({ waitUntil: 'domcontentloaded' });
-  assert.equal(await desktop.locator('#motion-toggle').getAttribute('aria-pressed'), 'true',
-    'User motion opt-in must survive a page reload');
-  assert.equal(await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).animationName),
-    'opted-arrow-travel', 'Reloaded desktop must retain motion');
-  await desktop.locator('#motion-toggle').click();
-  assert.equal(await desktop.locator('#motion-toggle').getAttribute('aria-pressed'), 'false');
-  assert.equal(await desktop.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).animationName),
-    'none', 'User must be able to turn motion off again');
-
-
+  assert.equal(await desktop.locator('.diagram-connector').first().evaluate(el =>
+    getComputedStyle(el, '::before').display), 'none',
+    'Research signal should respect reduced-motion setting');
+  assert.equal(await desktop.locator('#motion-toggle, #motion-replay').count(), 0);
 
   const reducedRevealStyles = await desktop.locator('.motion-reveal').evaluateAll(nodes =>
     nodes.map(el => ({ opacity: getComputedStyle(el).opacity, transform: getComputedStyle(el).transform }))
@@ -198,28 +146,22 @@ try {
   await desktop.locator('[data-language="en"]').click();
   assert.equal(await desktop.locator('html').getAttribute('lang'), 'en');
   assert.equal(await desktop.locator('[data-language="en"]').getAttribute('aria-pressed'), 'true');
-  assert.match(await desktop.locator('#hero-title').innerText(), /Measure the outcome/);
-  assert.ok((await desktop.locator('#resume-download').getAttribute('href')).endsWith('_EN.pdf'));
+  assert.match(await desktop.locator('#hero-title').innerText(), /I didn't start with AI/);
+  assert.equal(await desktop.locator('.hero-buttons a[href="#projects"]').count(), 1);
   await desktop.locator('[data-language="zh"]').click();
-  assert.ok((await desktop.locator('#resume-download').getAttribute('href')).endsWith('_ZH.pdf'));
+  assert.equal(await desktop.locator('.header-resume').getAttribute('href'), 'resume.html');
 
   const noJavaScript = await browser.newPage({ viewport: { width: 1280, height: 800 }, javaScriptEnabled: false });
   await noJavaScript.goto(pageURL, { waitUntil: 'load' });
   assert.equal(await noJavaScript.locator('.project-card').first().evaluate(el => getComputedStyle(el).opacity),
     '1', 'Content stays visible without JavaScript');
-  assert.equal(await noJavaScript.locator('#motion-replay').isVisible(), false,
-    'Replay control must not be inert when scripting is disabled');
-  assert.equal(await noJavaScript.locator('#motion-toggle').isVisible(), false,
-    'Motion opt-in must not be a dead button without JavaScript');
+  assert.equal(await noJavaScript.locator('.hero-buttons a').count(), 2);
   await noJavaScript.close();
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
   mobile.on('pageerror', err => errors.push('mobile: ' + err.message));
   await mobile.goto(pageURL, { waitUntil: 'domcontentloaded' });
-  assert.ok(await mobile.locator('#motion-toggle').isVisible(), 'Mobile retains motion controls');
-  assert.equal(await mobile.locator('.scroll-cue-arrow').evaluate(el => getComputedStyle(el).animationName),
-    'arrow-travel', 'Mobile motion remains enabled under its normal setting');
-
+  assert.equal(await mobile.locator('#motion-toggle, #motion-replay').count(), 0);
   assert.equal(await mobile.locator('#mobile-menu').isVisible(), false);
   await mobile.locator('#menu-toggle').click();
   assert.equal(await mobile.locator('#menu-toggle').getAttribute('aria-expanded'), 'true');
@@ -227,7 +169,7 @@ try {
   await mobile.locator('#mobile-menu a[href="#projects"]').click();
   assert.equal(await mobile.locator('#mobile-menu').isVisible(), false);
   await mobile.locator('[data-language="en"]').click();
-  assert.match(await mobile.locator('#hero-title').innerText(), /Measure the outcome/);
+  assert.match(await mobile.locator('#hero-title').innerText(), /I didn't start with AI/);
   // Test more than one iPhone width, languages, and the smallest 320px viewport.
   // Global overflow:hidden can hide a bug; inspect visible text/card bounds, not just scrollWidth.
   for (const width of [320, 360, 375, 390, 430, 768, 1024]) {
@@ -237,8 +179,8 @@ try {
       const layout = await mobile.evaluate(() => {
         const vw = document.documentElement.clientWidth;
         const selectors = [
-          '.brand','.header-actions','.hero-main','.hero h1','.hero-line',
-          '.hero-lead','.hero-buttons','.portrait-showcase','.portrait-frame',
+          '.brand','.header-actions','.hero-main','.hero h1','.hero-headline-line',
+          '.hero-story','.hero-conviction','.hero-belief','.hero-buttons','.portrait-showcase','.portrait-frame',
           '.portrait-caption','.metric','.metric-label','.section-heading',
           '.value-card','.value-card h3','.case-grid','.case-main',
           '.case-diagram','.diagram-block','.case-result','.case-method',
@@ -271,6 +213,13 @@ try {
       assert.ok(layout.htmlWidth <= layout.width + 2, width + '/' + language + ': document overflows by ' + (layout.htmlWidth - layout.width));
       assert.deepEqual(layout.outliers, [], width + '/' + language + ': clipped page elements');
       assert.equal(layout.headerOverlap, false, width + '/' + language + ': navigation controls overlap');
+      const headlineLines = await mobile.locator('#hero-title').evaluate(el => {
+        const css = getComputedStyle(el);
+        return el.getBoundingClientRect().height / parseFloat(css.lineHeight);
+      });
+      assert.ok(headlineLines <= (width <= 360 ? 5.2 : 4.2),
+        width + '/' + language + ': oversized headline or awkward wrapping: ' + headlineLines);
+
     }
   }
   await mobile.setViewportSize({ width: 390, height: 844 });
