@@ -225,7 +225,7 @@
         "Data Workflow",
         "CI/CD"
       ],
-      "link": "https://github.com/ematchorganization/WMS_Center",
+      "link": null,
       "bullets": [
         {
           "zh": "針對倉儲、庫存與補貨作業設計資料流程、規則判斷、測試與系統維護機制",
