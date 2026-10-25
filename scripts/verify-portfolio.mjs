@@ -21,10 +21,15 @@ assert.equal(resume.experience[1].end, '2026/09');
 assert.ok(html.includes('9.2%') && html.includes('7%'));
 assert.ok(!html.includes('2023/07 – 至今'));
 assert.ok(html.includes('<body id="top">') && !html.includes('<header class="site-header" id="top">'), 'Return-to-top target must not be the sticky header');
-assert.ok(html.includes('styles.css?v=20261025-motion-v2') &&
-  html.includes('script.js?v=20261025-motion-v2'), 'New styles and scripts must bypass previously cached asset URLs');
+assert.ok(html.includes('styles.css?v=20261025-motion-v3') &&
+  html.includes('script.js?v=20261025-motion-v3'), 'New styles and scripts must bypass previously cached asset URLs');
 assert.ok(html.includes('id="motion-replay"') && html.includes('class="scroll-cue"'),
   'A discoverable visual cue and motion replay control are required');
+assert.ok(!html.includes('id="motion-replay" class="motion-replay" hidden'),
+  'Replay must not be hidden by default in HTML');
+assert.ok(html.includes('id="motion-preference-note"'),
+  'Reduced motion preference must be explained on page');
+
 
 const portraitAsset = path.join(root, 'assets/joe-hsu-profile.webp');
 assert.ok(fs.statSync(portraitAsset).size >= 65000, 'Portrait was overcompressed: expected at least 65 KB');
@@ -119,6 +124,26 @@ try {
   assert.equal(await desktop.locator('.diagram-connector').first().evaluate(el => getComputedStyle(el, '::before').display),
     'none', 'Research signal animation must respect reduced-motion');
 
+  assert.ok(await desktop.locator('#motion-replay').isVisible(),
+    'Motion replay must remain visible when OS prefers reduced motion');
+  assert.match(await desktop.locator('#motion-replay').innerText(), /播放動態|Play animation/,
+    'Replay should switch to manual-play label with reduced motion');
+  assert.ok(await desktop.locator('#motion-preference-note').isVisible(),
+    'Explain why automatic animation is disabled');
+  await desktop.locator('#motion-replay').click();
+  const manualActive = await desktop.locator('.hero h1').evaluate(el =>
+    el.getAnimations().some(a => a.playState === 'running')
+  );
+  assert.ok(manualActive, 'Manual Web Animations API playback must run even with reduced motion');
+  const reducedManualBefore = await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).transform);
+  await desktop.waitForTimeout(260);
+  const reducedManualAfter = await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).transform);
+  assert.notEqual(reducedManualBefore, reducedManualAfter,
+    'Explicitly requested motion must visibly change the hero over time');
+  await desktop.waitForTimeout(950);
+  assert.equal(await desktop.locator('.hero h1').evaluate(el => getComputedStyle(el).opacity), '1');
+
+
   const reducedRevealStyles = await desktop.locator('.motion-reveal').evaluateAll(nodes =>
     nodes.map(el => ({ opacity: getComputedStyle(el).opacity, transform: getComputedStyle(el).transform }))
   );
@@ -152,6 +177,8 @@ try {
   await noJavaScript.goto(pageURL, { waitUntil: 'load' });
   assert.equal(await noJavaScript.locator('.project-card').first().evaluate(el => getComputedStyle(el).opacity),
     '1', 'Content stays visible without JavaScript');
+  assert.equal(await noJavaScript.locator('#motion-replay').isVisible(), false,
+    'Replay control must not be inert when scripting is disabled');
   await noJavaScript.close();
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
