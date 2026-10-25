@@ -528,8 +528,8 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
   .scroll-cue-icon>span{animation:cue-travel 1.8s ease-in-out infinite}
   .scroll-cue-arrow{animation:arrow-travel 1.8s ease-in-out infinite}
   .diagram-connector::before{animation:data-travel 2.1s ease-in-out infinite}
-  .diagram-connector:nth-of-type(2)::before{animation-delay:.4s}
-  .diagram-connector:nth-of-type(3)::before{animation-delay:.8s}
+  .diagram-connector:nth-of-type(4)::before{animation-delay:.4s}
+  .diagram-connector:nth-of-type(6)::before{animation-delay:.8s}
   .motion-enabled .motion-reveal{
     transform:translate3d(0,34px,0);
     transition:
@@ -537,11 +537,17 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
       transform 1050ms cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms);
   }
 }
+.hero.motion-resetting .accent-text::after{animation:none!important;transform:scaleX(0);opacity:0}
+
 @media (prefers-reduced-motion: reduce){
   .hero .accent-text::after{transform:scaleX(1);opacity:1}
   .scroll-cue-icon>span{transform:translateX(-50%);opacity:1}
   .scroll-cue-arrow{transform:none;opacity:1}
   .diagram-connector::before{display:none}
+  .scroll-cue-icon>span,.scroll-cue-arrow,.hero-decoration-one,
+  .hero-decoration-two,.portrait-corner-mark,.hero .accent-text::after{
+    animation:none!important
+  }
   .motion-replay{display:none!important}
 }
 
