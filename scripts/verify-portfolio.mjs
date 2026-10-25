@@ -21,8 +21,8 @@ assert.equal(resume.experience[1].end, '2026/09');
 assert.ok(html.includes('9.2%') && html.includes('7%'));
 assert.ok(!html.includes('2023/07 – 至今'));
 assert.ok(html.includes('<body id="top">') && !html.includes('<header class="site-header" id="top">'), 'Return-to-top target must not be the sticky header');
-assert.ok(html.includes('styles.css?v=20261025-landing-v6') &&
-  html.includes('script.js?v=20261025-landing-v6'), 'New styles and scripts must bypass previously cached asset URLs');
+assert.ok(html.includes('styles.css?v=20261025-motion-v7') &&
+  html.includes('script.js?v=20261025-motion-v7'), 'New styles and scripts must bypass previously cached asset URLs');
 assert.ok(!/id="motion-(replay|toggle|preference-note)"/.test(html),
   'Portfolio should never display developer-facing animation controls');
 for (const snippet of [
@@ -86,6 +86,57 @@ try {
   assert.equal(await directCase.evaluate(() => location.hash), '#case-study',
     'Intentional direct deep links must still work');
   await directCase.close();
+
+  // Desktop regression of PR #11: explicit motion preference must survive
+  // removal of the UI buttons in PR #12, including on Windows reduced-motion.
+  const reducedContext = await browser.newContext({
+    viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce'
+  });
+  const reducedDesktop = await reducedContext.newPage();
+  await reducedDesktop.goto(pageURL, { waitUntil: 'domcontentloaded' });
+  assert.equal(await reducedDesktop.locator('#hero-title').evaluate(el =>
+    getComputedStyle(el).animationName), 'none',
+    'New users must still respect the operating-system reduced-motion default');
+  assert.equal(await reducedDesktop.locator('html').evaluate(el =>
+    el.classList.contains('motion-opt-in')), false);
+
+  await reducedDesktop.goto(pageURL + '?motion=on', { waitUntil: 'domcontentloaded' });
+  assert.equal(await reducedDesktop.evaluate(() => localStorage.getItem('joe-portfolio-motion')), 'on');
+  assert.equal(await reducedDesktop.locator('html').evaluate(el =>
+    el.classList.contains('motion-opt-in')), true);
+  await reducedDesktop.waitForFunction(() =>
+    document.documentElement.classList.contains('motion-enabled') &&
+    document.documentElement.classList.contains('motion-ready'));
+  assert.equal(await reducedDesktop.locator('#hero-title').evaluate(el =>
+    getComputedStyle(el).animationName), 'opted-hero-arrive',
+    'Explicit opt-in restores hero animation in desktop reduced-motion mode');
+  assert.equal(await reducedDesktop.locator('.diagram-connector').first().evaluate(el =>
+    getComputedStyle(el, '::before').animationName), 'opted-data-travel',
+    'Explicit opt-in restores continuous research flow on desktop');
+  const reducedStart = await reducedDesktop.locator('#hero-title').evaluate(el =>
+    getComputedStyle(el).transform);
+  await reducedDesktop.waitForTimeout(280);
+  const reducedEnd = await reducedDesktop.locator('#hero-title').evaluate(el =>
+    getComputedStyle(el).transform);
+  assert.notEqual(reducedStart, reducedEnd,
+    'Desktop motion opt-in should create measurable movement');
+
+  // The legacy setting is remembered even after the activation URL is gone.
+  await reducedDesktop.goto(pageURL, { waitUntil: 'domcontentloaded' });
+  assert.equal(await reducedDesktop.locator('html').evaluate(el =>
+    el.classList.contains('motion-opt-in')), true);
+  assert.equal(await reducedDesktop.locator('#hero-title').evaluate(el =>
+    getComputedStyle(el).animationName), 'opted-hero-arrive',
+    'Desktop motion must persist without keeping a URL parameter');
+
+  await reducedDesktop.goto(pageURL + '?motion=off', { waitUntil: 'domcontentloaded' });
+  assert.equal(await reducedDesktop.evaluate(() => localStorage.getItem('joe-portfolio-motion')), 'off');
+  assert.equal(await reducedDesktop.locator('#hero-title').evaluate(el =>
+    getComputedStyle(el).animationName), 'none',
+    'User can revoke their site-specific motion choice');
+  assert.equal(await reducedDesktop.locator('#motion-replay, #motion-toggle').count(), 0,
+    'The old UI buttons remain removed');
+  await reducedContext.close();
 
   const desktop = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
   desktop.on('pageerror', err => errors.push('desktop: ' + err.message));
