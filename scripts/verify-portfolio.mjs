@@ -20,6 +20,9 @@ assert.equal(resume.experience[0].title.zh, 'AI 數據工程師');
 assert.equal(resume.experience[1].end, '2026/09');
 assert.ok(html.includes('9.2%') && html.includes('7%'));
 assert.ok(!html.includes('2023/07 – 至今'));
+assert.ok(html.includes('<body id="top">') && !html.includes('<header class="site-header" id="top">'), 'Return-to-top target must not be the sticky header');
+const portraitAsset = path.join(root, 'assets/joe-hsu-profile.webp');
+assert.ok(fs.statSync(portraitAsset).size >= 65000, 'Portrait was overcompressed: expected at least 65 KB');
 assert.equal((html.match(/class="career-entry"/g) || []).length, 3);
 assert.ok(!html.includes('id="impact"') && !html.includes('id="approach"'), 'Duplicate page sections removed');
 for (const token of ['−9.2%', '−7%']) {
@@ -61,12 +64,21 @@ try {
   assert.equal(await desktop.locator('.project-card').nth(1).locator('a').count(), 0, 'Private project must not link to repository');
   const portrait = desktop.locator('.portrait-showcase .portrait-photo');
   assert.equal(await portrait.count(), 1, 'Prominent hero portrait required');
-  assert.ok(await portrait.evaluate(img => img.complete && img.naturalWidth > 0), 'Portrait must load');
+  assert.ok(await portrait.evaluate(img => img.complete && img.naturalWidth >= 1100 && img.naturalHeight >= 1300), 'High-resolution original portrait must load');
   const portraitRect = await portrait.boundingBox();
   assert.ok(portraitRect.width >= 260 && portraitRect.height >= 260, 'Portrait must be prominently displayed on desktop');
 
   assert.equal(await desktop.locator('.career-entry').count(), 3);
   assert.equal(await desktop.locator('h1').count(), 1, 'One semantic H1');
+  await desktop.emulateMedia({ reducedMotion: 'reduce' });
+  await desktop.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+  await desktop.waitForFunction(() => window.scrollY > 500);
+  await desktop.locator('.site-footer .back-to-top').click();
+  await desktop.waitForFunction(() => window.scrollY <= 2);
+  assert.ok(await desktop.evaluate(() => window.scrollY <= 2), 'Footer return-to-top must scroll to document origin');
+  await desktop.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight / 2, behavior: 'instant' }));
+  await desktop.locator('.brand').click();
+  await desktop.waitForFunction(() => window.scrollY <= 2);
   const anchors = await desktop.locator('a[href^="#"]').evaluateAll(nodes =>
     nodes.map(a => a.getAttribute('href')).filter(Boolean));
   for (const anchor of anchors) {
@@ -144,6 +156,12 @@ try {
   await mobile.screenshot({ path: path.join(outDir, 'mobile-en.png'), fullPage: true, animations: 'disabled' });
   await mobile.locator('[data-language="zh"]').click();
   await mobile.screenshot({ path: path.join(outDir, 'mobile-zh.png'), fullPage: true, animations: 'disabled' });
+  await mobile.emulateMedia({ reducedMotion: 'reduce' });
+  await mobile.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+  await mobile.waitForFunction(() => window.scrollY > 500);
+  await mobile.locator('.site-footer .back-to-top').click();
+  await mobile.waitForFunction(() => window.scrollY <= 2);
+  assert.ok(await mobile.evaluate(() => window.scrollY <= 2), 'Mobile return-to-top must reach zero');
   assert.deepEqual(errors, [], 'No browser JavaScript errors');
   console.log('Portfolio E2E OK: desktop/mobile, bilingual, navigation, assets, 104 facts, no horizontal overflow.');
 } finally {

@@ -80,3 +80,9 @@
 - 移除舊成果矩陣與能力卡片及其未使用的 CSS 規則；保留研究方法流程圖。
 - 履歷摘要不重複列出成果數字，研究成果以 Highlights 集中呈現；教育資料不重複列出同一研究細節。
 - E2E 需檢查標題、各區塊、唯一成果、私人 Repository 隱藏及 320–1024px 雙語排版。
+
+## 2026/10/25 回頂端與頭像畫質修正
+- 「回頂端」的目標設在 `body#top`，而不是使用 `position: sticky` 的 Header；JavaScript 另外提供 `scrollTo({top:0})`，並尊重 reduced motion。
+- 保留 GitHub Repository / GitHub Pages 的同網域圖片來源：`assets/joe-hsu-profile.webp`，不改用 GitHub Raw URL。
+- 使用原選定肖像（1145 × 1374）重新以 WebP quality 82 編碼；原本檔案僅 4.6 KB，更新後約 97 KB，並加版本參數避免瀏覽器繼續快取舊照片。
+- CI 增加圖片解析度與檔案大小下限、桌機／手機回頂端 E2E，避免低畫質或捲動問題回歸。
