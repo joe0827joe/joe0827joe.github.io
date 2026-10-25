@@ -25,8 +25,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261025-hero-v5">
-  <script src="script.js?v=20261025-hero-v5" defer></script>
+  <!-- Only normalize an old ChatGPT-shared homepage link that mistakenly
+       included #case-study. Ordinary deep links continue to work. -->
+  <script>
+    try {
+      const incoming = new URL(window.location.href);
+      if (incoming.searchParams.get('utm_source') === 'chatgpt.com'
+          && incoming.hash === '#case-study') {
+        history.replaceState(history.state, '', incoming.href.slice(0, -incoming.hash.length));
+      }
+    } catch (_) { /* Keep navigating even if History API is unavailable. */ }
+  </script>
+  <link rel="stylesheet" href="styles.css?v=20261025-landing-v6">
+  <script src="script.js?v=20261025-landing-v6" defer></script>
 </head>
 <body id="top">
   <a class="skip-link" href="#main"><span data-zh="跳至主要內容" data-en="Skip to main content">跳至主要內容</span></a>
