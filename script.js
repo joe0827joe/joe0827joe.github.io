@@ -82,6 +82,18 @@
     }
   }
 
+  // The header is sticky: native #top navigation to the header may report it
+  // already visible instead of scrolling the document to position 0.
+  // Keep a real body#top fallback for browsers with JavaScript disabled.
+  for (const link of document.querySelectorAll('a[href="#top"]')) {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      closeMobile();
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, left: 0, behavior: reducedMotion ? 'instant' : 'smooth' });
+    });
+  }
+
   const progress = document.getElementById('reading-progress');
   let ticking = false;
   function updateProgress() {
