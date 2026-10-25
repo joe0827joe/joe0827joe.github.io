@@ -637,6 +637,81 @@ body{max-width:100%;overflow-x:clip;overscroll-behavior-x:none}
  .hero-buttons .btn{flex:1 1 auto}
 }
 
+
+/* The proven v4 opt-in behavior survives removal of its visual toggle.
+   Only users who previously opted in, or opened ?motion=on, receive these
+   animations under OS reduced-motion. Everyone else respects OS defaults. */
+@keyframes opted-hero-arrive{
+  from{opacity:0;transform:translate3d(0,30px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+@keyframes opted-portrait-arrive{
+  from{opacity:0;transform:translate3d(0,26px,0) scale(.96)}
+  to{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+@keyframes opted-data-travel{
+  0%{transform:translateY(-2px);opacity:0}
+  15%,70%{opacity:1}
+  100%{transform:translateY(27px);opacity:0}
+}
+@keyframes opted-ambient{
+  from{transform:translate3d(-16px,10px,0) scale(.96)}
+  to{transform:translate3d(22px,-12px,0) scale(1.05)}
+}
+
+@media (prefers-reduced-motion: reduce){
+  html.motion-opt-in .hero .eyebrow,
+  html.motion-opt-in .hero h1,
+  html.motion-opt-in .hero .hero-narrative,
+  html.motion-opt-in .hero .hero-identity,
+  html.motion-opt-in .hero .hero-buttons{
+    animation:opted-hero-arrive 950ms cubic-bezier(.22,1,.36,1) both;
+  }
+  html.motion-opt-in .hero .eyebrow{animation-delay:90ms}
+  html.motion-opt-in .hero h1{animation-delay:220ms}
+  html.motion-opt-in .hero .hero-narrative{animation-delay:370ms}
+  html.motion-opt-in .hero .hero-identity{animation-delay:510ms}
+  html.motion-opt-in .hero .hero-buttons{animation-delay:640ms}
+  html.motion-opt-in .portrait-showcase{
+    animation:opted-portrait-arrive 1200ms cubic-bezier(.22,1,.36,1) 280ms both;
+  }
+  html.motion-opt-in .hero-decoration-one{
+    animation:opted-ambient 9s ease-in-out infinite alternate;
+  }
+  html.motion-opt-in .hero-decoration-two{
+    animation:opted-ambient 14s ease-in-out -4s infinite alternate-reverse;
+  }
+  html.motion-opt-in .diagram-connector::before{
+    display:block;
+    animation:opted-data-travel 2.1s ease-in-out infinite;
+  }
+  html.motion-opt-in.motion-enabled .motion-reveal{
+    opacity:0;
+    transform:translate3d(0,34px,0);
+  }
+  html.motion-opt-in.motion-enabled .motion-reveal.is-visible{
+    opacity:1;
+    transform:translate3d(0,0,0);
+  }
+  html.motion-opt-in.motion-enabled.motion-ready .motion-reveal{
+    transition:
+      opacity 850ms ease var(--reveal-delay,0ms),
+      transform 1050ms cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms);
+  }
+}
+
+/* Persisted explicit opt-out also works on computers with normal motion. */
+html.motion-forced-off *,
+html.motion-forced-off *::before,
+html.motion-forced-off *::after{
+  animation:none!important;
+  transition-duration:0ms!important;
+}
+html.motion-forced-off .motion-reveal{
+  opacity:1!important;
+  transform:none!important;
+}
+
 @media print{
  .site-header,.hero-decoration,.site-footer,.reading-progress,.hero-buttons{display:none}
  body{background:#fff;color:#000}

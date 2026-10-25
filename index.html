@@ -36,8 +36,27 @@
       }
     } catch (_) { /* Keep navigating even if History API is unavailable. */ }
   </script>
-  <link rel="stylesheet" href="styles.css?v=20261025-landing-v6">
-  <script src="script.js?v=20261025-landing-v6" defer></script>
+  <!-- Preserve the visitor's previous explicit site-level motion choice.
+       A deliberate ?motion=on / ?motion=off URL sets it without a UI button.
+       Runs before CSS to prevent a visible first-frame mismatch. -->
+  <script>
+    (() => {
+      const requested = new URLSearchParams(location.search).get('motion');
+      let saved = null;
+      try {
+        if (requested === 'on' || requested === 'off') {
+          localStorage.setItem('joe-portfolio-motion', requested);
+        }
+        saved = localStorage.getItem('joe-portfolio-motion');
+      } catch (_) {
+        if (requested === 'on' || requested === 'off') saved = requested;
+      }
+      document.documentElement.classList.toggle('motion-opt-in', saved === 'on');
+      document.documentElement.classList.toggle('motion-forced-off', saved === 'off');
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css?v=20261025-motion-v7">
+  <script src="script.js?v=20261025-motion-v7" defer></script>
 </head>
 <body id="top">
   <a class="skip-link" href="#main"><span data-zh="跳至主要內容" data-en="Skip to main content">跳至主要內容</span></a>

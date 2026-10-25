@@ -157,7 +157,12 @@
   let scheduledReveal = 0;
   function syncMotion() {
     if (scheduledReveal) cancelAnimationFrame(scheduledReveal);
-    const enabled = !motionPreference.matches && !!revealObserver;
+    // Honor explicit preference previously saved by the working PR #11
+    // even on Windows/Edge when prefers-reduced-motion is enabled.
+    const root = document.documentElement;
+    const enabled = !root.classList.contains('motion-forced-off') &&
+      (!motionPreference.matches || root.classList.contains('motion-opt-in')) &&
+      !!revealObserver;
     document.documentElement.classList.remove('motion-ready');
     document.documentElement.classList.toggle('motion-enabled', enabled);
 
