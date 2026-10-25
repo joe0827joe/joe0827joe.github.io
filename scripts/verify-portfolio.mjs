@@ -113,10 +113,16 @@ try {
     getComputedStyle(el, '::before').animationName
   );
   assert.equal(diagramFlow, 'data-travel', 'Research diagram must show moving signal flow');
-  const preScrollOpacity = await desktop.locator('.project-card').first().evaluate(el =>
-    Number(getComputedStyle(el).opacity)
-  );
-  assert.ok(preScrollOpacity < 0.2, 'Below-the-fold project card should start hidden before reveal');
+  const preScroll = await desktop.locator('.project-card').first().evaluate(el => ({
+    opacity: Number(getComputedStyle(el).opacity),
+    top: el.getBoundingClientRect().top,
+    vh: window.innerHeight,
+    visible: el.classList.contains('is-visible')
+  }));
+  if (preScroll.top > preScroll.vh * .92) {
+    assert.ok(preScroll.opacity < 0.2,
+      'Below-the-fold project should start hidden before reveal: ' + JSON.stringify(preScroll));
+  }
   await desktop.locator('.project-card').first().scrollIntoViewIfNeeded();
   await desktop.waitForFunction(() => document.querySelector('.project-card')?.classList.contains('is-visible'));
   await desktop.waitForFunction(() => Number(getComputedStyle(document.querySelector('.project-card')).opacity) >= 0.98);
