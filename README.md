@@ -115,3 +115,9 @@
 - 區塊進場改在初始隱藏狀態完成排版後、跨越兩個 `requestAnimationFrame` 再觸發，修正同一畫面更新起始與終點樣式而看不到過渡的情形。
 - 保留 `prefers-reduced-motion` 原生無障礙偏好；桌面未顯示動畫時應確認 Windows／瀏覽器是否要求減少動態，不再增加手動播放控制。
 - Playwright 額外驗證：錯誤分享網址回首頁、一般研究深連結維持、首屏 transform 隨時間改變，以及作品卡片首次滾入的透明度變化。
+
+## 2026/10/25 — Desktop motion regression repair
+- PR #11 曾支援將 `joe-portfolio-motion=on/off` 存在 localStorage；PR #12 移除操作按鈕時，連讀取動態偏好也移除了，造成原本開啟桌面動態的使用者失去效果。
+- 修復方式：早於 CSS 載入前還原使用者先前選擇，沿用 `motion-opt-in` 及 `motion-forced-off`，恢復 Windows 減少動態模式下的使用者主動啟用效果。
+- 不再顯示動畫控制按鈕。使用 `?motion=on` 啟用並記住，使用 `?motion=off` 關閉並記住；不含參數則尊重先前儲存的選擇，未設定的訪客尊重系統預設。
+- 測試包含 Windows reduced-motion 模擬、動畫名稱及實際位移、進場區塊、重整後保留設定、關閉設定、正常桌機與手機回歸。
