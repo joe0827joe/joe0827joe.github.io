@@ -126,18 +126,9 @@
     for (const section of sections) observer.observe(section);
   }
 
-  // OS accessibility preferences control *automatic* animation by default.
-  // Visitors can explicitly opt in on desktop without changing Windows/Edge.
+  // One-time motion, automatically triggered for users without reduced-motion
+  // preference; keep the content visible when JavaScript is unavailable.
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const motionStorageKey = 'joe-portfolio-motion';
-  let motionOverride = null; // null = OS default, 'on'/'off' = deliberate choice
-  try {
-    const saved = localStorage.getItem(motionStorageKey);
-    if (saved === 'on' || saved === 'off') motionOverride = saved;
-  } catch (_) { /* storage is optional */ }
-  const motionIsEnabled = () =>
-    motionOverride === 'on' || (motionOverride !== 'off' && !motionPreference.matches);
-
   const motionTargets = [...document.querySelectorAll(
     '.section-heading, .case-main, .case-diagram, .project-card, ' +
     '.career-entry, .experience-aside, .contact-layout'
@@ -152,127 +143,40 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' })
     : null;
 
-  for (const target of motionTargets) {
-    target.classList.add('motion-reveal');
-    const siblings = target.matches('.project-card, .career-entry')
-      ? [...target.parentElement.children].filter(el => el.matches('.project-card, .career-entry'))
-      : [];
-    const stagger = siblings.length ? siblings.indexOf(target) % 3 : 0;
-    target.style.setProperty('--reveal-delay', (stagger * 90) + 'ms');
+  if (revealObserver) {
+    for (const target of motionTargets) {
+      target.classList.add('motion-reveal');
+      const siblings = target.matches('.project-card, .career-entry')
+        ? [...target.parentElement.children].filter(el => el.matches('.project-card, .career-entry'))
+        : [];
+      target.style.setProperty('--reveal-delay',
+        ((siblings.length ? siblings.indexOf(target) % 3 : 0) * 90) + 'ms');
+    }
   }
 
-  function syncMotionStyles() {
-    const enabled = motionIsEnabled();
-    const root = document.documentElement;
-    root.classList.toggle('motion-opt-in', motionOverride === 'on');
-    root.classList.toggle('motion-forced-off', !enabled);
-    root.classList.toggle('motion-enabled', enabled && !!revealObserver);
-
+  const syncMotion = () => {
+    const enabled = !motionPreference.matches && !!revealObserver;
+    document.documentElement.classList.toggle('motion-enabled', enabled);
     for (const target of motionTargets) {
-      if (!enabled || !revealObserver) {
+      if (!enabled) {
         target.classList.add('is-visible');
-        if (revealObserver) revealObserver.unobserve(target);
+        revealObserver?.unobserve(target);
         continue;
       }
       const bounds = target.getBoundingClientRect();
-      if (bounds.top < window.innerHeight * .92 || bounds.bottom <= 0) {
+      if (bounds.top < window.innerHeight * .92 || bounds.bottom < 0) {
         target.classList.add('is-visible');
-        revealObserver.unobserve(target);
+        revealObserver.observe(target);
       } else {
         target.classList.remove('is-visible');
         revealObserver.observe(target);
       }
     }
-  }
-
-  const replayButton = document.getElementById('motion-replay');
-  const motionToggle = document.getElementById('motion-toggle');
-  const motionNote = document.getElementById('motion-preference-note');
-  const hero = document.querySelector('.hero');
-  const replayTargets = [...document.querySelectorAll(
-    '.hero .eyebrow, .hero h1, .hero-lead, .hero-identity, ' +
-    '.hero-buttons, .portrait-showcase'
-  )];
-  const replayLabel = replayButton?.querySelector('[data-zh][data-en]');
-  const toggleLabel = motionToggle?.querySelector('[data-zh][data-en]');
-
-  function syncMotionControls() {
-    const enabled = motionIsEnabled();
-    if (replayButton) {
-      replayButton.hidden = false;
-      if (replayLabel) {
-        replayLabel.dataset.zh = enabled ? '重播動態' : '播放動態';
-        replayLabel.dataset.en = enabled ? 'Replay animation' : 'Play animation';
-        replayLabel.textContent = replayLabel.dataset[language];
-      }
-      replayButton.setAttribute('aria-label', language === 'zh'
-        ? (enabled ? '重播首頁進場動畫' : '手動播放一次動畫')
-        : (enabled ? 'Replay entrance animation' : 'Play entrance animation once'));
-    }
-    if (motionToggle) {
-      motionToggle.hidden = false;
-      motionToggle.setAttribute('aria-pressed', String(enabled));
-      if (toggleLabel) {
-        toggleLabel.dataset.zh = enabled ? '關閉動態' : '開啟動態';
-        toggleLabel.dataset.en = enabled ? 'Disable motion' : 'Enable motion';
-        toggleLabel.textContent = toggleLabel.dataset[language];
-      }
-    }
-    if (motionNote) {
-      const systemReduced = motionPreference.matches;
-      motionNote.hidden = !(systemReduced && motionOverride === null);
-      motionNote.dataset.zh = '電腦目前設定為減少動態，可按「開啟動態」啟用';
-      motionNote.dataset.en = 'Your system prefers reduced motion. Choose “Enable motion” to opt in.';
-      motionNote.textContent = motionNote.dataset[language];
-    }
-  }
-
-  const refreshMotion = () => {
-    syncMotionStyles();
-    syncMotionControls();
   };
 
-  function replayHero() {
-    if (!hero || !replayTargets.length || typeof Element.prototype.animate !== 'function') return;
-    hero.classList.add('manual-replay');
-    for (const el of replayTargets) {
-      for (const animation of el.getAnimations()) animation.cancel();
-    }
-    for (const [i, el] of replayTargets.entries()) {
-      const animation = el.animate(
-        [
-          { opacity: 0, transform: 'translate3d(0, 32px, 0)' },
-          { opacity: 1, transform: 'translate3d(0, 0, 0)' }
-        ],
-        {
-          duration: 1000,
-          delay: i * 125,
-          easing: 'cubic-bezier(.22, 1, .36, 1)',
-          fill: 'both'
-        }
-      );
-      animation.finished.then(() => animation.cancel()).catch(() => {});
-    }
-  }
-
-  if (replayButton) replayButton.addEventListener('click', replayHero);
-  if (motionToggle) motionToggle.addEventListener('click', () => {
-    motionOverride = motionIsEnabled() ? 'off' : 'on';
-    try { localStorage.setItem(motionStorageKey, motionOverride); } catch (_) {}
-    // CSS entrance animation may have been suppressed on first load; play once
-    // when the visitor explicitly enables it.
-    refreshMotion();
-    if (motionOverride === 'on') replayHero();
-    else if (hero) {
-      hero.classList.remove('manual-replay');
-      for (const el of replayTargets) for (const a of el.getAnimations()) a.cancel();
-    }
-  });
-  if (typeof motionPreference.addEventListener === 'function') {
-    motionPreference.addEventListener('change', refreshMotion);
-  }
-  for (const btn of langButtons) btn.addEventListener('click', syncMotionControls);
-  refreshMotion();
+  syncMotion();
+  if (typeof motionPreference.addEventListener === 'function')
+    motionPreference.addEventListener('change', syncMotion);
 
   const year = document.getElementById('copyright-year');
   if (year) year.textContent = String(new Date().getFullYear());
