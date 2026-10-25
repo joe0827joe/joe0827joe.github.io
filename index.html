@@ -25,9 +25,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261025-motion-v3">
-  <script src="script.js?v=20261025-motion-v3" defer></script>
-  <noscript><style>.motion-replay{display:none!important}</style></noscript>
+  <link rel="stylesheet" href="styles.css?v=20261025-motion-v4">
+  <script src="script.js?v=20261025-motion-v4" defer></script>
+  <noscript><style>.motion-replay,.motion-toggle{display:none!important}</style></noscript>
 </head>
 <body id="top">
   <a class="skip-link" href="#main"><span data-zh="跳至主要內容" data-en="Skip to main content">跳至主要內容</span></a>
@@ -78,6 +78,10 @@
             <button type="button" id="motion-replay" class="motion-replay">
               <span aria-hidden="true">↻</span>
               <span data-zh="重播動態" data-en="Replay motion">重播動態</span>
+            </button>
+            <button type="button" id="motion-toggle" class="motion-toggle" hidden aria-pressed="false">
+              <span aria-hidden="true">✦</span>
+              <span data-zh="開啟動態" data-en="Enable motion">開啟動態</span>
             </button>
             <span id="motion-preference-note" class="motion-preference-note" hidden data-zh="系統已停用自動動畫，可手動播放" data-en="Automatic motion is off; play manually">系統已停用自動動畫，可手動播放</span>
           </div>
